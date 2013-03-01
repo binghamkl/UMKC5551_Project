@@ -1,0 +1,4 @@
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\AgileMindBusiness\bin\Release\AgileMindBusiness.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\AgileMindBusiness\bin\Release\AgileMindBusiness.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\AgileMindBusiness\obj\Release\AgileMindBusiness.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\AgileMindBusiness\obj\Release\AgileMindBusiness.pdb

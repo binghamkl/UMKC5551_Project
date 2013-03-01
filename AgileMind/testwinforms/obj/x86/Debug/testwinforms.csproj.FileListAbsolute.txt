@@ -1,0 +1,6 @@
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\testwinforms\bin\Debug\testwinforms.exe
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\testwinforms\bin\Debug\testwinforms.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\testwinforms\obj\x86\Debug\testwinforms.Properties.Resources.resources
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\testwinforms\obj\x86\Debug\testwinforms.csproj.GenerateResource.Cache
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\testwinforms\obj\x86\Debug\testwinforms.exe
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKC5551Group\AgileMind\testwinforms\obj\x86\Debug\testwinforms.pdb

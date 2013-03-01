@@ -1,0 +1,4 @@
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.BLL\bin\Debug\AgileMind.BLL.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.BLL\bin\Debug\AgileMind.BLL.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.BLL\obj\Debug\AgileMind.BLL.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.BLL\obj\Debug\AgileMind.BLL.pdb
