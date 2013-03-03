@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1009]C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll</TopNode>
+  <SelectedNode>[0-1000]AgileMind.Bll.Testing.Login.LoginInfoTest</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1009]C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" Expanded="true" />
+    <Node UniqueName="[0-1010]AgileMind" Expanded="true" />
+    <Node UniqueName="[0-1011]AgileMind.Bll" Expanded="true" />
+    <Node UniqueName="[0-1012]AgileMind.Bll.Testing" Expanded="true" />
+    <Node UniqueName="[0-1013]AgileMind.Bll.Testing.Login" Expanded="true" />
+    <Node UniqueName="[0-1000]AgileMind.Bll.Testing.Login.LoginInfoTest" Expanded="true" />
+  </Nodes>
+</VisualState>

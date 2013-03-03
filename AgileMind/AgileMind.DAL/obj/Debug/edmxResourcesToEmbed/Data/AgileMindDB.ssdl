@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AgileMindModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="AgileMindModelStoreContainer">
+    <EntitySet Name="Logins" EntityType="AgileMindModel.Store.Logins" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vwLoginInfo" EntityType="AgileMindModel.Store.vwLoginInfo" store:Type="Views" store:Schema="dbo" store:Name="vwLoginInfo">
+      <DefiningQuery>SELECT 
+      [vwLoginInfo].[LoginId] AS [LoginId], 
+      [vwLoginInfo].[LoginName] AS [LoginName], 
+      [vwLoginInfo].[EmailAddress] AS [EmailAddress], 
+      [vwLoginInfo].[Active] AS [Active], 
+      [vwLoginInfo].[Created] AS [Created], 
+      [vwLoginInfo].[LastLogin] AS [LastLogin]
+      FROM [dbo].[vwLoginInfo] AS [vwLoginInfo]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <EntityType Name="Logins">
+    <Key>
+      <PropertyRef Name="LoginId" />
+    </Key>
+    <Property Name="LoginId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LoginName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="LastLogin" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AgileMind.dbo.vwLoginInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwLoginInfo">
+    <Key>
+      <PropertyRef Name="LoginId" />
+      <PropertyRef Name="LoginName" />
+      <PropertyRef Name="EmailAddress" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="Created" />
+    </Key>
+    <Property Name="LoginId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LoginName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="LastLogin" Type="datetime" />
+  </EntityType>
+  <Function Name="Logins_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LoginName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Logins_CreateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LoginName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="vw_LoginInfo_FetchByLoginId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LoginId" Type="int" Mode="In" />
+  </Function>
+</Schema>

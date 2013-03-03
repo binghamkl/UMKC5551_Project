@@ -1,0 +1,12 @@
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll.config
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.BLL.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\nunit.framework.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.BLL.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\nunit.framework.xml
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\obj\Debug\AgileMind.Bll.Testing.csprojResolveAssemblyReference.cache
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\obj\Debug\AgileMind.Bll.Testing.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\obj\Debug\AgileMind.Bll.Testing.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.DAL.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.DAL.pdb

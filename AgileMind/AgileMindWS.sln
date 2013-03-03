@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.WebService", "Agi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.Website", "AgileMind.Website\AgileMind.Website.csproj", "{AE44F81A-2542-4160-AA85-FE1C8540CD9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.Bll.Testing", "AgileMind.Bll.Testing\AgileMind.Bll.Testing.csproj", "{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{AE44F81A-2542-4160-AA85-FE1C8540CD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE44F81A-2542-4160-AA85-FE1C8540CD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE44F81A-2542-4160-AA85-FE1C8540CD9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
