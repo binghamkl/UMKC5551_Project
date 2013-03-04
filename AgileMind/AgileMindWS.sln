@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.Website", "AgileM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.Bll.Testing", "AgileMind.Bll.Testing\AgileMind.Bll.Testing.csproj", "{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.SOAP", "AgileMind.SOAP\AgileMind.SOAP.csproj", "{7D076617-3F19-48E1-868F-A1F6A4560A81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67F3E546-BFDB-43A9-9D38-EC556CD47AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D076617-3F19-48E1-868F-A1F6A4560A81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D076617-3F19-48E1-868F-A1F6A4560A81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D076617-3F19-48E1-868F-A1F6A4560A81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D076617-3F19-48E1-868F-A1F6A4560A81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

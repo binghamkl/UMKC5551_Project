@@ -34,3 +34,7 @@ C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.WebService\obj\Debug\AgileMind.WebService.csprojResolveAssemblyReference.cache
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.WebService\obj\Debug\AgileMind.WebService.dll
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.WebService\obj\Debug\AgileMind.WebService.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.WebService\bin\AgileMind.BLL.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.WebService\bin\AgileMind.DAL.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.WebService\bin\AgileMind.BLL.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.WebService\bin\AgileMind.DAL.pdb

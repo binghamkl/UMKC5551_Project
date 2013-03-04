@@ -217,7 +217,7 @@ namespace AgileMind.Bll.Testing.Login
         }
         #endregion
 
-        #region -- CallingCreat() Method --
+        #region -- CallingValidateLoginReturnsFalseIfTheLoginNameAndPasswordAreCorrectButActiveIsFalse() Method --
         [Test()]
         public void CallingValidateLoginReturnsFalseIfTheLoginNameAndPasswordAreCorrectButActiveIsFalse()
         {
@@ -244,7 +244,6 @@ namespace AgileMind.Bll.Testing.Login
             DeleteLoginsFromDB(loginName);
         }
         #endregion
-	
 	
         /*-- Helper Methods --*/
         

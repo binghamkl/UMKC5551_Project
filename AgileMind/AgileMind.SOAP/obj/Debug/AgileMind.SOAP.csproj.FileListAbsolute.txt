@@ -1,0 +1,4 @@
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.SOAP\bin\AgileMind.SOAP.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.SOAP\bin\AgileMind.SOAP.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.SOAP\obj\Debug\AgileMind.SOAP.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.SOAP\obj\Debug\AgileMind.SOAP.pdb
