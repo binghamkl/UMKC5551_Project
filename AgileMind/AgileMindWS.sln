@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.SOAP", "AgileMind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.Util", "AgileMind.Util\AgileMind.Util.csproj", "{C8E93FC7-B81E-4436-A829-C186277C2108}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileMind.MobileWeb", "AgileMind.MobileWeb\AgileMind.MobileWeb.csproj", "{D7E82AA5-4DBB-46BF-B491-4030597FDA08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{C8E93FC7-B81E-4436-A829-C186277C2108}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8E93FC7-B81E-4436-A829-C186277C2108}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8E93FC7-B81E-4436-A829-C186277C2108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7E82AA5-4DBB-46BF-B491-4030597FDA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E82AA5-4DBB-46BF-B491-4030597FDA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E82AA5-4DBB-46BF-B491-4030597FDA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E82AA5-4DBB-46BF-B491-4030597FDA08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
