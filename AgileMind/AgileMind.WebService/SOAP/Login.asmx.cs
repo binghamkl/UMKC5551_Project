@@ -31,8 +31,8 @@ namespace AgileMind.WebService.SOAP
         #endregion
 
         [WebMethod()]
-		#region -- ValidateLogin() Method --
-		public LoginResult ValidateLogin(string loginName, string password)
+        #region -- ValidateLogin(string loginName, string password) Method --
+        public LoginResult ValidateLogin(string loginName, string password)
 		{
             return LoginResult.ValidateLogin(loginName, password);
 		}

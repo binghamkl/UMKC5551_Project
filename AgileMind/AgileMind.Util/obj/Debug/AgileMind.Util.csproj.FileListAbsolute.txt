@@ -1,0 +1,5 @@
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Util\bin\Debug\AgileMind.Util.dll.config
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Util\bin\Debug\AgileMind.Util.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Util\bin\Debug\AgileMind.Util.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Util\obj\Debug\AgileMind.Util.dll
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Util\obj\Debug\AgileMind.Util.pdb
