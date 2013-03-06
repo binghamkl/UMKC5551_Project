@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Games\ColorGameQuestion.cs" />
+    <Compile Include="Games\ColorGameResult.cs" />
     <Compile Include="Login\LoginResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Result.cs" />

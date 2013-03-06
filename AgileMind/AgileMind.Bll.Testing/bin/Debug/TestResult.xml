@@ -1,31 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" total="11" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-03-03" time="16:16:40">
+<test-results name="C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" total="4" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-03-05" time="22:30:23">
   <environment nunit-version="2.6.2.12296" clr-version="4.0.30319.18033" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.2\bin" machine-name="KBINGHAM-PC" user="KBingham" user-domain="KRYGER" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Assembly" name="C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" executed="True" result="Success" success="True" time="5.341" asserts="0">
+  <test-suite type="Assembly" name="C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" executed="True" result="Success" success="True" time="67.357" asserts="0">
     <results>
-      <test-suite type="Namespace" name="AgileMind" executed="True" result="Success" success="True" time="5.322" asserts="0">
+      <test-suite type="Namespace" name="AgileMind" executed="True" result="Success" success="True" time="67.341" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Bll" executed="True" result="Success" success="True" time="5.322" asserts="0">
+          <test-suite type="Namespace" name="Bll" executed="True" result="Success" success="True" time="67.340" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Testing" executed="True" result="Success" success="True" time="5.322" asserts="0">
+              <test-suite type="Namespace" name="Testing" executed="True" result="Success" success="True" time="67.340" asserts="0">
                 <results>
-                  <test-suite type="Namespace" name="Login" executed="True" result="Success" success="True" time="5.322" asserts="0">
+                  <test-suite type="Namespace" name="Games" executed="True" result="Success" success="True" time="67.340" asserts="0">
                     <results>
-                      <test-suite type="TestFixture" name="LoginInfoTest" executed="True" result="Success" success="True" time="5.318" asserts="0">
+                      <test-suite type="TestFixture" name="ColorGameTest" executed="True" result="Success" success="True" time="67.337" asserts="0">
                         <results>
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginFailsIfPasswordIsLessthan6Long" executed="True" result="Success" success="True" time="4.516" asserts="1" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginFailsIfTheUserNameAlreadyExists" executed="True" result="Success" success="True" time="0.698" asserts="1" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLogiNFailsIfUserNameIsLessthan5Long" executed="True" result="Success" success="True" time="0.002" asserts="1" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginInfoAddsTheLoginPersonAndReturnsItInLoginInfoObject" executed="True" result="Success" success="True" time="0.017" asserts="3" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginInfoAddsTheLoginPersonIntoTheDatabase" executed="True" result="Success" success="True" time="0.011" asserts="4" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginReturnsLoginInfo" executed="True" result="Success" success="True" time="0.005" asserts="1" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginReturnsTrueInLoginResult" executed="True" result="Success" success="True" time="0.004" asserts="1" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingValidateLoginReturnsFalseIfTheLoginNameAndPasswordAreCorrectButActiveIsFalse" executed="True" result="Success" success="True" time="0.025" asserts="1" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingValidateLoginWithAuthorizedCredentialsReturnsTrueAndTheLoginInformation" executed="True" result="Success" success="True" time="0.005" asserts="3" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingValidateLoginWithAuthorizedInvalidUserNamereturnsFalse" executed="True" result="Success" success="True" time="0.004" asserts="1" />
-                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingValidateLoginWithInvalidPasswordReturnsFalse" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Games.ColorGameTest.ColorGameQuestionHasPropertiesForLeftWordLeftColorRightWordRightColorIsMatchAndUserCorrect" executed="True" result="Success" success="True" time="0.044" asserts="5" />
+                          <test-case name="AgileMind.Bll.Testing.Games.ColorGameTest.ColorGameQuestionReturnsIsMatchIfLeftWordEqualsRightColorElseReturnsFalse" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                          <test-case name="AgileMind.Bll.Testing.Games.ColorGameTest.CreateColorGameReturnsColorGameResult" executed="True" result="Success" success="True" time="0.009" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Games.ColorGameTest.CreateColorGameReturnsColorGameResultsWithTenQuestions" executed="True" result="Success" success="True" time="67.265" asserts="2" />
                         </results>
                       </test-suite>
                     </results>
