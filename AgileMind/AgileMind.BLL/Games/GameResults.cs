@@ -34,10 +34,10 @@ namespace AgileMind.BLL.Games
         /*-- Methods --*/
         
         /*-- Event Handlers --*/
-	
+
         /*-- Factory Methods --*/
-        
-		#region -- InsertGameResult() Method --
+
+        #region -- InsertGameResult(String UserName, String Password, GameListEnum gameType, int Score, decimal TestDuration, int Total) Method --
         public static GameResults InsertGameResult(String UserName, String Password, GameListEnum gameType, int Score, decimal TestDuration, int Total)
 		{
             GameResults results = new GameResults();
@@ -57,6 +57,7 @@ namespace AgileMind.BLL.Games
                     db.t_GameResults.AddObject(gameResults);
                     db.SaveChanges();
 
+                    results.Success = true;
                     results.Game = gameResults;
 
                 }
@@ -73,7 +74,6 @@ namespace AgileMind.BLL.Games
             return results;
 		}
 		#endregion
-
 
     }
 }

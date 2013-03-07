@@ -61,15 +61,36 @@ namespace AgileMind.Bll.Testing.Games
 
             DeleteGameResults(gameresults.Game.GameScoreId);
 
-            LoginInfoTest.DeleteLoginsFromDB(LOGINNAME);
+        }
+        #endregion
+
+        #region -- CallingInsertWillFailIfTheLoginIsIncorrect() Method --
+        [Test()]
+        public void CallingInsertWillFailIfTheLoginIsIncorrect()
+        {
+            decimal td = 28.2M;
+            GameResults gameresults = GameResults.InsertGameResult(LOGINNAME, "DOLE", GameListEnum.ColorQuiz, 5, td, 10);
+            Assert.IsNotNull(gameresults);
+            Assert.IsFalse(gameresults.Success);
 
         }
         #endregion
-	
 
+        #region -- CallingSaveWillSaveTheRecordToTheDatabase() Method --
+        [Test()]
+        public void CallingSaveWillReturnSuccessfullResult()
+        {
+
+            decimal td = 28.2M;
+            GameResults gameresults = GameResults.InsertGameResult(LOGINNAME, PASSWORD, GameListEnum.ColorQuiz, 5, td, 10);
+            Assert.IsNotNull(gameresults);
+            Assert.IsTrue(gameresults.Success);
+            DeleteGameResults(gameresults.Game.GameScoreId);
+
+        }
+        #endregion
 
         /*-- Helper Methods --*/
-
         
 		#region -- DeleteGameResults() Method --
 		public void DeleteGameResults(int GameResultsId)
@@ -83,7 +104,6 @@ namespace AgileMind.Bll.Testing.Games
             db.SaveChanges();
         }
 		#endregion
-		
         
 		#region -- GetFirstGameID() Method --
 		public static int GetFirstGameID()

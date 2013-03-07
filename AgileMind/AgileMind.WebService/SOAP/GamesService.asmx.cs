@@ -27,5 +27,15 @@ namespace AgileMind.WebService.SOAP
         {
             return ColorGameResult.CreateGame();
         }
+
+        [WebMethod]
+		#region -- InsertGameResult() Method --
+		public GameResults InsertGameResult(String UserName, String Password, GameListEnum gameType, int Score, decimal TestDuration, int Total)
+		{
+            return GameResults.InsertGameResult(UserName, Password, gameType, Score, TestDuration, Total);
+		}
+		#endregion
+		
+
     }
 }
