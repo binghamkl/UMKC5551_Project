@@ -2,6 +2,8 @@
 <Schema Namespace="AgileMindModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="AgileMindModelStoreContainer">
     <EntitySet Name="Logins" EntityType="AgileMindModel.Store.Logins" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_Game" EntityType="AgileMindModel.Store.t_Game" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_GameResults" EntityType="AgileMindModel.Store.t_GameResults" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="vwLoginInfo" EntityType="AgileMindModel.Store.vwLoginInfo" store:Type="Views" store:Schema="dbo" store:Name="vwLoginInfo">
       <DefiningQuery>SELECT 
       [vwLoginInfo].[LoginId] AS [LoginId], 
@@ -12,6 +14,14 @@
       [vwLoginInfo].[LastLogin] AS [LastLogin]
       FROM [dbo].[vwLoginInfo] AS [vwLoginInfo]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK_t_GameResults_Logins" Association="AgileMindModel.Store.FK_t_GameResults_Logins">
+      <End Role="Logins" EntitySet="Logins" />
+      <End Role="t_GameResults" EntitySet="t_GameResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_GameResults_t_Game" Association="AgileMindModel.Store.FK_t_GameResults_t_Game">
+      <End Role="t_Game" EntitySet="t_Game" />
+      <End Role="t_GameResults" EntitySet="t_GameResults" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Logins">
     <Key>
@@ -24,6 +34,26 @@
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="LastLogin" Type="datetime" />
+  </EntityType>
+  <EntityType Name="t_Game">
+    <Key>
+      <PropertyRef Name="GameId" />
+    </Key>
+    <Property Name="GameId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Game" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="t_GameResults">
+    <Key>
+      <PropertyRef Name="GameScoreId" />
+    </Key>
+    <Property Name="GameScoreId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+    <Property Name="LoginId" Type="int" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Score" Type="int" Nullable="false" />
+    <Property Name="Total" Type="int" Nullable="false" />
+    <Property Name="TestDuration" Type="decimal" Scale="2" />
   </EntityType>
   <!--Errors Found During Generation:
       warning 6002: The table/view 'AgileMind.dbo.vwLoginInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -43,6 +73,30 @@
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="LastLogin" Type="datetime" />
   </EntityType>
+  <Association Name="FK_t_GameResults_Logins">
+    <End Role="Logins" Type="AgileMindModel.Store.Logins" Multiplicity="1" />
+    <End Role="t_GameResults" Type="AgileMindModel.Store.t_GameResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Logins">
+        <PropertyRef Name="LoginId" />
+      </Principal>
+      <Dependent Role="t_GameResults">
+        <PropertyRef Name="LoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_GameResults_t_Game">
+    <End Role="t_Game" Type="AgileMindModel.Store.t_Game" Multiplicity="1" />
+    <End Role="t_GameResults" Type="AgileMindModel.Store.t_GameResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="t_GameResults">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="Logins_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LoginName" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />

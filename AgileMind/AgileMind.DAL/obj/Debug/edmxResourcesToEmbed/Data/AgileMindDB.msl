@@ -28,5 +28,27 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="vw_LoginInfo_FetchByLoginId" FunctionName="AgileMindModel.Store.vw_LoginInfo_FetchByLoginId" />
+    <EntitySetMapping Name="t_Game">
+      <EntityTypeMapping TypeName="AgileMindModel.t_Game">
+        <MappingFragment StoreEntitySet="t_Game">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Game" ColumnName="Game" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_GameResults">
+      <EntityTypeMapping TypeName="AgileMindModel.t_GameResults">
+        <MappingFragment StoreEntitySet="t_GameResults">
+          <ScalarProperty Name="TestDuration" ColumnName="TestDuration" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+          <ScalarProperty Name="GameScoreId" ColumnName="GameScoreId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

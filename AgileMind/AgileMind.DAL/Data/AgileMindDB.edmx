@@ -7,6 +7,8 @@
     <Schema Namespace="AgileMindModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="AgileMindModelStoreContainer">
           <EntitySet Name="Logins" EntityType="AgileMindModel.Store.Logins" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="t_Game" EntityType="AgileMindModel.Store.t_Game" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="t_GameResults" EntityType="AgileMindModel.Store.t_GameResults" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="vwLoginInfo" EntityType="AgileMindModel.Store.vwLoginInfo" store:Type="Views" store:Schema="dbo" store:Name="vwLoginInfo">
             <DefiningQuery>SELECT 
       [vwLoginInfo].[LoginId] AS [LoginId], 
@@ -17,6 +19,14 @@
       [vwLoginInfo].[LastLogin] AS [LastLogin]
       FROM [dbo].[vwLoginInfo] AS [vwLoginInfo]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_t_GameResults_Logins" Association="AgileMindModel.Store.FK_t_GameResults_Logins">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="t_GameResults" EntitySet="t_GameResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_GameResults_t_Game" Association="AgileMindModel.Store.FK_t_GameResults_t_Game">
+            <End Role="t_Game" EntitySet="t_Game" />
+            <End Role="t_GameResults" EntitySet="t_GameResults" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Logins">
           <Key>
@@ -29,6 +39,26 @@
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="LastLogin" Type="datetime" />
+        </EntityType>
+        <EntityType Name="t_Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Game" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="t_GameResults">
+          <Key>
+            <PropertyRef Name="GameScoreId" />
+          </Key>
+          <Property Name="GameScoreId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="LoginId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="Total" Type="int" Nullable="false" />
+          <Property Name="TestDuration" Type="decimal" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'AgileMind.dbo.vwLoginInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -48,6 +78,30 @@
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="LastLogin" Type="datetime" />
         </EntityType>
+        <Association Name="FK_t_GameResults_Logins">
+          <End Role="Logins" Type="AgileMindModel.Store.Logins" Multiplicity="1" />
+          <End Role="t_GameResults" Type="AgileMindModel.Store.t_GameResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="t_GameResults">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_GameResults_t_Game">
+          <End Role="t_Game" Type="AgileMindModel.Store.t_Game" Multiplicity="1" />
+          <End Role="t_GameResults" Type="AgileMindModel.Store.t_GameResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="t_GameResults">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="Logins_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -72,8 +126,18 @@
           </FunctionImport>
           <EntitySet Name="vwLoginInfoes" EntityType="AgileMindModel.vwLoginInfo" />
           <FunctionImport Name="vw_LoginInfo_FetchByLoginId" EntitySet="vwLoginInfoes" ReturnType="Collection(AgileMindModel.vwLoginInfo)">
-            <Parameter Name="LoginId" Mode="In" Type="Int32" />
+          <Parameter Name="LoginId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="t_Game" EntityType="AgileMindModel.t_Game" />
+          <EntitySet Name="t_GameResults" EntityType="AgileMindModel.t_GameResults" />
+          <AssociationSet Name="FK_t_GameResults_Logins" Association="AgileMindModel.FK_t_GameResults_Logins">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="t_GameResults" EntitySet="t_GameResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_GameResults_t_Game" Association="AgileMindModel.FK_t_GameResults_t_Game">
+            <End Role="t_Game" EntitySet="t_Game" />
+            <End Role="t_GameResults" EntitySet="t_GameResults" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Login">
           <Key>
@@ -86,6 +150,7 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" />
           <Property Name="LastLogin" Type="DateTime" />
+          <NavigationProperty Name="t_GameResults" Relationship="AgileMindModel.FK_t_GameResults_Logins" FromRole="Login" ToRole="t_GameResults" />
         </EntityType>
         <EntityType Name="vwLoginInfo">
           <Key>
@@ -102,6 +167,53 @@
           <Property Type="DateTime" Name="Created" Nullable="false" />
           <Property Type="DateTime" Name="LastLogin" />
         </EntityType>
+        <EntityType Name="t_Game">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Type="Int32" Name="GameId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Game" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="t_GameResults" Relationship="AgileMindModel.FK_t_GameResults_t_Game" FromRole="t_Game" ToRole="t_GameResults" />
+        </EntityType>
+        <EntityType Name="t_GameResults">
+          <Key>
+            <PropertyRef Name="GameScoreId" />
+          </Key>
+          <Property Type="Int32" Name="GameScoreId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <Property Type="Int32" Name="LoginId" Nullable="false" />
+          <Property Type="DateTime" Name="Created" Nullable="false" />
+          <Property Type="Int32" Name="Score" Nullable="false" />
+          <Property Type="Int32" Name="Total" Nullable="false" />
+          <NavigationProperty Name="Login" Relationship="AgileMindModel.FK_t_GameResults_Logins" FromRole="t_GameResults" ToRole="Login" />
+          <NavigationProperty Name="t_Game" Relationship="AgileMindModel.FK_t_GameResults_t_Game" FromRole="t_GameResults" ToRole="t_Game" />
+          <Property Type="Decimal" Name="TestDuration" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_t_GameResults_Logins">
+          <End Type="AgileMindModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="AgileMindModel.t_GameResults" Role="t_GameResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="LoginId" />
+            </Principal>
+            <Dependent Role="t_GameResults">
+              <PropertyRef Name="LoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_t_GameResults_t_Game">
+          <End Type="AgileMindModel.t_Game" Role="t_Game" Multiplicity="1" />
+          <End Type="AgileMindModel.t_GameResults" Role="t_GameResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Game">
+              <PropertyRef Name="GameId" />
+            </Principal>
+            <Dependent Role="t_GameResults">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -135,6 +247,28 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="vw_LoginInfo_FetchByLoginId" FunctionName="AgileMindModel.Store.vw_LoginInfo_FetchByLoginId" />
+          <EntitySetMapping Name="t_Game">
+            <EntityTypeMapping TypeName="AgileMindModel.t_Game">
+              <MappingFragment StoreEntitySet="t_Game">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Game" ColumnName="Game" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_GameResults">
+            <EntityTypeMapping TypeName="AgileMindModel.t_GameResults">
+              <MappingFragment StoreEntitySet="t_GameResults">
+                <ScalarProperty Name="TestDuration" ColumnName="TestDuration" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="GameScoreId" ColumnName="GameScoreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -158,6 +292,17 @@
       <Diagram Name="AgileMindDB">
         <EntityTypeShape EntityType="AgileMindModel.Login" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
         <EntityTypeShape EntityType="AgileMindModel.vwLoginInfo" Width="1.5" PointX="3.375" PointY="0.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="AgileMindModel.t_Game" Width="1.5" PointX="0.75" PointY="4.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="AgileMindModel.t_GameResults" Width="1.5" PointX="3" PointY="3.625" Height="2.7494921874999996" />
+        <AssociationConnector Association="AgileMindModel.FK_t_GameResults_Logins" >
+          <ConnectorPoint PointX="2.25" PointY="3.1461393229166665" />
+          <ConnectorPoint PointX="3.15625" PointY="3.1461393229166665" />
+          <ConnectorPoint PointX="3.15625" PointY="3.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="AgileMindModel.FK_t_GameResults_t_Game" >
+          <ConnectorPoint PointX="2.25" PointY="5.0189925130208337" />
+          <ConnectorPoint PointX="3" PointY="5.0189925130208337" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

@@ -10,6 +10,16 @@
     <FunctionImport Name="vw_LoginInfo_FetchByLoginId" EntitySet="vwLoginInfoes" ReturnType="Collection(AgileMindModel.vwLoginInfo)">
       <Parameter Name="LoginId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="t_Game" EntityType="AgileMindModel.t_Game" />
+    <EntitySet Name="t_GameResults" EntityType="AgileMindModel.t_GameResults" />
+    <AssociationSet Name="FK_t_GameResults_Logins" Association="AgileMindModel.FK_t_GameResults_Logins">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="t_GameResults" EntitySet="t_GameResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_GameResults_t_Game" Association="AgileMindModel.FK_t_GameResults_t_Game">
+      <End Role="t_Game" EntitySet="t_Game" />
+      <End Role="t_GameResults" EntitySet="t_GameResults" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Login">
     <Key>
@@ -22,6 +32,7 @@
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <Property Name="Created" Type="DateTime" Nullable="false" />
     <Property Name="LastLogin" Type="DateTime" />
+    <NavigationProperty Name="t_GameResults" Relationship="AgileMindModel.FK_t_GameResults_Logins" FromRole="Login" ToRole="t_GameResults" />
   </EntityType>
   <EntityType Name="vwLoginInfo">
     <Key>
@@ -38,4 +49,51 @@
     <Property Type="DateTime" Name="Created" Nullable="false" />
     <Property Type="DateTime" Name="LastLogin" />
   </EntityType>
+  <EntityType Name="t_Game">
+    <Key>
+      <PropertyRef Name="GameId" />
+    </Key>
+    <Property Type="Int32" Name="GameId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Game" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="t_GameResults" Relationship="AgileMindModel.FK_t_GameResults_t_Game" FromRole="t_Game" ToRole="t_GameResults" />
+  </EntityType>
+  <EntityType Name="t_GameResults">
+    <Key>
+      <PropertyRef Name="GameScoreId" />
+    </Key>
+    <Property Type="Int32" Name="GameScoreId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="GameId" Nullable="false" />
+    <Property Type="Int32" Name="LoginId" Nullable="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <Property Type="Int32" Name="Score" Nullable="false" />
+    <Property Type="Int32" Name="Total" Nullable="false" />
+    <NavigationProperty Name="Login" Relationship="AgileMindModel.FK_t_GameResults_Logins" FromRole="t_GameResults" ToRole="Login" />
+    <NavigationProperty Name="t_Game" Relationship="AgileMindModel.FK_t_GameResults_t_Game" FromRole="t_GameResults" ToRole="t_Game" />
+    <Property Type="Decimal" Name="TestDuration" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_t_GameResults_Logins">
+    <End Type="AgileMindModel.Login" Role="Login" Multiplicity="1" />
+    <End Type="AgileMindModel.t_GameResults" Role="t_GameResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="LoginId" />
+      </Principal>
+      <Dependent Role="t_GameResults">
+        <PropertyRef Name="LoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_GameResults_t_Game">
+    <End Type="AgileMindModel.t_Game" Role="t_Game" Multiplicity="1" />
+    <End Type="AgileMindModel.t_GameResults" Role="t_GameResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="t_GameResults">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

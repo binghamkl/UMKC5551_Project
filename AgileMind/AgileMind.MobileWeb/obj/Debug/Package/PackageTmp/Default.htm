@@ -32,7 +32,9 @@
 			    </div>
         </div>
         <div data-role="content" data-bind="visible: IsLoggedIn()">
-            Yeap, logged in.
+            <ul data-role="listview">
+                <li><a data-bind="click:CreateQuestions">Color Game</a></li>
+            </ul>
         </div>
     </div>
 
@@ -58,6 +60,46 @@
 			    </div>
         </div>
     </div>
+
+    <!-- Color Game Questions -->
+    <div data-role="dialog" id="ColorGame" data-theme="c">
+        <div data-role="header">
+            <h2>Color Match</h2>
+        </div>
+        <div data-role="content" data-bind="with:CurrentQuestion">
+            <h2>Match Not Match.</h2>
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="background-color:White;" data-bind="text:LeftWord, style: {color: LeftColor}"></div>
+                <div class="ui-block-b" style="background-color:White;" data-bind="text:RightWord, style: {color: RightColor}"></div>
+            </div>
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a data-bind="click: $root.NoMatch" data-role="button" data-icon="arrow-d">No Match</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-bind="click: $root.Match" data-role="button" data-icon="check">Match</a>
+                </div>
+            </div>
+            <div>
+                <p>
+                </p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Color Game Questions -->
+    <div data-role="dialog" id="ColorGameScores" data-theme="c">
+        <div data-role="header">
+            <h2>Your Score</h2>
+        </div>
+        <div data-role="content">
+            <h2>You got <label data-bind="text:CorrectAnswers"></label> out of 10 correct</h2>
+            <a data-rel="back" data-role="button" data-icon="arrow-d">Menu</a>
+
+        </div>
+    </div>
+
 
 
     <script>

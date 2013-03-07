@@ -67,6 +67,7 @@ namespace AgileMind.BLL.Games
         public bool IsMatch
         {
             get { return LeftWord.Equals(RightColor); }
+            set { }
         }
         #endregion
 

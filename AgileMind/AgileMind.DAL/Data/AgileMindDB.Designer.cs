@@ -17,6 +17,13 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+#region EDM Relationship Metadata
+
+[assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_GameResults_Logins", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.Login), "t_GameResults", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_GameResults), true)]
+[assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_GameResults_t_Game", "t_Game", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_Game), "t_GameResults", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_GameResults), true)]
+
+#endregion
+
 namespace AgileMind.DAL.Data
 {
     #region Contexts
@@ -96,6 +103,38 @@ namespace AgileMind.DAL.Data
             }
         }
         private ObjectSet<vwLoginInfo> _vwLoginInfoes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_Game> t_Game
+        {
+            get
+            {
+                if ((_t_Game == null))
+                {
+                    _t_Game = base.CreateObjectSet<t_Game>("t_Game");
+                }
+                return _t_Game;
+            }
+        }
+        private ObjectSet<t_Game> _t_Game;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_GameResults> t_GameResults
+        {
+            get
+            {
+                if ((_t_GameResults == null))
+                {
+                    _t_GameResults = base.CreateObjectSet<t_GameResults>("t_GameResults");
+                }
+                return _t_GameResults;
+            }
+        }
+        private ObjectSet<t_GameResults> _t_GameResults;
 
         #endregion
 
@@ -115,6 +154,22 @@ namespace AgileMind.DAL.Data
         public void AddTovwLoginInfoes(vwLoginInfo vwLoginInfo)
         {
             base.AddObject("vwLoginInfoes", vwLoginInfo);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_Game EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_Game(t_Game t_Game)
+        {
+            base.AddObject("t_Game", t_Game);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_GameResults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_GameResults(t_GameResults t_GameResults)
+        {
+            base.AddObject("t_GameResults", t_GameResults);
         }
 
         #endregion
@@ -436,6 +491,458 @@ namespace AgileMind.DAL.Data
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_GameResults_Logins", "t_GameResults")]
+        public EntityCollection<t_GameResults> t_GameResults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<t_GameResults>("AgileMindModel.FK_t_GameResults_Logins", "t_GameResults");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_GameResults>("AgileMindModel.FK_t_GameResults_Logins", "t_GameResults", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_Game")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_Game : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_Game object.
+        /// </summary>
+        /// <param name="gameId">Initial value of the GameId property.</param>
+        /// <param name="game">Initial value of the Game property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
+        public static t_Game Createt_Game(global::System.Int32 gameId, global::System.String game, global::System.String description)
+        {
+            t_Game t_Game = new t_Game();
+            t_Game.GameId = gameId;
+            t_Game.Game = game;
+            t_Game.Description = description;
+            return t_Game;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GameId
+        {
+            get
+            {
+                return _GameId;
+            }
+            set
+            {
+                if (_GameId != value)
+                {
+                    OnGameIdChanging(value);
+                    ReportPropertyChanging("GameId");
+                    _GameId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("GameId");
+                    OnGameIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _GameId;
+        partial void OnGameIdChanging(global::System.Int32 value);
+        partial void OnGameIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Game
+        {
+            get
+            {
+                return _Game;
+            }
+            set
+            {
+                OnGameChanging(value);
+                ReportPropertyChanging("Game");
+                _Game = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Game");
+                OnGameChanged();
+            }
+        }
+        private global::System.String _Game;
+        partial void OnGameChanging(global::System.String value);
+        partial void OnGameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                OnDescriptionChanging(value);
+                ReportPropertyChanging("Description");
+                _Description = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Description");
+                OnDescriptionChanged();
+            }
+        }
+        private global::System.String _Description;
+        partial void OnDescriptionChanging(global::System.String value);
+        partial void OnDescriptionChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_GameResults_t_Game", "t_GameResults")]
+        public EntityCollection<t_GameResults> t_GameResults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<t_GameResults>("AgileMindModel.FK_t_GameResults_t_Game", "t_GameResults");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_GameResults>("AgileMindModel.FK_t_GameResults_t_Game", "t_GameResults", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_GameResults")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_GameResults : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_GameResults object.
+        /// </summary>
+        /// <param name="gameScoreId">Initial value of the GameScoreId property.</param>
+        /// <param name="gameId">Initial value of the GameId property.</param>
+        /// <param name="loginId">Initial value of the LoginId property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        /// <param name="score">Initial value of the Score property.</param>
+        /// <param name="total">Initial value of the Total property.</param>
+        public static t_GameResults Createt_GameResults(global::System.Int32 gameScoreId, global::System.Int32 gameId, global::System.Int32 loginId, global::System.DateTime created, global::System.Int32 score, global::System.Int32 total)
+        {
+            t_GameResults t_GameResults = new t_GameResults();
+            t_GameResults.GameScoreId = gameScoreId;
+            t_GameResults.GameId = gameId;
+            t_GameResults.LoginId = loginId;
+            t_GameResults.Created = created;
+            t_GameResults.Score = score;
+            t_GameResults.Total = total;
+            return t_GameResults;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GameScoreId
+        {
+            get
+            {
+                return _GameScoreId;
+            }
+            set
+            {
+                if (_GameScoreId != value)
+                {
+                    OnGameScoreIdChanging(value);
+                    ReportPropertyChanging("GameScoreId");
+                    _GameScoreId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("GameScoreId");
+                    OnGameScoreIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _GameScoreId;
+        partial void OnGameScoreIdChanging(global::System.Int32 value);
+        partial void OnGameScoreIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GameId
+        {
+            get
+            {
+                return _GameId;
+            }
+            set
+            {
+                OnGameIdChanging(value);
+                ReportPropertyChanging("GameId");
+                _GameId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GameId");
+                OnGameIdChanged();
+            }
+        }
+        private global::System.Int32 _GameId;
+        partial void OnGameIdChanging(global::System.Int32 value);
+        partial void OnGameIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LoginId
+        {
+            get
+            {
+                return _LoginId;
+            }
+            set
+            {
+                OnLoginIdChanging(value);
+                ReportPropertyChanging("LoginId");
+                _LoginId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LoginId");
+                OnLoginIdChanged();
+            }
+        }
+        private global::System.Int32 _LoginId;
+        partial void OnLoginIdChanging(global::System.Int32 value);
+        partial void OnLoginIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Score
+        {
+            get
+            {
+                return _Score;
+            }
+            set
+            {
+                OnScoreChanging(value);
+                ReportPropertyChanging("Score");
+                _Score = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Score");
+                OnScoreChanged();
+            }
+        }
+        private global::System.Int32 _Score;
+        partial void OnScoreChanging(global::System.Int32 value);
+        partial void OnScoreChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Total
+        {
+            get
+            {
+                return _Total;
+            }
+            set
+            {
+                OnTotalChanging(value);
+                ReportPropertyChanging("Total");
+                _Total = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Total");
+                OnTotalChanged();
+            }
+        }
+        private global::System.Int32 _Total;
+        partial void OnTotalChanging(global::System.Int32 value);
+        partial void OnTotalChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> TestDuration
+        {
+            get
+            {
+                return _TestDuration;
+            }
+            set
+            {
+                OnTestDurationChanging(value);
+                ReportPropertyChanging("TestDuration");
+                _TestDuration = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestDuration");
+                OnTestDurationChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _TestDuration;
+        partial void OnTestDurationChanging(Nullable<global::System.Decimal> value);
+        partial void OnTestDurationChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_GameResults_Logins", "Login")]
+        public Login Login
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_GameResults_Logins", "Login").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_GameResults_Logins", "Login").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Login> LoginReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_GameResults_Logins", "Login");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Login>("AgileMindModel.FK_t_GameResults_Logins", "Login", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_GameResults_t_Game", "t_Game")]
+        public t_Game t_Game
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_Game>("AgileMindModel.FK_t_GameResults_t_Game", "t_Game").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_Game>("AgileMindModel.FK_t_GameResults_t_Game", "t_Game").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<t_Game> t_GameReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_Game>("AgileMindModel.FK_t_GameResults_t_Game", "t_Game");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<t_Game>("AgileMindModel.FK_t_GameResults_t_Game", "t_Game", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>

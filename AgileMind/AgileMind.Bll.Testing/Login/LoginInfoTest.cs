@@ -248,7 +248,7 @@ namespace AgileMind.Bll.Testing.Login
         /*-- Helper Methods --*/
         
 		#region -- DeleteLoginsFromDB() Method --
-		private void DeleteLoginsFromDB(String LoginName)
+		public static void DeleteLoginsFromDB(String LoginName)
 		{
             AgileMind.DAL.Data.AgileMindEntities agileMindDB = new DAL.Data.AgileMindEntities();
 
