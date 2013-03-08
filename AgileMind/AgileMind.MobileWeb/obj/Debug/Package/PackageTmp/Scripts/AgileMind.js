@@ -30,11 +30,14 @@ function AgileMindViewModel() {
     var self = this;
 
     // Non-editable catalog data - would come from the server
+    self.startTime = new Date();
+    self.endTime = new Date();
 
     // Editable data
 
     self.IsLoggedIn = ko.observable(false);
     self.Error = ko.observable("");
+    self.duration = ko.observable(0);
 
     self.LoginInfo = { UserName: ko.observable(""), Password: ko.observable("") };
     self.Register = { UserName: ko.observable(""), Password: ko.observable(""), Email: ko.observable("") };
@@ -47,6 +50,36 @@ function AgileMindViewModel() {
     // Computed data
 
     // Operations
+
+    self.SaveResults = function () {
+        self.endTime = new Date();
+        var elapsed = (vw.endTime - vw.startTime) / 1000
+        self.duration(elapsed);
+        $.ajax({
+            type: 'POST',
+            url: URIHOME + GAMES + 'InsertGameResult',
+            data: {
+                UserName: self.LoginInfo.UserName(), Password: self.LoginInfo.Password(), gameType: 1,
+                Score: self.CorrectAnswers(), TestDuration: elapsed, Total: self.Questions.length
+            },
+            dataType: 'json',
+            success: function (data) {
+
+                if (!data.Success) {
+                    self.Error(data.Error);
+                }
+                else {
+
+                    self.Error('');
+                }
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                self.Error(errorThrown);
+            }
+
+        });
+    };
 
         //CreateQuestions
     self.CreateQuestions = function () {
@@ -79,6 +112,7 @@ function AgileMindViewModel() {
                                 transition: "slide"
                             }
                         );
+                        self.startTime = new Date();
 
                         $('#ColorGame').trigger('create');
 
@@ -154,8 +188,9 @@ function AgileMindViewModel() {
                                         changeHash: false
                                     }
                             );
-                                    $('#ColorGameScores').trigger('create');
+            $('#ColorGameScores').trigger('create');
 
+            self.SaveResults();
         }
         else {
             $.mobile.changePage("#ColorGame",
@@ -165,7 +200,7 @@ function AgileMindViewModel() {
                                         changeHash: false
                                     }
                             );
-             $('#ColorGame').trigger('create');
+            $('#ColorGame').trigger('create');
         }
 
     }

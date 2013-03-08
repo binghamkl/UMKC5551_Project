@@ -1,2 +1,2 @@
-﻿var URIHOME = "http://localhost:59845/";
+﻿var URIHOME = "http://localhost/AgilesMindWS/";
 var USER = "Login/";
