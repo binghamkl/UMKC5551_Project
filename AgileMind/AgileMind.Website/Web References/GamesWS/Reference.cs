@@ -33,7 +33,7 @@ namespace AgileMind.Website.GamesWS {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EntityKeyMember[]))]
     public partial class GamesService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback FetchGolorGameOperationCompleted;
+        private System.Threading.SendOrPostCallback FetchColorGameOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertGameResultOperationCompleted;
         
@@ -78,7 +78,7 @@ namespace AgileMind.Website.GamesWS {
         }
         
         /// <remarks/>
-        public event FetchGolorGameCompletedEventHandler FetchGolorGameCompleted;
+        public event FetchColorGameCompletedEventHandler FetchColorGameCompleted;
         
         /// <remarks/>
         public event InsertGameResultCompletedEventHandler InsertGameResultCompleted;
@@ -87,29 +87,29 @@ namespace AgileMind.Website.GamesWS {
         public event InsertGameResultWebCompletedEventHandler InsertGameResultWebCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchGolorGame", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ColorGameResult FetchGolorGame() {
-            object[] results = this.Invoke("FetchGolorGame", new object[0]);
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchColorGame", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ColorGameResult FetchColorGame() {
+            object[] results = this.Invoke("FetchColorGame", new object[0]);
             return ((ColorGameResult)(results[0]));
         }
         
         /// <remarks/>
-        public void FetchGolorGameAsync() {
-            this.FetchGolorGameAsync(null);
+        public void FetchColorGameAsync() {
+            this.FetchColorGameAsync(null);
         }
         
         /// <remarks/>
-        public void FetchGolorGameAsync(object userState) {
-            if ((this.FetchGolorGameOperationCompleted == null)) {
-                this.FetchGolorGameOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFetchGolorGameOperationCompleted);
+        public void FetchColorGameAsync(object userState) {
+            if ((this.FetchColorGameOperationCompleted == null)) {
+                this.FetchColorGameOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFetchColorGameOperationCompleted);
             }
-            this.InvokeAsync("FetchGolorGame", new object[0], this.FetchGolorGameOperationCompleted, userState);
+            this.InvokeAsync("FetchColorGame", new object[0], this.FetchColorGameOperationCompleted, userState);
         }
         
-        private void OnFetchGolorGameOperationCompleted(object arg) {
-            if ((this.FetchGolorGameCompleted != null)) {
+        private void OnFetchColorGameOperationCompleted(object arg) {
+            if ((this.FetchColorGameCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.FetchGolorGameCompleted(this, new FetchGolorGameCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.FetchColorGameCompleted(this, new FetchColorGameCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -660,17 +660,17 @@ namespace AgileMind.Website.GamesWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void FetchGolorGameCompletedEventHandler(object sender, FetchGolorGameCompletedEventArgs e);
+    public delegate void FetchColorGameCompletedEventHandler(object sender, FetchColorGameCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class FetchGolorGameCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class FetchColorGameCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal FetchGolorGameCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal FetchColorGameCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

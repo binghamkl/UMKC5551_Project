@@ -26,7 +26,7 @@ namespace AgileMind.Website.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:59845/SOAP/GamesService.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:52761/GamesService.asmx")]
         public string AgileMind_Website_GamesWS_GamesService {
             get {
                 return ((string)(this["AgileMind_Website_GamesWS_GamesService"]));

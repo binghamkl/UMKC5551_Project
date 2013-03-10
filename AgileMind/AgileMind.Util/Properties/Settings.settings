@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="AgileMind_Util_LoginWS_Login" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:59845/SOAP/Login.asmx</Value>
+      <Value Profile="(Default)">http://localhost:52761/Login.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

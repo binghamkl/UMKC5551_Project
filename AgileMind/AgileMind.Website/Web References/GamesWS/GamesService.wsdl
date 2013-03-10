@@ -2,13 +2,13 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
-      <s:element name="FetchGolorGame">
+      <s:element name="FetchColorGame">
         <s:complexType />
       </s:element>
-      <s:element name="FetchGolorGameResponse">
+      <s:element name="FetchColorGameResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="FetchGolorGameResult" type="tns:ColorGameResult" />
+            <s:element minOccurs="0" maxOccurs="1" name="FetchColorGameResult" type="tns:ColorGameResult" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -160,11 +160,11 @@
       </s:element>
     </s:schema>
   </wsdl:types>
-  <wsdl:message name="FetchGolorGameSoapIn">
-    <wsdl:part name="parameters" element="tns:FetchGolorGame" />
+  <wsdl:message name="FetchColorGameSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchColorGame" />
   </wsdl:message>
-  <wsdl:message name="FetchGolorGameSoapOut">
-    <wsdl:part name="parameters" element="tns:FetchGolorGameResponse" />
+  <wsdl:message name="FetchColorGameSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchColorGameResponse" />
   </wsdl:message>
   <wsdl:message name="InsertGameResultSoapIn">
     <wsdl:part name="parameters" element="tns:InsertGameResult" />
@@ -179,9 +179,9 @@
     <wsdl:part name="parameters" element="tns:InsertGameResultWebResponse" />
   </wsdl:message>
   <wsdl:portType name="GamesServiceSoap">
-    <wsdl:operation name="FetchGolorGame">
-      <wsdl:input message="tns:FetchGolorGameSoapIn" />
-      <wsdl:output message="tns:FetchGolorGameSoapOut" />
+    <wsdl:operation name="FetchColorGame">
+      <wsdl:input message="tns:FetchColorGameSoapIn" />
+      <wsdl:output message="tns:FetchColorGameSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="InsertGameResult">
       <wsdl:input message="tns:InsertGameResultSoapIn" />
@@ -194,8 +194,8 @@
   </wsdl:portType>
   <wsdl:binding name="GamesServiceSoap" type="tns:GamesServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="FetchGolorGame">
-      <soap:operation soapAction="http://tempuri.org/FetchGolorGame" style="document" />
+    <wsdl:operation name="FetchColorGame">
+      <soap:operation soapAction="http://tempuri.org/FetchColorGame" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -224,8 +224,8 @@
   </wsdl:binding>
   <wsdl:binding name="GamesServiceSoap12" type="tns:GamesServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="FetchGolorGame">
-      <soap12:operation soapAction="http://tempuri.org/FetchGolorGame" style="document" />
+    <wsdl:operation name="FetchColorGame">
+      <soap12:operation soapAction="http://tempuri.org/FetchColorGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -254,10 +254,10 @@
   </wsdl:binding>
   <wsdl:service name="GamesService">
     <wsdl:port name="GamesServiceSoap" binding="tns:GamesServiceSoap">
-      <soap:address location="http://localhost:59845/SOAP/GamesService.asmx" />
+      <soap:address location="http://localhost:52761/GamesService.asmx" />
     </wsdl:port>
     <wsdl:port name="GamesServiceSoap12" binding="tns:GamesServiceSoap12">
-      <soap12:address location="http://localhost:59845/SOAP/GamesService.asmx" />
+      <soap12:address location="http://localhost:52761/GamesService.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

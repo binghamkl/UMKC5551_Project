@@ -91,7 +91,7 @@ namespace AgileMind.Website.Games
                 if (Request.IsAuthenticated)
                 {
                     GamesWS.GamesService gamesService = new GamesWS.GamesService();
-                    ColorGameResult result = gamesService.FetchGolorGame();
+                    ColorGameResult result = gamesService.FetchColorGame();
                     if (result.Success)
                     {
                         ColorGameInfo = new ColorGameInformation();

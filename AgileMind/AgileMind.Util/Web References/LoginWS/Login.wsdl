@@ -158,10 +158,10 @@
   </wsdl:binding>
   <wsdl:service name="Login">
     <wsdl:port name="LoginSoap" binding="tns:LoginSoap">
-      <soap:address location="http://localhost:59845/SOAP/Login.asmx" />
+      <soap:address location="http://localhost:52761/Login.asmx" />
     </wsdl:port>
     <wsdl:port name="LoginSoap12" binding="tns:LoginSoap12">
-      <soap12:address location="http://localhost:59845/SOAP/Login.asmx" />
+      <soap12:address location="http://localhost:52761/Login.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

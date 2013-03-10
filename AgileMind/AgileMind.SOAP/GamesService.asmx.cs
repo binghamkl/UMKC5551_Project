@@ -9,7 +9,7 @@ using AgileMind.BLL.Games;
 
 #endregion
 
-namespace AgileMind.WebService.SOAP
+namespace AgileMind.SOAP
 {
     /// <summary>
     /// Summary description for GamesService
@@ -23,8 +23,8 @@ namespace AgileMind.WebService.SOAP
     {
 
         [WebMethod]
-        #region -- FetchGolorGame() WebService --
-        public ColorGameResult FetchGolorGame()
+        #region -- FetchColorGame() WebService --
+        public ColorGameResult FetchColorGame()
         {
             return ColorGameResult.CreateGame();
         }

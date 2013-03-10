@@ -9,7 +9,7 @@ using AgileMind.BLL.Login;
 
 #endregion
 
-namespace AgileMind.WebService.SOAP
+namespace AgileMind.SOAP
 {
     /// <summary>
     /// Summary description for Login

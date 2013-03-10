@@ -26,7 +26,7 @@ namespace AgileMind.Util.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:59845/SOAP/Login.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:52761/Login.asmx")]
         public string AgileMind_Util_LoginWS_Login {
             get {
                 return ((string)(this["AgileMind_Util_LoginWS_Login"]));
