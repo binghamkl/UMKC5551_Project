@@ -10,6 +10,7 @@
 </head>
 <body>
     <form runat="server">
+    <asp:ScriptManager ID="uxAgileMindScriptManager" runat="server"></asp:ScriptManager>
     <div class="page">
         <div class="header">
             <div class="title">
@@ -33,6 +34,7 @@
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
+                        <asp:MenuItem NavigateUrl="~/Games/ColorQuiz.aspx" Text="Color Quiz"/>
                     </Items>
                 </asp:Menu>
             </div>

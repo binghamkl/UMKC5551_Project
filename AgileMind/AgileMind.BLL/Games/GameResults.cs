@@ -75,5 +75,45 @@ namespace AgileMind.BLL.Games
 		}
 		#endregion
 
+        #region -- InsertGameResultLoginId(String UserName, GameListEnum gameType, int Score, decimal TestDuration, int Total) Method --
+        public static GameResults InsertGameResultLoginId(String UserName, GameListEnum gameType, int Score, decimal TestDuration, int Total)
+        {
+            GameResults results = new GameResults();
+            try
+            {
+
+                AgileMindEntities db = new AgileMindEntities();
+                vwLoginInfo login = (from data in db.vwLoginInfoes where data.LoginName == UserName select data).Single();
+
+                if (login != null)
+                {
+                    t_GameResults gameResults = new t_GameResults();
+                    gameResults.Created = DateTime.Now;
+                    gameResults.GameId = (int)gameType;
+                    gameResults.LoginId = login.LoginId;
+                    gameResults.Score = Score;
+                    gameResults.TestDuration = TestDuration;
+                    gameResults.Total = Total;
+                    db.t_GameResults.AddObject(gameResults);
+                    db.SaveChanges();
+
+                    results.Success = true;
+                    results.Game = gameResults;
+
+                }
+                else
+                {
+                    results.Error = "Could not login.  Invalid Username/Password";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                results.Error = ex.Message;
+            }
+            return results;
+        }
+        #endregion
+
     }
 }

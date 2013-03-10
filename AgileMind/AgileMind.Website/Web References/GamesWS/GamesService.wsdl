@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="FetchGolorGame">
+        <s:complexType />
+      </s:element>
+      <s:element name="FetchGolorGameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchGolorGameResult" type="tns:ColorGameResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ColorGameResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Result">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Questions" type="tns:ArrayOfColorGameQuestion" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Result">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfColorGameQuestion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ColorGameQuestion" nillable="true" type="tns:ColorGameQuestion" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ColorGameQuestion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LeftWord" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LeftColor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RightWord" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RightColor" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsMatch" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserCorrect" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="InsertGameResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gameType" type="tns:GameListEnum" />
+            <s:element minOccurs="1" maxOccurs="1" name="Score" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TestDuration" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="GameListEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="ColorQuiz" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="InsertGameResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertGameResultResult" type="tns:GameResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GameResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Result">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Game" type="tns:t_GameResults" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="t_GameResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityObject">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="GameScoreId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="GameId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="LoginId" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Created" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Score" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TestDuration" nillable="true" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="LoginReference" type="tns:EntityReferenceOfLogin" />
+              <s:element minOccurs="0" maxOccurs="1" name="t_GameReference" type="tns:EntityReferenceOft_Game" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EntityObject" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:StructuralObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="EntityKey" type="tns:EntityKey" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="StructuralObject" abstract="true" />
+      <s:complexType name="EntityKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="EntitySetName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntityContainerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntityKeyValues" type="tns:ArrayOfEntityKeyMember" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEntityKeyMember">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EntityKeyMember" nillable="true" type="tns:EntityKeyMember" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityKeyMember">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityReferenceOfLogin">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityReference" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EntityReference" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:RelatedEnd">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="EntityKey" type="tns:EntityKey" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="RelatedEnd" abstract="true" />
+      <s:complexType name="EntityReferenceOft_Game">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityReference" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="InsertGameResultWeb">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gameType" type="tns:GameListEnum" />
+            <s:element minOccurs="1" maxOccurs="1" name="Score" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TestDuration" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Total" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertGameResultWebResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertGameResultWebResult" type="tns:GameResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FetchGolorGameSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchGolorGame" />
+  </wsdl:message>
+  <wsdl:message name="FetchGolorGameSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchGolorGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertGameResultSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertGameResult" />
+  </wsdl:message>
+  <wsdl:message name="InsertGameResultSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertGameResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertGameResultWebSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertGameResultWeb" />
+  </wsdl:message>
+  <wsdl:message name="InsertGameResultWebSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertGameResultWebResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GamesServiceSoap">
+    <wsdl:operation name="FetchGolorGame">
+      <wsdl:input message="tns:FetchGolorGameSoapIn" />
+      <wsdl:output message="tns:FetchGolorGameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertGameResult">
+      <wsdl:input message="tns:InsertGameResultSoapIn" />
+      <wsdl:output message="tns:InsertGameResultSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertGameResultWeb">
+      <wsdl:input message="tns:InsertGameResultWebSoapIn" />
+      <wsdl:output message="tns:InsertGameResultWebSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GamesServiceSoap" type="tns:GamesServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FetchGolorGame">
+      <soap:operation soapAction="http://tempuri.org/FetchGolorGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertGameResult">
+      <soap:operation soapAction="http://tempuri.org/InsertGameResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertGameResultWeb">
+      <soap:operation soapAction="http://tempuri.org/InsertGameResultWeb" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GamesServiceSoap12" type="tns:GamesServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FetchGolorGame">
+      <soap12:operation soapAction="http://tempuri.org/FetchGolorGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertGameResult">
+      <soap12:operation soapAction="http://tempuri.org/InsertGameResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertGameResultWeb">
+      <soap12:operation soapAction="http://tempuri.org/InsertGameResultWeb" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GamesService">
+    <wsdl:port name="GamesServiceSoap" binding="tns:GamesServiceSoap">
+      <soap:address location="http://localhost:59845/SOAP/GamesService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GamesServiceSoap12" binding="tns:GamesServiceSoap12">
+      <soap12:address location="http://localhost:59845/SOAP/GamesService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
