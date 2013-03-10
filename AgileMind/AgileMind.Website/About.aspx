@@ -8,6 +8,9 @@
         About
     </h2>
     <p>
-        Put content here.
+        Studies are beginning to show that mental exercise as well as physical exercise can prevent or reduce the symptoms of brain disorders such as alzheimer's.
+    </p>
+    <p>
+        Keep your mind active is a big part of helping with symptoms of people who are currently afflicted with these diseases.
     </p>
 </asp:Content>
