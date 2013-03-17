@@ -50,5 +50,37 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="t_UserProfileAnswer">
+      <EntityTypeMapping TypeName="AgileMindModel.t_UserProfileAnswer">
+        <MappingFragment StoreEntitySet="t_UserProfileAnswer">
+          <ScalarProperty Name="NoAnswer" ColumnName="NoAnswer" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="UserProfileQuestionId" ColumnName="UserProfileQuestionId" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="UserProfileAnswerId" ColumnName="UserProfileAnswerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_UserProfileQuestion">
+      <EntityTypeMapping TypeName="AgileMindModel.t_UserProfileQuestion">
+        <MappingFragment StoreEntitySet="t_UserProfileQuestion">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="UserProfileQuestionId" ColumnName="UserProfileQuestionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_LoginSession">
+      <EntityTypeMapping TypeName="AgileMindModel.t_LoginSession">
+        <MappingFragment StoreEntitySet="t_LoginSession">
+          <ScalarProperty Name="ValidTill" ColumnName="ValidTill" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="LoginSessionId" ColumnName="LoginSessionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

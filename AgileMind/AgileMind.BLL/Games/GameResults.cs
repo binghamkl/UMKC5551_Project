@@ -43,7 +43,7 @@ namespace AgileMind.BLL.Games
             GameResults results = new GameResults();
             try 
 	        {	        
-                LoginResult loginResult = LoginResult.ValidateLogin(UserName, Password);
+                LoginResult loginResult = LoginResult.ValidateLogin(UserName, Password, String.Empty);
                 if (loginResult.Success)
                 {
                     AgileMindEntities db = new AgileMindEntities();
@@ -114,6 +114,7 @@ namespace AgileMind.BLL.Games
             return results;
         }
         #endregion
+        
 
     }
 }

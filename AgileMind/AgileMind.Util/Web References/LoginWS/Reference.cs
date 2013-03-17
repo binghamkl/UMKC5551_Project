@@ -115,26 +115,28 @@ namespace AgileMind.Util.LoginWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ValidateLogin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public LoginResult ValidateLogin(string loginName, string password) {
+        public LoginResult ValidateLogin(string loginName, string password, string IPAddress) {
             object[] results = this.Invoke("ValidateLogin", new object[] {
                         loginName,
-                        password});
+                        password,
+                        IPAddress});
             return ((LoginResult)(results[0]));
         }
         
         /// <remarks/>
-        public void ValidateLoginAsync(string loginName, string password) {
-            this.ValidateLoginAsync(loginName, password, null);
+        public void ValidateLoginAsync(string loginName, string password, string IPAddress) {
+            this.ValidateLoginAsync(loginName, password, IPAddress, null);
         }
         
         /// <remarks/>
-        public void ValidateLoginAsync(string loginName, string password, object userState) {
+        public void ValidateLoginAsync(string loginName, string password, string IPAddress, object userState) {
             if ((this.ValidateLoginOperationCompleted == null)) {
                 this.ValidateLoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidateLoginOperationCompleted);
             }
             this.InvokeAsync("ValidateLogin", new object[] {
                         loginName,
-                        password}, this.ValidateLoginOperationCompleted, userState);
+                        password,
+                        IPAddress}, this.ValidateLoginOperationCompleted, userState);
         }
         
         private void OnValidateLoginOperationCompleted(object arg) {

@@ -46,5 +46,21 @@ namespace AgileMind.SOAP
         }
         #endregion
 
+        [WebMethod]
+		#region -- FetchUserProfileQuestions() Method --
+		public UserProfileQuestionsResults FetchUserProfileQuestions()
+		{
+            return UserProfileQuestionsResults.FetchUserProfileQuestions();
+		}
+		#endregion
+		
+        [WebMethod]
+		#region -- HasUserFilledOutQuestions() Method --
+		public bool HasUserFilledOutQuestions(Guid SessionId)
+		{
+            return UserProfileQuestionsResults.HasUserFilledOutAnyQuestions(SessionId);
+		}
+		#endregion
+		
     }
 }

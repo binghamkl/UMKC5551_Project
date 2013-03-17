@@ -15,6 +15,7 @@ namespace AgileMind.BLL.Login
     {
 
         private vwLoginInfo _loginInfo;
+        private Guid _sessionId;
 
         /*-- Constructors --*/
 
@@ -34,6 +35,14 @@ namespace AgileMind.BLL.Login
         {
             get { return _loginInfo; }
             set { _loginInfo = value; }
+        }
+        #endregion
+
+        #region -- SessionId Property --
+        public Guid SessionId
+        {
+            get { return _sessionId; }
+            set { _sessionId = value; }
         }
         #endregion
 
@@ -105,15 +114,15 @@ namespace AgileMind.BLL.Login
         }
         #endregion
 
-        #region -- ValidateLogin(string loginName, string password) Method --
-        public static LoginResult ValidateLogin(string loginName, string password)
+        #region -- ValidateLogin(string loginName, string password, String IPAddress) Method --
+        public static LoginResult ValidateLogin(string loginName, string password, String IPAddress)
         {
             LoginResult result = new LoginResult();
 
             try
             {
                 AgileMindEntities agileMindDB = new AgileMindEntities();
-                List<AgileMind.DAL.Data.Login> loginList = agileMindDB.Logins_CheckLogin(loginName, password).ToList();
+                List<AgileMind.DAL.Data.Login> loginList = agileMindDB.Logins_CheckLogin(loginName, password, IPAddress).ToList();
                 if (loginList.Count == 1)
                 {
                     int loginId = loginList[0].LoginId;
@@ -122,6 +131,22 @@ namespace AgileMind.BLL.Login
                     {
                         if (loginInfoList[0].Active)
                         {
+                            //Load sessions  or save a new session
+                            List<t_LoginSession> sessionlist = (from data in agileMindDB.t_LoginSession where data.LoginId == loginId && data.ValidTill > DateTime.Now select data).ToList();
+                            if (sessionlist.Count > 0)
+                                result.SessionId = sessionlist[0].LoginSessionId;
+                            else
+                            {
+                                t_LoginSession newSession = new t_LoginSession();
+                                newSession.LoginId = loginId;
+                                newSession.LoginSessionId = Guid.NewGuid();
+                                newSession.ValidTill = DateTime.Now.AddHours(3);
+                                agileMindDB.t_LoginSession.AddObject(newSession);
+                                agileMindDB.SaveChanges();
+
+                                result.SessionId = newSession.LoginSessionId;
+                            }
+
                             result.Success = true;
                             result.LoginInfo = loginInfoList[0];
                         }
@@ -154,5 +179,16 @@ namespace AgileMind.BLL.Login
         }
         #endregion
 
+        #region -- ValidateSession(Guid SessionId) Method --
+        public static bool ValidateSession(Guid SessionId)
+		{
+            AgileMindEntities agileDB = new AgileMindEntities();
+            List<t_LoginSession> sessionList = (from data in agileDB.t_LoginSession where data.LoginSessionId == SessionId && data.ValidTill > DateTime.Now select data).ToList();
+            if (sessionList.Count > 0)
+                return true;
+            return false;
+		}
+		#endregion
+		
     }
 }

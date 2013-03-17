@@ -26,7 +26,21 @@ namespace AgileMind.WebService.Controllers
         {
             JsonResult jsonResult = new JsonResult();
 
-            LoginResult loginResult = LoginResult.ValidateLogin(UserName, Password);
+            
+            string szRemoteAddr = Request.ServerVariables["REMOTE_ADDR"];
+            string szXForwardedFor = Request.ServerVariables["X_FORWARDED_FOR"];
+            string szIP = "";
+
+            if (szXForwardedFor == null)
+            {
+                szIP = szRemoteAddr;
+            }
+            else
+            {
+                szIP = szXForwardedFor;
+            }
+
+            LoginResult loginResult = LoginResult.ValidateLogin(UserName, Password, szIP);
 
             jsonResult = Json(loginResult, JsonRequestBehavior.AllowGet);
             return jsonResult;

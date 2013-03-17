@@ -21,6 +21,9 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_GameResults_Logins", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.Login), "t_GameResults", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_GameResults), true)]
 [assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_GameResults_t_Game", "t_Game", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_Game), "t_GameResults", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_GameResults), true)]
+[assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_UserProfileAnswer_Logins", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.Login), "t_UserProfileAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_UserProfileAnswer), true)]
+[assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_UserProfileQuestion), "t_UserProfileAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_UserProfileAnswer), true)]
+[assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_LoginSession_Logins", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.Login), "t_LoginSession", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_LoginSession), true)]
 
 #endregion
 
@@ -135,6 +138,54 @@ namespace AgileMind.DAL.Data
             }
         }
         private ObjectSet<t_GameResults> _t_GameResults;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_UserProfileAnswer> t_UserProfileAnswer
+        {
+            get
+            {
+                if ((_t_UserProfileAnswer == null))
+                {
+                    _t_UserProfileAnswer = base.CreateObjectSet<t_UserProfileAnswer>("t_UserProfileAnswer");
+                }
+                return _t_UserProfileAnswer;
+            }
+        }
+        private ObjectSet<t_UserProfileAnswer> _t_UserProfileAnswer;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_UserProfileQuestion> t_UserProfileQuestion
+        {
+            get
+            {
+                if ((_t_UserProfileQuestion == null))
+                {
+                    _t_UserProfileQuestion = base.CreateObjectSet<t_UserProfileQuestion>("t_UserProfileQuestion");
+                }
+                return _t_UserProfileQuestion;
+            }
+        }
+        private ObjectSet<t_UserProfileQuestion> _t_UserProfileQuestion;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_LoginSession> t_LoginSession
+        {
+            get
+            {
+                if ((_t_LoginSession == null))
+                {
+                    _t_LoginSession = base.CreateObjectSet<t_LoginSession>("t_LoginSession");
+                }
+                return _t_LoginSession;
+            }
+        }
+        private ObjectSet<t_LoginSession> _t_LoginSession;
 
         #endregion
 
@@ -171,6 +222,30 @@ namespace AgileMind.DAL.Data
         {
             base.AddObject("t_GameResults", t_GameResults);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_UserProfileAnswer EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_UserProfileAnswer(t_UserProfileAnswer t_UserProfileAnswer)
+        {
+            base.AddObject("t_UserProfileAnswer", t_UserProfileAnswer);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_UserProfileQuestion EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_UserProfileQuestion(t_UserProfileQuestion t_UserProfileQuestion)
+        {
+            base.AddObject("t_UserProfileQuestion", t_UserProfileQuestion);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_LoginSession EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_LoginSession(t_LoginSession t_LoginSession)
+        {
+            base.AddObject("t_LoginSession", t_LoginSession);
+        }
 
         #endregion
 
@@ -181,7 +256,8 @@ namespace AgileMind.DAL.Data
         /// </summary>
         /// <param name="loginName">No Metadata Documentation available.</param>
         /// <param name="password">No Metadata Documentation available.</param>
-        public ObjectResult<Login> Logins_CheckLogin(global::System.String loginName, global::System.String password)
+        /// <param name="iPAddress">No Metadata Documentation available.</param>
+        public ObjectResult<Login> Logins_CheckLogin(global::System.String loginName, global::System.String password, global::System.String iPAddress)
         {
             ObjectParameter loginNameParameter;
             if (loginName != null)
@@ -203,7 +279,17 @@ namespace AgileMind.DAL.Data
                 passwordParameter = new ObjectParameter("Password", typeof(global::System.String));
             }
     
-            return base.ExecuteFunction<Login>("Logins_CheckLogin", loginNameParameter, passwordParameter);
+            ObjectParameter iPAddressParameter;
+            if (iPAddress != null)
+            {
+                iPAddressParameter = new ObjectParameter("IPAddress", iPAddress);
+            }
+            else
+            {
+                iPAddressParameter = new ObjectParameter("IPAddress", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<Login>("Logins_CheckLogin", loginNameParameter, passwordParameter, iPAddressParameter);
         }
         /// <summary>
         /// No Metadata Documentation available.
@@ -211,7 +297,8 @@ namespace AgileMind.DAL.Data
         /// <param name="mergeOption"></param>
         /// <param name="loginName">No Metadata Documentation available.</param>
         /// <param name="password">No Metadata Documentation available.</param>
-        public ObjectResult<Login> Logins_CheckLogin(global::System.String loginName, global::System.String password, MergeOption mergeOption)
+        /// <param name="iPAddress">No Metadata Documentation available.</param>
+        public ObjectResult<Login> Logins_CheckLogin(global::System.String loginName, global::System.String password, global::System.String iPAddress, MergeOption mergeOption)
         {
             ObjectParameter loginNameParameter;
             if (loginName != null)
@@ -233,7 +320,17 @@ namespace AgileMind.DAL.Data
                 passwordParameter = new ObjectParameter("Password", typeof(global::System.String));
             }
     
-            return base.ExecuteFunction<Login>("Logins_CheckLogin", mergeOption, loginNameParameter, passwordParameter);
+            ObjectParameter iPAddressParameter;
+            if (iPAddress != null)
+            {
+                iPAddressParameter = new ObjectParameter("IPAddress", iPAddress);
+            }
+            else
+            {
+                iPAddressParameter = new ObjectParameter("IPAddress", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<Login>("Logins_CheckLogin", mergeOption, loginNameParameter, passwordParameter, iPAddressParameter);
         }
     
         /// <summary>
@@ -511,6 +608,50 @@ namespace AgileMind.DAL.Data
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_GameResults>("AgileMindModel.FK_t_GameResults_Logins", "t_GameResults", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_UserProfileAnswer_Logins", "t_UserProfileAnswer")]
+        public EntityCollection<t_UserProfileAnswer> t_UserProfileAnswer
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<t_UserProfileAnswer>("AgileMindModel.FK_t_UserProfileAnswer_Logins", "t_UserProfileAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_UserProfileAnswer>("AgileMindModel.FK_t_UserProfileAnswer_Logins", "t_UserProfileAnswer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_LoginSession_Logins", "t_LoginSession")]
+        public EntityCollection<t_LoginSession> t_LoginSession
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<t_LoginSession>("AgileMindModel.FK_t_LoginSession_Logins", "t_LoginSession");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_LoginSession>("AgileMindModel.FK_t_LoginSession_Logins", "t_LoginSession", value);
                 }
             }
         }
@@ -937,6 +1078,611 @@ namespace AgileMind.DAL.Data
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<t_Game>("AgileMindModel.FK_t_GameResults_t_Game", "t_Game", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_LoginSession")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_LoginSession : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_LoginSession object.
+        /// </summary>
+        /// <param name="loginSessionId">Initial value of the LoginSessionId property.</param>
+        /// <param name="loginId">Initial value of the LoginId property.</param>
+        /// <param name="validTill">Initial value of the ValidTill property.</param>
+        public static t_LoginSession Createt_LoginSession(global::System.Guid loginSessionId, global::System.Int32 loginId, global::System.DateTime validTill)
+        {
+            t_LoginSession t_LoginSession = new t_LoginSession();
+            t_LoginSession.LoginSessionId = loginSessionId;
+            t_LoginSession.LoginId = loginId;
+            t_LoginSession.ValidTill = validTill;
+            return t_LoginSession;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid LoginSessionId
+        {
+            get
+            {
+                return _LoginSessionId;
+            }
+            set
+            {
+                if (_LoginSessionId != value)
+                {
+                    OnLoginSessionIdChanging(value);
+                    ReportPropertyChanging("LoginSessionId");
+                    _LoginSessionId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("LoginSessionId");
+                    OnLoginSessionIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _LoginSessionId;
+        partial void OnLoginSessionIdChanging(global::System.Guid value);
+        partial void OnLoginSessionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LoginId
+        {
+            get
+            {
+                return _LoginId;
+            }
+            set
+            {
+                OnLoginIdChanging(value);
+                ReportPropertyChanging("LoginId");
+                _LoginId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LoginId");
+                OnLoginIdChanged();
+            }
+        }
+        private global::System.Int32 _LoginId;
+        partial void OnLoginIdChanging(global::System.Int32 value);
+        partial void OnLoginIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ValidTill
+        {
+            get
+            {
+                return _ValidTill;
+            }
+            set
+            {
+                OnValidTillChanging(value);
+                ReportPropertyChanging("ValidTill");
+                _ValidTill = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ValidTill");
+                OnValidTillChanged();
+            }
+        }
+        private global::System.DateTime _ValidTill;
+        partial void OnValidTillChanging(global::System.DateTime value);
+        partial void OnValidTillChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_LoginSession_Logins", "Login")]
+        public Login Login
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_LoginSession_Logins", "Login").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_LoginSession_Logins", "Login").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Login> LoginReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_LoginSession_Logins", "Login");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Login>("AgileMindModel.FK_t_LoginSession_Logins", "Login", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_UserProfileAnswer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_UserProfileAnswer : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_UserProfileAnswer object.
+        /// </summary>
+        /// <param name="userProfileAnswerId">Initial value of the UserProfileAnswerId property.</param>
+        /// <param name="loginId">Initial value of the LoginId property.</param>
+        /// <param name="userProfileQuestionId">Initial value of the UserProfileQuestionId property.</param>
+        /// <param name="answer">Initial value of the Answer property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        /// <param name="noAnswer">Initial value of the NoAnswer property.</param>
+        public static t_UserProfileAnswer Createt_UserProfileAnswer(global::System.Int32 userProfileAnswerId, global::System.Int32 loginId, global::System.Int32 userProfileQuestionId, global::System.String answer, global::System.DateTime created, global::System.Boolean noAnswer)
+        {
+            t_UserProfileAnswer t_UserProfileAnswer = new t_UserProfileAnswer();
+            t_UserProfileAnswer.UserProfileAnswerId = userProfileAnswerId;
+            t_UserProfileAnswer.LoginId = loginId;
+            t_UserProfileAnswer.UserProfileQuestionId = userProfileQuestionId;
+            t_UserProfileAnswer.Answer = answer;
+            t_UserProfileAnswer.Created = created;
+            t_UserProfileAnswer.NoAnswer = noAnswer;
+            return t_UserProfileAnswer;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserProfileAnswerId
+        {
+            get
+            {
+                return _UserProfileAnswerId;
+            }
+            set
+            {
+                if (_UserProfileAnswerId != value)
+                {
+                    OnUserProfileAnswerIdChanging(value);
+                    ReportPropertyChanging("UserProfileAnswerId");
+                    _UserProfileAnswerId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserProfileAnswerId");
+                    OnUserProfileAnswerIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserProfileAnswerId;
+        partial void OnUserProfileAnswerIdChanging(global::System.Int32 value);
+        partial void OnUserProfileAnswerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LoginId
+        {
+            get
+            {
+                return _LoginId;
+            }
+            set
+            {
+                OnLoginIdChanging(value);
+                ReportPropertyChanging("LoginId");
+                _LoginId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LoginId");
+                OnLoginIdChanged();
+            }
+        }
+        private global::System.Int32 _LoginId;
+        partial void OnLoginIdChanging(global::System.Int32 value);
+        partial void OnLoginIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserProfileQuestionId
+        {
+            get
+            {
+                return _UserProfileQuestionId;
+            }
+            set
+            {
+                OnUserProfileQuestionIdChanging(value);
+                ReportPropertyChanging("UserProfileQuestionId");
+                _UserProfileQuestionId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserProfileQuestionId");
+                OnUserProfileQuestionIdChanged();
+            }
+        }
+        private global::System.Int32 _UserProfileQuestionId;
+        partial void OnUserProfileQuestionIdChanging(global::System.Int32 value);
+        partial void OnUserProfileQuestionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Answer
+        {
+            get
+            {
+                return _Answer;
+            }
+            set
+            {
+                OnAnswerChanging(value);
+                ReportPropertyChanging("Answer");
+                _Answer = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Answer");
+                OnAnswerChanged();
+            }
+        }
+        private global::System.String _Answer;
+        partial void OnAnswerChanging(global::System.String value);
+        partial void OnAnswerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean NoAnswer
+        {
+            get
+            {
+                return _NoAnswer;
+            }
+            set
+            {
+                OnNoAnswerChanging(value);
+                ReportPropertyChanging("NoAnswer");
+                _NoAnswer = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoAnswer");
+                OnNoAnswerChanged();
+            }
+        }
+        private global::System.Boolean _NoAnswer;
+        partial void OnNoAnswerChanging(global::System.Boolean value);
+        partial void OnNoAnswerChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_UserProfileAnswer_Logins", "Login")]
+        public Login Login
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_UserProfileAnswer_Logins", "Login").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_UserProfileAnswer_Logins", "Login").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Login> LoginReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("AgileMindModel.FK_t_UserProfileAnswer_Logins", "Login");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Login>("AgileMindModel.FK_t_UserProfileAnswer_Logins", "Login", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileQuestion")]
+        public t_UserProfileQuestion t_UserProfileQuestion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_UserProfileQuestion>("AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileQuestion").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_UserProfileQuestion>("AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileQuestion").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<t_UserProfileQuestion> t_UserProfileQuestionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_UserProfileQuestion>("AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileQuestion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<t_UserProfileQuestion>("AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileQuestion", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_UserProfileQuestion")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_UserProfileQuestion : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_UserProfileQuestion object.
+        /// </summary>
+        /// <param name="userProfileQuestionId">Initial value of the UserProfileQuestionId property.</param>
+        /// <param name="question">Initial value of the Question property.</param>
+        /// <param name="order">Initial value of the Order property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        /// <param name="active">Initial value of the Active property.</param>
+        public static t_UserProfileQuestion Createt_UserProfileQuestion(global::System.Int32 userProfileQuestionId, global::System.String question, global::System.Byte order, global::System.DateTime created, global::System.Boolean active)
+        {
+            t_UserProfileQuestion t_UserProfileQuestion = new t_UserProfileQuestion();
+            t_UserProfileQuestion.UserProfileQuestionId = userProfileQuestionId;
+            t_UserProfileQuestion.Question = question;
+            t_UserProfileQuestion.Order = order;
+            t_UserProfileQuestion.Created = created;
+            t_UserProfileQuestion.Active = active;
+            return t_UserProfileQuestion;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserProfileQuestionId
+        {
+            get
+            {
+                return _UserProfileQuestionId;
+            }
+            set
+            {
+                if (_UserProfileQuestionId != value)
+                {
+                    OnUserProfileQuestionIdChanging(value);
+                    ReportPropertyChanging("UserProfileQuestionId");
+                    _UserProfileQuestionId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserProfileQuestionId");
+                    OnUserProfileQuestionIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserProfileQuestionId;
+        partial void OnUserProfileQuestionIdChanging(global::System.Int32 value);
+        partial void OnUserProfileQuestionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Question
+        {
+            get
+            {
+                return _Question;
+            }
+            set
+            {
+                OnQuestionChanging(value);
+                ReportPropertyChanging("Question");
+                _Question = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Question");
+                OnQuestionChanged();
+            }
+        }
+        private global::System.String _Question;
+        partial void OnQuestionChanging(global::System.String value);
+        partial void OnQuestionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte Order
+        {
+            get
+            {
+                return _Order;
+            }
+            set
+            {
+                OnOrderChanging(value);
+                ReportPropertyChanging("Order");
+                _Order = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Order");
+                OnOrderChanged();
+            }
+        }
+        private global::System.Byte _Order;
+        partial void OnOrderChanging(global::System.Byte value);
+        partial void OnOrderChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Active
+        {
+            get
+            {
+                return _Active;
+            }
+            set
+            {
+                OnActiveChanging(value);
+                ReportPropertyChanging("Active");
+                _Active = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Active");
+                OnActiveChanged();
+            }
+        }
+        private global::System.Boolean _Active;
+        partial void OnActiveChanging(global::System.Boolean value);
+        partial void OnActiveChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileAnswer")]
+        public EntityCollection<t_UserProfileAnswer> t_UserProfileAnswer
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<t_UserProfileAnswer>("AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_UserProfileAnswer>("AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileAnswer", value);
                 }
             }
         }

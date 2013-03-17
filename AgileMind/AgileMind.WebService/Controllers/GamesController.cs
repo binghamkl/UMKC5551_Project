@@ -44,6 +44,31 @@ namespace AgileMind.WebService.Controllers
             return jsonResult;
         }
 		#endregion
-		
+
+        #region -- FetchUserProfileQuestions() WS
+        public JsonResult FetchUserProfileQuestions()
+        {
+            JsonResult jsonResult = new JsonResult();
+
+            UserProfileQuestionsResults result = UserProfileQuestionsResults.FetchUserProfileQuestions();
+
+            jsonResult = Json(result, JsonRequestBehavior.AllowGet);
+            return jsonResult;
+        }
+        #endregion
+
+        #region -- HasUserFilledOutQuestions(String SessionId) WS
+        public JsonResult HasUserFilledOutQuestions(String SessionId)
+        {
+            JsonResult jsonResult = new JsonResult();
+
+            Guid sessionId = new Guid(SessionId);
+            bool hasResults = UserProfileQuestionsResults.HasUserFilledOutAnyQuestions(sessionId);
+
+            jsonResult = Json(hasResults, JsonRequestBehavior.AllowGet);
+            return jsonResult;
+        }
+        #endregion
+
     }
 }

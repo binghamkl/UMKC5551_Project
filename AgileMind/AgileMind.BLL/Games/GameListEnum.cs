@@ -11,6 +11,7 @@ namespace AgileMind.BLL.Games
 {
     public enum GameListEnum
     {
-        ColorQuiz = 1
+        ColorQuiz = 1,
+        UserProfileQuestions = 2
     }
 }

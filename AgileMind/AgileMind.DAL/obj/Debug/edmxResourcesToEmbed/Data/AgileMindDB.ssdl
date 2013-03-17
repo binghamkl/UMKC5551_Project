@@ -4,6 +4,9 @@
     <EntitySet Name="Logins" EntityType="AgileMindModel.Store.Logins" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_Game" EntityType="AgileMindModel.Store.t_Game" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_GameResults" EntityType="AgileMindModel.Store.t_GameResults" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_LoginSession" EntityType="AgileMindModel.Store.t_LoginSession" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_UserProfileAnswer" EntityType="AgileMindModel.Store.t_UserProfileAnswer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_UserProfileQuestion" EntityType="AgileMindModel.Store.t_UserProfileQuestion" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="vwLoginInfo" EntityType="AgileMindModel.Store.vwLoginInfo" store:Type="Views" store:Schema="dbo" store:Name="vwLoginInfo">
       <DefiningQuery>SELECT 
       [vwLoginInfo].[LoginId] AS [LoginId], 
@@ -22,6 +25,18 @@
       <End Role="t_Game" EntitySet="t_Game" />
       <End Role="t_GameResults" EntitySet="t_GameResults" />
     </AssociationSet>
+    <AssociationSet Name="FK_t_LoginSession_Logins" Association="AgileMindModel.Store.FK_t_LoginSession_Logins">
+      <End Role="Logins" EntitySet="Logins" />
+      <End Role="t_LoginSession" EntitySet="t_LoginSession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_UserProfileAnswer_Logins" Association="AgileMindModel.Store.FK_t_UserProfileAnswer_Logins">
+      <End Role="Logins" EntitySet="Logins" />
+      <End Role="t_UserProfileAnswer" EntitySet="t_UserProfileAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_UserProfileAnswer_t_UserProfileQuestion" Association="AgileMindModel.Store.FK_t_UserProfileAnswer_t_UserProfileQuestion">
+      <End Role="t_UserProfileQuestion" EntitySet="t_UserProfileQuestion" />
+      <End Role="t_UserProfileAnswer" EntitySet="t_UserProfileAnswer" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Logins">
     <Key>
@@ -39,7 +54,7 @@
     <Key>
       <PropertyRef Name="GameId" />
     </Key>
-    <Property Name="GameId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GameId" Type="int" Nullable="false" />
     <Property Name="Game" Type="varchar" Nullable="false" MaxLength="30" />
     <Property Name="Description" Type="varchar" Nullable="false" MaxLength="200" />
   </EntityType>
@@ -54,6 +69,35 @@
     <Property Name="Score" Type="int" Nullable="false" />
     <Property Name="Total" Type="int" Nullable="false" />
     <Property Name="TestDuration" Type="decimal" Scale="2" />
+  </EntityType>
+  <EntityType Name="t_LoginSession">
+    <Key>
+      <PropertyRef Name="LoginSessionId" />
+    </Key>
+    <Property Name="LoginSessionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LoginId" Type="int" Nullable="false" />
+    <Property Name="ValidTill" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_UserProfileAnswer">
+    <Key>
+      <PropertyRef Name="UserProfileAnswerId" />
+    </Key>
+    <Property Name="UserProfileAnswerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LoginId" Type="int" Nullable="false" />
+    <Property Name="UserProfileQuestionId" Type="int" Nullable="false" />
+    <Property Name="Answer" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="NoAnswer" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_UserProfileQuestion">
+    <Key>
+      <PropertyRef Name="UserProfileQuestionId" />
+    </Key>
+    <Property Name="UserProfileQuestionId" Type="int" Nullable="false" />
+    <Property Name="Question" Type="varchar" Nullable="false" MaxLength="75" />
+    <Property Name="Order" Type="tinyint" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
       warning 6002: The table/view 'AgileMind.dbo.vwLoginInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -97,9 +141,50 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_t_LoginSession_Logins">
+    <End Role="Logins" Type="AgileMindModel.Store.Logins" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="t_LoginSession" Type="AgileMindModel.Store.t_LoginSession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Logins">
+        <PropertyRef Name="LoginId" />
+      </Principal>
+      <Dependent Role="t_LoginSession">
+        <PropertyRef Name="LoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_UserProfileAnswer_Logins">
+    <End Role="Logins" Type="AgileMindModel.Store.Logins" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="t_UserProfileAnswer" Type="AgileMindModel.Store.t_UserProfileAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Logins">
+        <PropertyRef Name="LoginId" />
+      </Principal>
+      <Dependent Role="t_UserProfileAnswer">
+        <PropertyRef Name="LoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_UserProfileAnswer_t_UserProfileQuestion">
+    <End Role="t_UserProfileQuestion" Type="AgileMindModel.Store.t_UserProfileQuestion" Multiplicity="1" />
+    <End Role="t_UserProfileAnswer" Type="AgileMindModel.Store.t_UserProfileAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_UserProfileQuestion">
+        <PropertyRef Name="UserProfileQuestionId" />
+      </Principal>
+      <Dependent Role="t_UserProfileAnswer">
+        <PropertyRef Name="UserProfileQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="Logins_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LoginName" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="IPAddress" Type="varchar" Mode="In" />
   </Function>
   <Function Name="Logins_CreateLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LoginName" Type="varchar" Mode="In" />

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Games\ColorGameTest.cs" />
     <Compile Include="Games\SaveGameResultsFixture.cs" />
+    <Compile Include="Games\UserProfileQuestionsTestFixture.cs" />
     <Compile Include="Login\LoginInfoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

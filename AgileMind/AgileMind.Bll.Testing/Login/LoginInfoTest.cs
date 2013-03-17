@@ -51,7 +51,7 @@ namespace AgileMind.Bll.Testing.Login
             LoginResult loginInfo = LoginResult.CreateLogin(loginName, password, email);
 
             AgileMind.DAL.Data.AgileMindEntities agileMind = new DAL.Data.AgileMindEntities();
-            List<AgileMind.DAL.Data.Login> loginList = agileMind.Logins_CheckLogin(loginName, password).ToList();
+            List<AgileMind.DAL.Data.Login> loginList = agileMind.Logins_CheckLogin(loginName, password, String.Empty).ToList();
             Assert.AreEqual(1, loginList.Count, "After insertion of new login there should be one login");
             Assert.AreEqual(loginName, loginList[0].LoginName, "Login Name should be set equal");
             Assert.AreEqual(password, loginList[0].Password, "Password should be equal");
@@ -169,7 +169,7 @@ namespace AgileMind.Bll.Testing.Login
             DeleteLoginsFromDB(loginName);
             LoginResult loginResult = LoginResult.CreateLogin(loginName, password, email);
 
-            LoginResult validateResult = LoginResult.ValidateLogin(loginName, password);
+            LoginResult validateResult = LoginResult.ValidateLogin(loginName, password, String.Empty);
 
             Assert.IsTrue(validateResult.Success);
             Assert.IsNotNull(validateResult.LoginInfo);
@@ -190,7 +190,7 @@ namespace AgileMind.Bll.Testing.Login
             DeleteLoginsFromDB(loginName);
             LoginResult loginResult = LoginResult.CreateLogin(loginName, password, email);
 
-            LoginResult validateResult = LoginResult.ValidateLogin("IncorrectAccount", password);
+            LoginResult validateResult = LoginResult.ValidateLogin("IncorrectAccount", password, String.Empty);
 
             Assert.IsFalse(validateResult.Success);
 
@@ -209,7 +209,7 @@ namespace AgileMind.Bll.Testing.Login
             DeleteLoginsFromDB(loginName);
             LoginResult loginResult = LoginResult.CreateLogin(loginName, password, email);
 
-            LoginResult validateResult = LoginResult.ValidateLogin(loginName, "nope");
+            LoginResult validateResult = LoginResult.ValidateLogin(loginName, "nope", String.Empty);
 
             Assert.IsFalse(validateResult.Success);
 
@@ -237,14 +237,67 @@ namespace AgileMind.Bll.Testing.Login
             }
             agileMindDB.SaveChanges();
 
-            LoginResult validateResult = LoginResult.ValidateLogin(loginName, password);
+            LoginResult validateResult = LoginResult.ValidateLogin(loginName, password, String.Empty);
 
             Assert.IsFalse(validateResult.Success);
 
             DeleteLoginsFromDB(loginName);
         }
         #endregion
+
+        //*-- SessionId Testing --*/
+
+        #region -- ValidateLoginReturnsASessionIdWithAMatchingRecordInTheDB() Method --
+        [Test()]
+        public void ValidateLoginReturnsASessionIdWithAMatchingRecordInTheDB()
+        {
+            String loginName = "TestAccount";
+            String password = "Password";
+            String email = "Email@test.com";
+
+            DeleteLoginsFromDB(loginName);
+            LoginResult loginResult = LoginResult.CreateLogin(loginName, password, email);
+
+            LoginResult validateResult = LoginResult.ValidateLogin(loginName, password, String.Empty);
+            Assert.IsNotNull(validateResult.SessionId);
+
+            DeleteLoginsFromDB(loginName);
+        }
+        #endregion
+
+        #region -- ValidateSessionReturnsTrueIfSessionIsvalid() Method --
+        [Test()]
+        public void ValidateSessionReturnsTrueIfSessionIsvalid()
+        {
+            String loginName = "TestAccount";
+            String password = "Password";
+            String email = "Email@test.com";
+
+            DeleteLoginsFromDB(loginName);
+            LoginResult loginResult = LoginResult.CreateLogin(loginName, password, email);
+
+            LoginResult validateResult = LoginResult.ValidateLogin(loginName, password, String.Empty);
+            bool validateSession = LoginResult.ValidateSession(validateResult.SessionId);
+            Assert.IsTrue(validateSession);
+
+            DeleteLoginsFromDB(loginName);
+
+        }
+        #endregion
+
+        #region -- ValidateSessionReturnsFalseIfSessionIsNotValid() Method --
+        [Test()]
+        public void ValidateSessionReturnsFalseIfSessionIsNotValid()
+        {
+            bool validateSession = LoginResult.ValidateSession(Guid.NewGuid());
+            Assert.IsFalse(validateSession);
+
+        }
+        #endregion
 	
+        /*-- Login Attempts --*/
+
+
         /*-- Helper Methods --*/
         
 		#region -- DeleteLoginsFromDB() Method --

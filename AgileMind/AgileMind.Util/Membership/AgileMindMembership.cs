@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Security;
 using AgileMind.Util.LoginWS;
+using System.Web;
 
 #endregion
 
@@ -55,8 +56,23 @@ namespace AgileMind.Util.Membership
         #region -- ValidateUser(string username, string password) Method --
         public override bool ValidateUser(string username, string password)
         {
+
+            string szRemoteAddr = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            string szXForwardedFor = HttpContext.Current.Request.ServerVariables["X_FORWARDED_FOR"];
+            string szIP = "";
+
+            if (szXForwardedFor == null)
+            {
+                szIP = szRemoteAddr;
+            }
+            else
+            {
+                szIP = szXForwardedFor;
+            }
+
+
             LoginWS.Login client = new LoginWS.Login();
-            LoginResult loginResult = client.ValidateLogin(username, password);
+            LoginResult loginResult = client.ValidateLogin(username, password, szIP);
             return loginResult.Success;
         }
         #endregion

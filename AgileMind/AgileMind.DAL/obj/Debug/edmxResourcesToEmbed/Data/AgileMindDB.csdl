@@ -5,6 +5,7 @@
     <FunctionImport Name="Logins_CheckLogin" EntitySet="Logins" ReturnType="Collection(AgileMindModel.Login)">
       <Parameter Name="LoginName" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="IPAddress" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="vwLoginInfoes" EntityType="AgileMindModel.vwLoginInfo" />
     <FunctionImport Name="vw_LoginInfo_FetchByLoginId" EntitySet="vwLoginInfoes" ReturnType="Collection(AgileMindModel.vwLoginInfo)">
@@ -20,6 +21,21 @@
       <End Role="t_Game" EntitySet="t_Game" />
       <End Role="t_GameResults" EntitySet="t_GameResults" />
     </AssociationSet>
+    <EntitySet Name="t_UserProfileAnswer" EntityType="AgileMindModel.t_UserProfileAnswer" />
+    <EntitySet Name="t_UserProfileQuestion" EntityType="AgileMindModel.t_UserProfileQuestion" />
+    <AssociationSet Name="FK_t_UserProfileAnswer_Logins" Association="AgileMindModel.FK_t_UserProfileAnswer_Logins">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="t_UserProfileAnswer" EntitySet="t_UserProfileAnswer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_UserProfileAnswer_t_UserProfileQuestion" Association="AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion">
+      <End Role="t_UserProfileQuestion" EntitySet="t_UserProfileQuestion" />
+      <End Role="t_UserProfileAnswer" EntitySet="t_UserProfileAnswer" />
+    </AssociationSet>
+    <EntitySet Name="t_LoginSession" EntityType="AgileMindModel.t_LoginSession" />
+    <AssociationSet Name="FK_t_LoginSession_Logins" Association="AgileMindModel.FK_t_LoginSession_Logins">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="t_LoginSession" EntitySet="t_LoginSession" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Login">
     <Key>
@@ -33,6 +49,8 @@
     <Property Name="Created" Type="DateTime" Nullable="false" />
     <Property Name="LastLogin" Type="DateTime" />
     <NavigationProperty Name="t_GameResults" Relationship="AgileMindModel.FK_t_GameResults_Logins" FromRole="Login" ToRole="t_GameResults" />
+    <NavigationProperty Name="t_UserProfileAnswer" Relationship="AgileMindModel.FK_t_UserProfileAnswer_Logins" FromRole="Login" ToRole="t_UserProfileAnswer" />
+    <NavigationProperty Name="t_LoginSession" Relationship="AgileMindModel.FK_t_LoginSession_Logins" FromRole="Login" ToRole="t_LoginSession" />
   </EntityType>
   <EntityType Name="vwLoginInfo">
     <Key>
@@ -93,6 +111,75 @@
       </Principal>
       <Dependent Role="t_GameResults">
         <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="t_UserProfileAnswer">
+    <Key>
+      <PropertyRef Name="UserProfileAnswerId" />
+    </Key>
+    <Property Type="Int32" Name="UserProfileAnswerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="LoginId" Nullable="false" />
+    <Property Type="Int32" Name="UserProfileQuestionId" Nullable="false" />
+    <Property Type="String" Name="Answer" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <Property Type="Boolean" Name="NoAnswer" Nullable="false" />
+    <NavigationProperty Name="Login" Relationship="AgileMindModel.FK_t_UserProfileAnswer_Logins" FromRole="t_UserProfileAnswer" ToRole="Login" />
+    <NavigationProperty Name="t_UserProfileQuestion" Relationship="AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion" FromRole="t_UserProfileAnswer" ToRole="t_UserProfileQuestion" />
+  </EntityType>
+  <EntityType Name="t_UserProfileQuestion">
+    <Key>
+      <PropertyRef Name="UserProfileQuestionId" />
+    </Key>
+    <Property Type="Int32" Name="UserProfileQuestionId" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Type="Byte" Name="Order" Nullable="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+    <NavigationProperty Name="t_UserProfileAnswer" Relationship="AgileMindModel.FK_t_UserProfileAnswer_t_UserProfileQuestion" FromRole="t_UserProfileQuestion" ToRole="t_UserProfileAnswer" />
+  </EntityType>
+  <Association Name="FK_t_UserProfileAnswer_Logins">
+    <End Type="AgileMindModel.Login" Role="Login" Multiplicity="1" />
+    <End Type="AgileMindModel.t_UserProfileAnswer" Role="t_UserProfileAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="LoginId" />
+      </Principal>
+      <Dependent Role="t_UserProfileAnswer">
+        <PropertyRef Name="LoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_UserProfileAnswer_t_UserProfileQuestion">
+    <End Type="AgileMindModel.t_UserProfileQuestion" Role="t_UserProfileQuestion" Multiplicity="1" />
+    <End Type="AgileMindModel.t_UserProfileAnswer" Role="t_UserProfileAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_UserProfileQuestion">
+        <PropertyRef Name="UserProfileQuestionId" />
+      </Principal>
+      <Dependent Role="t_UserProfileAnswer">
+        <PropertyRef Name="UserProfileQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="t_LoginSession">
+    <Key>
+      <PropertyRef Name="LoginSessionId" />
+    </Key>
+    <Property Type="Guid" Name="LoginSessionId" Nullable="false" />
+    <Property Type="Int32" Name="LoginId" Nullable="false" />
+    <Property Type="DateTime" Name="ValidTill" Nullable="false" />
+    <NavigationProperty Name="Login" Relationship="AgileMindModel.FK_t_LoginSession_Logins" FromRole="t_LoginSession" ToRole="Login" />
+  </EntityType>
+  <Association Name="FK_t_LoginSession_Logins">
+    <End Type="AgileMindModel.Login" Role="Login" Multiplicity="1" />
+    <End Type="AgileMindModel.t_LoginSession" Role="t_LoginSession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="LoginId" />
+      </Principal>
+      <Dependent Role="t_LoginSession">
+        <PropertyRef Name="LoginId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

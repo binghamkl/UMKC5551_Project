@@ -31,10 +31,10 @@ namespace AgileMind.SOAP
         #endregion
 
         [WebMethod()]
-        #region -- ValidateLogin(string loginName, string password) Method --
-        public LoginResult ValidateLogin(string loginName, string password)
+        #region -- ValidateLogin(string loginName, string password, String IPAddress) Method --
+        public LoginResult ValidateLogin(string loginName, string password, String IPAddress)
 		{
-            return LoginResult.ValidateLogin(loginName, password);
+            return LoginResult.ValidateLogin(loginName, password, IPAddress);
 		}
 		#endregion
 

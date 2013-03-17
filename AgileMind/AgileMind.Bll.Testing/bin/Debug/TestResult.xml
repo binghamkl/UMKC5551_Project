@@ -1,24 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" total="4" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-03-06" time="21:10:01">
+<test-results name="C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" total="25" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2013-03-17" time="15:14:38">
   <environment nunit-version="2.6.2.12296" clr-version="4.0.30319.18033" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Program Files (x86)\NUnit 2.6.2\bin" machine-name="KBINGHAM-PC" user="KBingham" user-domain="KRYGER" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Assembly" name="C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" executed="True" result="Success" success="True" time="0.473" asserts="0">
+  <test-suite type="Assembly" name="C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Bll.Testing\bin\Debug\AgileMind.Bll.Testing.dll" executed="True" result="Success" success="True" time="0.358" asserts="0">
     <results>
-      <test-suite type="Namespace" name="AgileMind" executed="True" result="Success" success="True" time="0.472" asserts="0">
+      <test-suite type="Namespace" name="AgileMind" executed="True" result="Success" success="True" time="0.358" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Bll" executed="True" result="Success" success="True" time="0.472" asserts="0">
+          <test-suite type="Namespace" name="Bll" executed="True" result="Success" success="True" time="0.357" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Testing" executed="True" result="Success" success="True" time="0.472" asserts="0">
+              <test-suite type="Namespace" name="Testing" executed="True" result="Success" success="True" time="0.357" asserts="0">
                 <results>
-                  <test-suite type="Namespace" name="Games" executed="True" result="Success" success="True" time="0.472" asserts="0">
+                  <test-suite type="Namespace" name="Games" executed="True" result="Success" success="True" time="0.209" asserts="0">
                     <results>
-                      <test-suite type="TestFixture" name="SaveGameResultsFixture" executed="True" result="Success" success="True" time="0.471" asserts="0">
+                      <test-suite type="TestFixture" name="ColorGameTest" executed="True" result="Success" success="True" time="0.037" asserts="0">
                         <results>
-                          <test-case name="AgileMind.Bll.Testing.Games.SaveGameResultsFixture.CallingInsertWillFailIfTheLoginIsIncorrect" executed="True" result="Success" success="True" time="0.033" asserts="2" />
-                          <test-case name="AgileMind.Bll.Testing.Games.SaveGameResultsFixture.CallingSaveWillReturnSuccessfullResult" executed="True" result="Success" success="True" time="0.149" asserts="2" />
+                          <test-case name="AgileMind.Bll.Testing.Games.ColorGameTest.ColorGameQuestionHasPropertiesForLeftWordLeftColorRightWordRightColorIsMatchAndUserCorrect" executed="True" result="Success" success="True" time="0.014" asserts="5" />
+                          <test-case name="AgileMind.Bll.Testing.Games.ColorGameTest.ColorGameQuestionReturnsIsMatchIfLeftWordEqualsRightColorElseReturnsFalse" executed="True" result="Success" success="True" time="0.001" asserts="2" />
+                          <test-case name="AgileMind.Bll.Testing.Games.ColorGameTest.CreateColorGameReturnsColorGameResult" executed="True" result="Success" success="True" time="0.002" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Games.ColorGameTest.CreateColorGameReturnsColorGameResultsWithTenQuestions" executed="True" result="Success" success="True" time="0.008" asserts="2" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="SaveGameResultsFixture" executed="True" result="Success" success="True" time="0.132" asserts="0">
+                        <results>
+                          <test-case name="AgileMind.Bll.Testing.Games.SaveGameResultsFixture.CallingInsertWillFailIfTheLoginIsIncorrect" executed="True" result="Success" success="True" time="0.007" asserts="2" />
+                          <test-case name="AgileMind.Bll.Testing.Games.SaveGameResultsFixture.CallingSaveWillReturnSuccessfullResult" executed="True" result="Success" success="True" time="0.096" asserts="2" />
                           <test-case name="AgileMind.Bll.Testing.Games.SaveGameResultsFixture.CallingSaveWillSaveTheRecordToTheDatabase" executed="True" result="Success" success="True" time="0.008" asserts="1" />
-                          <test-case name="AgileMind.Bll.Testing.Games.SaveGameResultsFixture.CanCreateSaveRecord" executed="True" result="Success" success="True" time="0.001" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Games.SaveGameResultsFixture.CanCreateSaveRecord" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="UserProfileQuestionsTestFixture" executed="True" result="Success" success="True" time="0.029" asserts="0">
+                        <results>
+                          <test-case name="AgileMind.Bll.Testing.Games.UserProfileQuestionsTestFixture.HasUserFilledOutQuestionsReturnsFalseIfTheUserDidNotFillOutAnyQuestions" executed="True" result="Success" success="True" time="0.007" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Games.UserProfileQuestionsTestFixture.HasUserFilledOutQuestionsReturnsTrueIfTheUserFilledOutEvenASingleQuestion" executed="True" result="Success" success="True" time="0.007" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Games.UserProfileQuestionsTestFixture.LoadQuestionsReturnsAListOfQuestionsFromTheDatabase" executed="True" result="Success" success="True" time="0.001" asserts="3" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                  <test-suite type="Namespace" name="Login" executed="True" result="Success" success="True" time="0.145" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="LoginInfoTest" executed="True" result="Success" success="True" time="0.145" asserts="0">
+                        <results>
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginFailsIfPasswordIsLessthan6Long" executed="True" result="Success" success="True" time="0.003" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginFailsIfTheUserNameAlreadyExists" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLogiNFailsIfUserNameIsLessthan5Long" executed="True" result="Success" success="True" time="0.003" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginInfoAddsTheLoginPersonAndReturnsItInLoginInfoObject" executed="True" result="Success" success="True" time="0.007" asserts="3" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginInfoAddsTheLoginPersonIntoTheDatabase" executed="True" result="Success" success="True" time="0.010" asserts="4" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginReturnsLoginInfo" executed="True" result="Success" success="True" time="0.005" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingCreateLoginReturnsTrueInLoginResult" executed="True" result="Success" success="True" time="0.006" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingValidateLoginReturnsFalseIfTheLoginNameAndPasswordAreCorrectButActiveIsFalse" executed="True" result="Success" success="True" time="0.024" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingValidateLoginWithAuthorizedCredentialsReturnsTrueAndTheLoginInformation" executed="True" result="Success" success="True" time="0.011" asserts="3" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingValidateLoginWithAuthorizedInvalidUserNamereturnsFalse" executed="True" result="Success" success="True" time="0.008" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.CallingValidateLoginWithInvalidPasswordReturnsFalse" executed="True" result="Success" success="True" time="0.007" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.ValidateLoginReturnsASessionIdWithAMatchingRecordInTheDB" executed="True" result="Success" success="True" time="0.010" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.ValidateSessionReturnsFalseIfSessionIsNotValid" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                          <test-case name="AgileMind.Bll.Testing.Login.LoginInfoTest.ValidateSessionReturnsTrueIfSessionIsvalid" executed="True" result="Success" success="True" time="0.010" asserts="1" />
                         </results>
                       </test-suite>
                     </results>
