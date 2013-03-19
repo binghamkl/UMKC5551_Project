@@ -37,6 +37,7 @@
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                         <asp:MenuItem NavigateUrl="~/Games/ColorQuiz.aspx" Text="Color Quiz"/>
+                        <asp:MenuItem NavigateUrl="~/Games/UserProfileQuestions.aspx" Text="Profile Questions"/>
                     </Items>
                 </asp:Menu>
             </div>

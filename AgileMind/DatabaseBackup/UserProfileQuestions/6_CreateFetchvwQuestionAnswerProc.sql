@@ -33,6 +33,7 @@ BEGIN
 	FROM [vwQuestionAnswer]
 		WHERE 
 			(LoginId = @LoginId OR LoginId IS NULL)
+			AND Active = 1
 
 
 END

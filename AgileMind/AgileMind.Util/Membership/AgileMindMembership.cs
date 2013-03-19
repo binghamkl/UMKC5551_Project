@@ -73,6 +73,8 @@ namespace AgileMind.Util.Membership
 
             LoginWS.Login client = new LoginWS.Login();
             LoginResult loginResult = client.ValidateLogin(username, password, szIP);
+            HttpContext.Current.Session.Add("SessionId", loginResult.SessionId);
+
             return loginResult.Success;
         }
         #endregion

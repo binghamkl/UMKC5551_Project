@@ -29,7 +29,6 @@ namespace AgileMind.Website.GamesWS {
     [System.Web.Services.WebServiceBindingAttribute(Name="GamesServiceSoap", Namespace="http://tempuri.org/")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(RelatedEnd))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StructuralObject))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EntityKeyMember[]))]
     public partial class GamesService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
@@ -38,6 +37,12 @@ namespace AgileMind.Website.GamesWS {
         private System.Threading.SendOrPostCallback InsertGameResultOperationCompleted;
         
         private System.Threading.SendOrPostCallback InsertGameResultWebOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback FetchUserProfileQuestionsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback HasUserFilledOutQuestionsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveUserProfileQuestionsOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -85,6 +90,15 @@ namespace AgileMind.Website.GamesWS {
         
         /// <remarks/>
         public event InsertGameResultWebCompletedEventHandler InsertGameResultWebCompleted;
+        
+        /// <remarks/>
+        public event FetchUserProfileQuestionsCompletedEventHandler FetchUserProfileQuestionsCompleted;
+        
+        /// <remarks/>
+        public event HasUserFilledOutQuestionsCompletedEventHandler HasUserFilledOutQuestionsCompleted;
+        
+        /// <remarks/>
+        public event SaveUserProfileQuestionsCompletedEventHandler SaveUserProfileQuestionsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchColorGame", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -186,6 +200,95 @@ namespace AgileMind.Website.GamesWS {
             if ((this.InsertGameResultWebCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.InsertGameResultWebCompleted(this, new InsertGameResultWebCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchUserProfileQuestions", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public UserProfileQuestionsResults FetchUserProfileQuestions(System.Guid SessionId) {
+            object[] results = this.Invoke("FetchUserProfileQuestions", new object[] {
+                        SessionId});
+            return ((UserProfileQuestionsResults)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FetchUserProfileQuestionsAsync(System.Guid SessionId) {
+            this.FetchUserProfileQuestionsAsync(SessionId, null);
+        }
+        
+        /// <remarks/>
+        public void FetchUserProfileQuestionsAsync(System.Guid SessionId, object userState) {
+            if ((this.FetchUserProfileQuestionsOperationCompleted == null)) {
+                this.FetchUserProfileQuestionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFetchUserProfileQuestionsOperationCompleted);
+            }
+            this.InvokeAsync("FetchUserProfileQuestions", new object[] {
+                        SessionId}, this.FetchUserProfileQuestionsOperationCompleted, userState);
+        }
+        
+        private void OnFetchUserProfileQuestionsOperationCompleted(object arg) {
+            if ((this.FetchUserProfileQuestionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FetchUserProfileQuestionsCompleted(this, new FetchUserProfileQuestionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HasUserFilledOutQuestions", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public bool HasUserFilledOutQuestions(System.Guid SessionId) {
+            object[] results = this.Invoke("HasUserFilledOutQuestions", new object[] {
+                        SessionId});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void HasUserFilledOutQuestionsAsync(System.Guid SessionId) {
+            this.HasUserFilledOutQuestionsAsync(SessionId, null);
+        }
+        
+        /// <remarks/>
+        public void HasUserFilledOutQuestionsAsync(System.Guid SessionId, object userState) {
+            if ((this.HasUserFilledOutQuestionsOperationCompleted == null)) {
+                this.HasUserFilledOutQuestionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnHasUserFilledOutQuestionsOperationCompleted);
+            }
+            this.InvokeAsync("HasUserFilledOutQuestions", new object[] {
+                        SessionId}, this.HasUserFilledOutQuestionsOperationCompleted, userState);
+        }
+        
+        private void OnHasUserFilledOutQuestionsOperationCompleted(object arg) {
+            if ((this.HasUserFilledOutQuestionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.HasUserFilledOutQuestionsCompleted(this, new HasUserFilledOutQuestionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SaveUserProfileQuestions", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result SaveUserProfileQuestions(vwQuestionAnswer[] QuestionAnswerList, System.Guid SessionId) {
+            object[] results = this.Invoke("SaveUserProfileQuestions", new object[] {
+                        QuestionAnswerList,
+                        SessionId});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveUserProfileQuestionsAsync(vwQuestionAnswer[] QuestionAnswerList, System.Guid SessionId) {
+            this.SaveUserProfileQuestionsAsync(QuestionAnswerList, SessionId, null);
+        }
+        
+        /// <remarks/>
+        public void SaveUserProfileQuestionsAsync(vwQuestionAnswer[] QuestionAnswerList, System.Guid SessionId, object userState) {
+            if ((this.SaveUserProfileQuestionsOperationCompleted == null)) {
+                this.SaveUserProfileQuestionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveUserProfileQuestionsOperationCompleted);
+            }
+            this.InvokeAsync("SaveUserProfileQuestions", new object[] {
+                        QuestionAnswerList,
+                        SessionId}, this.SaveUserProfileQuestionsOperationCompleted, userState);
+        }
+        
+        private void OnSaveUserProfileQuestionsOperationCompleted(object arg) {
+            if ((this.SaveUserProfileQuestionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveUserProfileQuestionsCompleted(this, new SaveUserProfileQuestionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -444,6 +547,7 @@ namespace AgileMind.Website.GamesWS {
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EntityObject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(t_GameResults))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(vwQuestionAnswer))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -454,6 +558,7 @@ namespace AgileMind.Website.GamesWS {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(t_GameResults))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(vwQuestionAnswer))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -593,6 +698,140 @@ namespace AgileMind.Website.GamesWS {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class vwQuestionAnswer : EntityObject {
+        
+        private int userProfileQuestionIdField;
+        
+        private string questionField;
+        
+        private byte orderField;
+        
+        private System.DateTime createdField;
+        
+        private bool activeField;
+        
+        private System.Nullable<int> userProfileAnswerIdField;
+        
+        private System.Nullable<int> loginIdField;
+        
+        private string answerField;
+        
+        private System.Nullable<System.DateTime> answerCreatedField;
+        
+        private System.Nullable<bool> noAnswerField;
+        
+        /// <remarks/>
+        public int UserProfileQuestionId {
+            get {
+                return this.userProfileQuestionIdField;
+            }
+            set {
+                this.userProfileQuestionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Question {
+            get {
+                return this.questionField;
+            }
+            set {
+                this.questionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public byte Order {
+            get {
+                return this.orderField;
+            }
+            set {
+                this.orderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime Created {
+            get {
+                return this.createdField;
+            }
+            set {
+                this.createdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Active {
+            get {
+                return this.activeField;
+            }
+            set {
+                this.activeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> UserProfileAnswerId {
+            get {
+                return this.userProfileAnswerIdField;
+            }
+            set {
+                this.userProfileAnswerIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> LoginId {
+            get {
+                return this.loginIdField;
+            }
+            set {
+                this.loginIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Answer {
+            get {
+                return this.answerField;
+            }
+            set {
+                this.answerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> AnswerCreated {
+            get {
+                return this.answerCreatedField;
+            }
+            set {
+                this.answerCreatedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> NoAnswer {
+            get {
+                return this.noAnswerField;
+            }
+            set {
+                this.noAnswerField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserProfileQuestionsResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(GameResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ColorGameResult))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
@@ -633,6 +872,27 @@ namespace AgileMind.Website.GamesWS {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class UserProfileQuestionsResults : Result {
+        
+        private vwQuestionAnswer[] questionListField;
+        
+        /// <remarks/>
+        public vwQuestionAnswer[] QuestionList {
+            get {
+                return this.questionListField;
+            }
+            set {
+                this.questionListField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
     public partial class GameResults : Result {
         
         private t_GameResults gameField;
@@ -656,6 +916,9 @@ namespace AgileMind.Website.GamesWS {
         
         /// <remarks/>
         ColorQuiz,
+        
+        /// <remarks/>
+        UserProfileQuestions,
     }
     
     /// <remarks/>
@@ -732,6 +995,84 @@ namespace AgileMind.Website.GamesWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((GameResults)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void FetchUserProfileQuestionsCompletedEventHandler(object sender, FetchUserProfileQuestionsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FetchUserProfileQuestionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FetchUserProfileQuestionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public UserProfileQuestionsResults Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((UserProfileQuestionsResults)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void HasUserFilledOutQuestionsCompletedEventHandler(object sender, HasUserFilledOutQuestionsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class HasUserFilledOutQuestionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal HasUserFilledOutQuestionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void SaveUserProfileQuestionsCompletedEventHandler(object sender, SaveUserProfileQuestionsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveUserProfileQuestionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveUserProfileQuestionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
             }
         }
     }

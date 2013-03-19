@@ -175,6 +175,8 @@ namespace AgileMind.Util.LoginWS {
         
         private vwLoginInfo loginInfoField;
         
+        private System.Guid sessionIdField;
+        
         /// <remarks/>
         public vwLoginInfo LoginInfo {
             get {
@@ -182,6 +184,16 @@ namespace AgileMind.Util.LoginWS {
             }
             set {
                 this.loginInfoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.Guid SessionId {
+            get {
+                return this.sessionIdField;
+            }
+            set {
+                this.sessionIdField = value;
             }
         }
     }

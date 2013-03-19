@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
       <s:element name="FetchColorGame">
         <s:complexType />
       </s:element>
@@ -57,6 +58,7 @@
       <s:simpleType name="GameListEnum">
         <s:restriction base="s:string">
           <s:enumeration value="ColorQuiz" />
+          <s:enumeration value="UserProfileQuestions" />
         </s:restriction>
       </s:simpleType>
       <s:element name="InsertGameResultResponse">
@@ -158,6 +160,88 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="FetchUserProfileQuestions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SessionId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfVwQuestionAnswer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="vwQuestionAnswer" nillable="true" type="tns:vwQuestionAnswer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="vwQuestionAnswer">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityObject">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="UserProfileQuestionId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Question" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Order" type="s:unsignedByte" />
+              <s:element minOccurs="1" maxOccurs="1" name="Created" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserProfileAnswerId" nillable="true" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="LoginId" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Answer" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="AnswerCreated" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="NoAnswer" nillable="true" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="FetchUserProfileQuestionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchUserProfileQuestionsResult" type="tns:UserProfileQuestionsResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserProfileQuestionsResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Result">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="QuestionList" type="tns:ArrayOfVwQuestionAnswer" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="HasUserFilledOutQuestions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SessionId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HasUserFilledOutQuestionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="HasUserFilledOutQuestionsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveUserProfileQuestions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QuestionAnswerList" type="tns:ArrayOfVwQuestionAnswer" />
+            <s:element minOccurs="1" maxOccurs="1" name="SessionId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveUserProfileQuestionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveUserProfileQuestionsResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="FetchColorGameSoapIn">
@@ -178,6 +262,24 @@
   <wsdl:message name="InsertGameResultWebSoapOut">
     <wsdl:part name="parameters" element="tns:InsertGameResultWebResponse" />
   </wsdl:message>
+  <wsdl:message name="FetchUserProfileQuestionsSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchUserProfileQuestions" />
+  </wsdl:message>
+  <wsdl:message name="FetchUserProfileQuestionsSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchUserProfileQuestionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="HasUserFilledOutQuestionsSoapIn">
+    <wsdl:part name="parameters" element="tns:HasUserFilledOutQuestions" />
+  </wsdl:message>
+  <wsdl:message name="HasUserFilledOutQuestionsSoapOut">
+    <wsdl:part name="parameters" element="tns:HasUserFilledOutQuestionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveUserProfileQuestionsSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveUserProfileQuestions" />
+  </wsdl:message>
+  <wsdl:message name="SaveUserProfileQuestionsSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveUserProfileQuestionsResponse" />
+  </wsdl:message>
   <wsdl:portType name="GamesServiceSoap">
     <wsdl:operation name="FetchColorGame">
       <wsdl:input message="tns:FetchColorGameSoapIn" />
@@ -190,6 +292,18 @@
     <wsdl:operation name="InsertGameResultWeb">
       <wsdl:input message="tns:InsertGameResultWebSoapIn" />
       <wsdl:output message="tns:InsertGameResultWebSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchUserProfileQuestions">
+      <wsdl:input message="tns:FetchUserProfileQuestionsSoapIn" />
+      <wsdl:output message="tns:FetchUserProfileQuestionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HasUserFilledOutQuestions">
+      <wsdl:input message="tns:HasUserFilledOutQuestionsSoapIn" />
+      <wsdl:output message="tns:HasUserFilledOutQuestionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveUserProfileQuestions">
+      <wsdl:input message="tns:SaveUserProfileQuestionsSoapIn" />
+      <wsdl:output message="tns:SaveUserProfileQuestionsSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="GamesServiceSoap" type="tns:GamesServiceSoap">
@@ -221,6 +335,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FetchUserProfileQuestions">
+      <soap:operation soapAction="http://tempuri.org/FetchUserProfileQuestions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasUserFilledOutQuestions">
+      <soap:operation soapAction="http://tempuri.org/HasUserFilledOutQuestions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveUserProfileQuestions">
+      <soap:operation soapAction="http://tempuri.org/SaveUserProfileQuestions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="GamesServiceSoap12" type="tns:GamesServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -244,6 +385,33 @@
     </wsdl:operation>
     <wsdl:operation name="InsertGameResultWeb">
       <soap12:operation soapAction="http://tempuri.org/InsertGameResultWeb" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchUserProfileQuestions">
+      <soap12:operation soapAction="http://tempuri.org/FetchUserProfileQuestions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasUserFilledOutQuestions">
+      <soap12:operation soapAction="http://tempuri.org/HasUserFilledOutQuestions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveUserProfileQuestions">
+      <soap12:operation soapAction="http://tempuri.org/SaveUserProfileQuestions" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
