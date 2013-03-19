@@ -82,5 +82,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vwQuestionAnswers">
+      <EntityTypeMapping TypeName="AgileMindModel.vwQuestionAnswer">
+        <MappingFragment StoreEntitySet="vwQuestionAnswer">
+          <ScalarProperty Name="NoAnswer" ColumnName="NoAnswer" />
+          <ScalarProperty Name="AnswerCreated" ColumnName="AnswerCreated" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+          <ScalarProperty Name="UserProfileAnswerId" ColumnName="UserProfileAnswerId" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Order" ColumnName="Order" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="UserProfileQuestionId" ColumnName="UserProfileQuestionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="FetchQuestionAnswer_ByLoginId" FunctionName="AgileMindModel.Store.FetchQuestionAnswer_ByLoginId" />
   </EntityContainerMapping>
 </Mapping>

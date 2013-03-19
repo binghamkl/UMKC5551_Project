@@ -186,6 +186,22 @@ namespace AgileMind.DAL.Data
             }
         }
         private ObjectSet<t_LoginSession> _t_LoginSession;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<vwQuestionAnswer> vwQuestionAnswers
+        {
+            get
+            {
+                if ((_vwQuestionAnswers == null))
+                {
+                    _vwQuestionAnswers = base.CreateObjectSet<vwQuestionAnswer>("vwQuestionAnswers");
+                }
+                return _vwQuestionAnswers;
+            }
+        }
+        private ObjectSet<vwQuestionAnswer> _vwQuestionAnswers;
 
         #endregion
 
@@ -245,6 +261,14 @@ namespace AgileMind.DAL.Data
         public void AddTot_LoginSession(t_LoginSession t_LoginSession)
         {
             base.AddObject("t_LoginSession", t_LoginSession);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the vwQuestionAnswers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTovwQuestionAnswers(vwQuestionAnswer vwQuestionAnswer)
+        {
+            base.AddObject("vwQuestionAnswers", vwQuestionAnswer);
         }
 
         #endregion
@@ -369,6 +393,44 @@ namespace AgileMind.DAL.Data
             }
     
             return base.ExecuteFunction<vwLoginInfo>("vw_LoginInfo_FetchByLoginId", mergeOption, loginIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="loginId">No Metadata Documentation available.</param>
+        public ObjectResult<vwQuestionAnswer> FetchQuestionAnswer_ByLoginId(Nullable<global::System.Int32> loginId)
+        {
+            ObjectParameter loginIdParameter;
+            if (loginId.HasValue)
+            {
+                loginIdParameter = new ObjectParameter("LoginId", loginId);
+            }
+            else
+            {
+                loginIdParameter = new ObjectParameter("LoginId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<vwQuestionAnswer>("FetchQuestionAnswer_ByLoginId", loginIdParameter);
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="mergeOption"></param>
+        /// <param name="loginId">No Metadata Documentation available.</param>
+        public ObjectResult<vwQuestionAnswer> FetchQuestionAnswer_ByLoginId(Nullable<global::System.Int32> loginId, MergeOption mergeOption)
+        {
+            ObjectParameter loginIdParameter;
+            if (loginId.HasValue)
+            {
+                loginIdParameter = new ObjectParameter("LoginId", loginId);
+            }
+            else
+            {
+                loginIdParameter = new ObjectParameter("LoginId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<vwQuestionAnswer>("FetchQuestionAnswer_ByLoginId", mergeOption, loginIdParameter);
         }
 
         #endregion
@@ -1882,6 +1944,299 @@ namespace AgileMind.DAL.Data
         private Nullable<global::System.DateTime> _LastLogin;
         partial void OnLastLoginChanging(Nullable<global::System.DateTime> value);
         partial void OnLastLoginChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="vwQuestionAnswer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class vwQuestionAnswer : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new vwQuestionAnswer object.
+        /// </summary>
+        /// <param name="userProfileQuestionId">Initial value of the UserProfileQuestionId property.</param>
+        /// <param name="question">Initial value of the Question property.</param>
+        /// <param name="order">Initial value of the Order property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        /// <param name="active">Initial value of the Active property.</param>
+        public static vwQuestionAnswer CreatevwQuestionAnswer(global::System.Int32 userProfileQuestionId, global::System.String question, global::System.Byte order, global::System.DateTime created, global::System.Boolean active)
+        {
+            vwQuestionAnswer vwQuestionAnswer = new vwQuestionAnswer();
+            vwQuestionAnswer.UserProfileQuestionId = userProfileQuestionId;
+            vwQuestionAnswer.Question = question;
+            vwQuestionAnswer.Order = order;
+            vwQuestionAnswer.Created = created;
+            vwQuestionAnswer.Active = active;
+            return vwQuestionAnswer;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserProfileQuestionId
+        {
+            get
+            {
+                return _UserProfileQuestionId;
+            }
+            set
+            {
+                if (_UserProfileQuestionId != value)
+                {
+                    OnUserProfileQuestionIdChanging(value);
+                    ReportPropertyChanging("UserProfileQuestionId");
+                    _UserProfileQuestionId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("UserProfileQuestionId");
+                    OnUserProfileQuestionIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserProfileQuestionId;
+        partial void OnUserProfileQuestionIdChanging(global::System.Int32 value);
+        partial void OnUserProfileQuestionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Question
+        {
+            get
+            {
+                return _Question;
+            }
+            set
+            {
+                if (_Question != value)
+                {
+                    OnQuestionChanging(value);
+                    ReportPropertyChanging("Question");
+                    _Question = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("Question");
+                    OnQuestionChanged();
+                }
+            }
+        }
+        private global::System.String _Question;
+        partial void OnQuestionChanging(global::System.String value);
+        partial void OnQuestionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte Order
+        {
+            get
+            {
+                return _Order;
+            }
+            set
+            {
+                if (_Order != value)
+                {
+                    OnOrderChanging(value);
+                    ReportPropertyChanging("Order");
+                    _Order = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Order");
+                    OnOrderChanged();
+                }
+            }
+        }
+        private global::System.Byte _Order;
+        partial void OnOrderChanging(global::System.Byte value);
+        partial void OnOrderChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                if (_Created != value)
+                {
+                    OnCreatedChanging(value);
+                    ReportPropertyChanging("Created");
+                    _Created = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Created");
+                    OnCreatedChanged();
+                }
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Active
+        {
+            get
+            {
+                return _Active;
+            }
+            set
+            {
+                if (_Active != value)
+                {
+                    OnActiveChanging(value);
+                    ReportPropertyChanging("Active");
+                    _Active = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Active");
+                    OnActiveChanged();
+                }
+            }
+        }
+        private global::System.Boolean _Active;
+        partial void OnActiveChanging(global::System.Boolean value);
+        partial void OnActiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UserProfileAnswerId
+        {
+            get
+            {
+                return _UserProfileAnswerId;
+            }
+            set
+            {
+                OnUserProfileAnswerIdChanging(value);
+                ReportPropertyChanging("UserProfileAnswerId");
+                _UserProfileAnswerId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserProfileAnswerId");
+                OnUserProfileAnswerIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UserProfileAnswerId;
+        partial void OnUserProfileAnswerIdChanging(Nullable<global::System.Int32> value);
+        partial void OnUserProfileAnswerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> LoginId
+        {
+            get
+            {
+                return _LoginId;
+            }
+            set
+            {
+                OnLoginIdChanging(value);
+                ReportPropertyChanging("LoginId");
+                _LoginId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LoginId");
+                OnLoginIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _LoginId;
+        partial void OnLoginIdChanging(Nullable<global::System.Int32> value);
+        partial void OnLoginIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Answer
+        {
+            get
+            {
+                return _Answer;
+            }
+            set
+            {
+                OnAnswerChanging(value);
+                ReportPropertyChanging("Answer");
+                _Answer = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Answer");
+                OnAnswerChanged();
+            }
+        }
+        private global::System.String _Answer;
+        partial void OnAnswerChanging(global::System.String value);
+        partial void OnAnswerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> AnswerCreated
+        {
+            get
+            {
+                return _AnswerCreated;
+            }
+            set
+            {
+                OnAnswerCreatedChanging(value);
+                ReportPropertyChanging("AnswerCreated");
+                _AnswerCreated = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AnswerCreated");
+                OnAnswerCreatedChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _AnswerCreated;
+        partial void OnAnswerCreatedChanging(Nullable<global::System.DateTime> value);
+        partial void OnAnswerCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> NoAnswer
+        {
+            get
+            {
+                return _NoAnswer;
+            }
+            set
+            {
+                OnNoAnswerChanging(value);
+                ReportPropertyChanging("NoAnswer");
+                _NoAnswer = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoAnswer");
+                OnNoAnswerChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _NoAnswer;
+        partial void OnNoAnswerChanging(Nullable<global::System.Boolean> value);
+        partial void OnNoAnswerChanged();
 
         #endregion
 

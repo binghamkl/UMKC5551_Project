@@ -22,6 +22,20 @@
       [vwLoginInfo].[LastLogin] AS [LastLogin]
       FROM [dbo].[vwLoginInfo] AS [vwLoginInfo]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwQuestionAnswer" EntityType="AgileMindModel.Store.vwQuestionAnswer" store:Type="Views" store:Schema="dbo" store:Name="vwQuestionAnswer">
+            <DefiningQuery>SELECT 
+      [vwQuestionAnswer].[UserProfileQuestionId] AS [UserProfileQuestionId], 
+      [vwQuestionAnswer].[Question] AS [Question], 
+      [vwQuestionAnswer].[Order] AS [Order], 
+      [vwQuestionAnswer].[Created] AS [Created], 
+      [vwQuestionAnswer].[Active] AS [Active], 
+      [vwQuestionAnswer].[UserProfileAnswerId] AS [UserProfileAnswerId], 
+      [vwQuestionAnswer].[LoginId] AS [LoginId], 
+      [vwQuestionAnswer].[Answer] AS [Answer], 
+      [vwQuestionAnswer].[AnswerCreated] AS [AnswerCreated], 
+      [vwQuestionAnswer].[NoAnswer] AS [NoAnswer]
+      FROM [dbo].[vwQuestionAnswer] AS [vwQuestionAnswer]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_t_GameResults_Logins" Association="AgileMindModel.Store.FK_t_GameResults_Logins">
             <End Role="Logins" EntitySet="Logins" />
             <End Role="t_GameResults" EntitySet="t_GameResults" />
@@ -122,6 +136,28 @@
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="LastLogin" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'AgileMind.dbo.vwQuestionAnswer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vwQuestionAnswer">
+          <Key>
+            <PropertyRef Name="UserProfileQuestionId" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="Order" />
+            <PropertyRef Name="Created" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="UserProfileQuestionId" Type="int" Nullable="false" />
+          <Property Name="Question" Type="varchar" Nullable="false" MaxLength="75" />
+          <Property Name="Order" Type="tinyint" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="UserProfileAnswerId" Type="int" />
+          <Property Name="LoginId" Type="int" />
+          <Property Name="Answer" Type="varchar" MaxLength="30" />
+          <Property Name="AnswerCreated" Type="datetime" />
+          <Property Name="NoAnswer" Type="bit" />
+        </EntityType>
         <Association Name="FK_t_GameResults_Logins">
           <End Role="Logins" Type="AgileMindModel.Store.Logins" Multiplicity="1" />
           <End Role="t_GameResults" Type="AgileMindModel.Store.t_GameResults" Multiplicity="*" />
@@ -186,6 +222,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="FetchQuestionAnswer_ByLoginId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LoginId" Type="int" Mode="In" />
+        </Function>
         <Function Name="Logins_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LoginName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -239,6 +278,10 @@
             <End Role="Login" EntitySet="Logins" />
             <End Role="t_LoginSession" EntitySet="t_LoginSession" />
           </AssociationSet>
+          <EntitySet Name="vwQuestionAnswers" EntityType="AgileMindModel.vwQuestionAnswer" />
+          <FunctionImport Name="FetchQuestionAnswer_ByLoginId" EntitySet="vwQuestionAnswers" ReturnType="Collection(AgileMindModel.vwQuestionAnswer)">
+            <Parameter Name="LoginId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Login">
           <Key>
@@ -386,6 +429,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwQuestionAnswer">
+          <Key>
+            <PropertyRef Name="UserProfileQuestionId" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="Order" />
+            <PropertyRef Name="Created" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Type="Int32" Name="UserProfileQuestionId" Nullable="false" />
+          <Property Type="String" Name="Question" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="Order" Nullable="false" />
+          <Property Type="DateTime" Name="Created" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Int32" Name="UserProfileAnswerId" />
+          <Property Type="Int32" Name="LoginId" />
+          <Property Type="String" Name="Answer" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="AnswerCreated" />
+          <Property Type="Boolean" Name="NoAnswer" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -473,6 +535,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="vwQuestionAnswers">
+            <EntityTypeMapping TypeName="AgileMindModel.vwQuestionAnswer">
+              <MappingFragment StoreEntitySet="vwQuestionAnswer">
+                <ScalarProperty Name="NoAnswer" ColumnName="NoAnswer" />
+                <ScalarProperty Name="AnswerCreated" ColumnName="AnswerCreated" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="UserProfileAnswerId" ColumnName="UserProfileAnswerId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="UserProfileQuestionId" ColumnName="UserProfileQuestionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="FetchQuestionAnswer_ByLoginId" FunctionName="AgileMindModel.Store.FetchQuestionAnswer_ByLoginId" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -527,6 +606,7 @@
           <ConnectorPoint PointX="2.625" PointY="12.268992513020834" />
           <ConnectorPoint PointX="3" PointY="12.268992513020834" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="AgileMindModel.vwQuestionAnswer" Width="1.5" PointX="6.375" PointY="4.75" Height="2.9417936197916674" />
       </Diagram>
     </Diagrams>
   </Designer>

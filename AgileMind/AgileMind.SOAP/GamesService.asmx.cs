@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Services;
 using AgileMind.BLL.Games;
+using AgileMind.BLL.Util;
+using AgileMind.DAL.Data;
 
 #endregion
 
@@ -48,9 +50,9 @@ namespace AgileMind.SOAP
 
         [WebMethod]
 		#region -- FetchUserProfileQuestions() Method --
-		public UserProfileQuestionsResults FetchUserProfileQuestions()
+		public UserProfileQuestionsResults FetchUserProfileQuestions(Guid SessionId)
 		{
-            return UserProfileQuestionsResults.FetchUserProfileQuestions();
+            return UserProfileQuestionsResults.FetchUserProfileQuestions(SessionId);
 		}
 		#endregion
 		
@@ -59,6 +61,14 @@ namespace AgileMind.SOAP
 		public bool HasUserFilledOutQuestions(Guid SessionId)
 		{
             return UserProfileQuestionsResults.HasUserFilledOutAnyQuestions(SessionId);
+		}
+		#endregion
+		
+        [WebMethod]
+        #region -- SaveUserProfileQuestions(List<vwQuestionAnswer> QuestionAnswerList, Guid SessionId) Method --
+        public Result SaveUserProfileQuestions(List<vwQuestionAnswer> QuestionAnswerList, Guid SessionId)
+		{
+            return UserProfileQuestionsResults.SaveUserQuestions(QuestionAnswerList, SessionId);
 		}
 		#endregion
 		

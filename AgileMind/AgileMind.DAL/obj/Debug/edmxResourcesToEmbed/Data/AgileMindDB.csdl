@@ -36,6 +36,10 @@
       <End Role="Login" EntitySet="Logins" />
       <End Role="t_LoginSession" EntitySet="t_LoginSession" />
     </AssociationSet>
+    <EntitySet Name="vwQuestionAnswers" EntityType="AgileMindModel.vwQuestionAnswer" />
+    <FunctionImport Name="FetchQuestionAnswer_ByLoginId" EntitySet="vwQuestionAnswers" ReturnType="Collection(AgileMindModel.vwQuestionAnswer)">
+      <Parameter Name="LoginId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Login">
     <Key>
@@ -183,4 +187,23 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="vwQuestionAnswer">
+    <Key>
+      <PropertyRef Name="UserProfileQuestionId" />
+      <PropertyRef Name="Question" />
+      <PropertyRef Name="Order" />
+      <PropertyRef Name="Created" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Type="Int32" Name="UserProfileQuestionId" Nullable="false" />
+    <Property Type="String" Name="Question" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Type="Byte" Name="Order" Nullable="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+    <Property Type="Int32" Name="UserProfileAnswerId" />
+    <Property Type="Int32" Name="LoginId" />
+    <Property Type="String" Name="Answer" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="AnswerCreated" />
+    <Property Type="Boolean" Name="NoAnswer" />
+  </EntityType>
 </Schema>

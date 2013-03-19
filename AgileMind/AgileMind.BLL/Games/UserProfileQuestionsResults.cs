@@ -14,7 +14,7 @@ namespace AgileMind.BLL.Games
     public class UserProfileQuestionsResults : Result
     {
 
-        private List<t_UserProfileQuestion> _questionList = new List<t_UserProfileQuestion>();
+        private List<vwQuestionAnswer> _questionList = new List<vwQuestionAnswer>();
 
         /*-- Constructors --*/
 
@@ -30,7 +30,7 @@ namespace AgileMind.BLL.Games
         /*-- Properties --*/
 
         #region -- QuestionList Property --
-        public List<t_UserProfileQuestion> QuestionList
+        public List<vwQuestionAnswer> QuestionList
         {
             get { return _questionList; }
             set { _questionList = value; }
@@ -43,16 +43,26 @@ namespace AgileMind.BLL.Games
 
         /*-- Factory Methods --*/
 
-        #region -- FetchUserProfileQuestions() Method --
-        public static UserProfileQuestionsResults FetchUserProfileQuestions()
+        #region -- FetchUserProfileQuestions(Guid SessionId) Method --
+        public static UserProfileQuestionsResults FetchUserProfileQuestions(Guid SessionId)
         {
             UserProfileQuestionsResults questionResults = new UserProfileQuestionsResults();
             try
             {
-                AgileMindEntities agileDB = new AgileMindEntities();
-                questionResults.QuestionList = (from data in agileDB.t_UserProfileQuestion where data.Active == true orderby data.Order select data).ToList();
 
-                questionResults.Success = true;
+                AgileMindEntities agileDB = new AgileMindEntities();
+
+                t_LoginSession session = (from loginSession in agileDB.t_LoginSession where loginSession.LoginSessionId == SessionId && loginSession.ValidTill > DateTime.Now select loginSession).First();
+                if (session != null)
+                {
+                    questionResults.QuestionList = agileDB.FetchQuestionAnswer_ByLoginId(session.LoginId).ToList();
+                    questionResults.Success = true;
+                }
+                else
+                {
+                    questionResults.Error = "Could not find sessionId";
+                }
+
             }
             catch (Exception ex)
             {
@@ -83,5 +93,70 @@ namespace AgileMind.BLL.Games
 		}
 		#endregion
 	
+		#region -- SaveUserQuestions(List<vwQuestionAnswer> QuestionAnswerList, Guid SessionId) Method --
+		public static Result SaveUserQuestions(List<vwQuestionAnswer> QuestionAnswerList, Guid SessionId)
+		{
+            Result saveResults = new Result();
+
+            AgileMindEntities agileDB = new AgileMindEntities();
+
+            t_LoginSession session = (from loginSession in agileDB.t_LoginSession where loginSession.LoginSessionId == SessionId && loginSession.ValidTill > DateTime.Now select loginSession).First();
+            if (session != null)
+	        {
+                List<t_UserProfileAnswer> answerList = (from data in agileDB.t_UserProfileAnswer where data.LoginId == session.LoginId select data).ToList();
+
+                foreach (vwQuestionAnswer questionAnswer in QuestionAnswerList)
+                {
+                    if (questionAnswer.UserProfileAnswerId == null || questionAnswer.UserProfileAnswerId == 0)
+                    {
+                        t_UserProfileAnswer newAnswer = new t_UserProfileAnswer();
+                        newAnswer.Answer = questionAnswer.Answer;
+                        newAnswer.Created = DateTime.Now;
+                        newAnswer.LoginId = session.LoginId;
+                        newAnswer.UserProfileQuestionId = questionAnswer.UserProfileQuestionId;
+                        if (questionAnswer.NoAnswer.HasValue)
+                        {
+                            newAnswer.NoAnswer = questionAnswer.NoAnswer.Value;
+                        }
+                        else
+                        {
+                            newAnswer.NoAnswer = false;
+                        }
+                        agileDB.t_UserProfileAnswer.AddObject(newAnswer);
+                    }
+                    else
+                    {
+                        t_UserProfileAnswer foundAnswer = (from data in agileDB.t_UserProfileAnswer where data.UserProfileAnswerId == questionAnswer.UserProfileAnswerId select data).First();
+
+                        if (foundAnswer != null)
+                        {
+                            foundAnswer.Answer = questionAnswer.Answer;
+
+                            if (questionAnswer.NoAnswer.HasValue)
+                            {
+                                foundAnswer.NoAnswer = questionAnswer.NoAnswer.Value;
+                            }
+                            else
+                            {
+                                foundAnswer.NoAnswer = false;
+                            }
+                            
+                        }
+                    }
+                }
+
+                agileDB.SaveChanges();
+
+                saveResults.Success = true;
+	        }
+            else
+            {
+                saveResults.Error = "Could not find session";
+            }
+
+            return saveResults;
+		}
+		#endregion
+		
     }
 }

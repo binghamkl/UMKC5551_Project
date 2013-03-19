@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AgileMind.BLL.Games;
+using AgileMind.DAL.Data;
 
 #endregion
 
@@ -46,11 +47,13 @@ namespace AgileMind.WebService.Controllers
 		#endregion
 
         #region -- FetchUserProfileQuestions() WS
-        public JsonResult FetchUserProfileQuestions()
+        public JsonResult FetchUserProfileQuestions(String SessionId)
         {
             JsonResult jsonResult = new JsonResult();
 
-            UserProfileQuestionsResults result = UserProfileQuestionsResults.FetchUserProfileQuestions();
+            Guid sessionGuid = new Guid(SessionId);
+
+            UserProfileQuestionsResults result = UserProfileQuestionsResults.FetchUserProfileQuestions(sessionGuid);
 
             jsonResult = Json(result, JsonRequestBehavior.AllowGet);
             return jsonResult;
@@ -67,6 +70,14 @@ namespace AgileMind.WebService.Controllers
 
             jsonResult = Json(hasResults, JsonRequestBehavior.AllowGet);
             return jsonResult;
+        }
+        #endregion
+
+        #region -- SaveUserProfileQuestions(List<vwQuestionAnswer> QuestionAnswerList, Guid SessionId) Method --
+        public JsonResult SaveUserProfileQuestions(List<vwQuestionAnswer> QuestionAnswerList, Guid SessionId)
+        {
+            JsonResult result = Json(UserProfileQuestionsResults.SaveUserQuestions(QuestionAnswerList, SessionId), JsonRequestBehavior.AllowGet);
+            return result;
         }
         #endregion
 

@@ -17,6 +17,20 @@
       [vwLoginInfo].[LastLogin] AS [LastLogin]
       FROM [dbo].[vwLoginInfo] AS [vwLoginInfo]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="vwQuestionAnswer" EntityType="AgileMindModel.Store.vwQuestionAnswer" store:Type="Views" store:Schema="dbo" store:Name="vwQuestionAnswer">
+      <DefiningQuery>SELECT 
+      [vwQuestionAnswer].[UserProfileQuestionId] AS [UserProfileQuestionId], 
+      [vwQuestionAnswer].[Question] AS [Question], 
+      [vwQuestionAnswer].[Order] AS [Order], 
+      [vwQuestionAnswer].[Created] AS [Created], 
+      [vwQuestionAnswer].[Active] AS [Active], 
+      [vwQuestionAnswer].[UserProfileAnswerId] AS [UserProfileAnswerId], 
+      [vwQuestionAnswer].[LoginId] AS [LoginId], 
+      [vwQuestionAnswer].[Answer] AS [Answer], 
+      [vwQuestionAnswer].[AnswerCreated] AS [AnswerCreated], 
+      [vwQuestionAnswer].[NoAnswer] AS [NoAnswer]
+      FROM [dbo].[vwQuestionAnswer] AS [vwQuestionAnswer]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_t_GameResults_Logins" Association="AgileMindModel.Store.FK_t_GameResults_Logins">
       <End Role="Logins" EntitySet="Logins" />
       <End Role="t_GameResults" EntitySet="t_GameResults" />
@@ -117,6 +131,28 @@
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="LastLogin" Type="datetime" />
   </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'AgileMind.dbo.vwQuestionAnswer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vwQuestionAnswer">
+    <Key>
+      <PropertyRef Name="UserProfileQuestionId" />
+      <PropertyRef Name="Question" />
+      <PropertyRef Name="Order" />
+      <PropertyRef Name="Created" />
+      <PropertyRef Name="Active" />
+    </Key>
+    <Property Name="UserProfileQuestionId" Type="int" Nullable="false" />
+    <Property Name="Question" Type="varchar" Nullable="false" MaxLength="75" />
+    <Property Name="Order" Type="tinyint" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="UserProfileAnswerId" Type="int" />
+    <Property Name="LoginId" Type="int" />
+    <Property Name="Answer" Type="varchar" MaxLength="30" />
+    <Property Name="AnswerCreated" Type="datetime" />
+    <Property Name="NoAnswer" Type="bit" />
+  </EntityType>
   <Association Name="FK_t_GameResults_Logins">
     <End Role="Logins" Type="AgileMindModel.Store.Logins" Multiplicity="1" />
     <End Role="t_GameResults" Type="AgileMindModel.Store.t_GameResults" Multiplicity="*" />
@@ -181,6 +217,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="FetchQuestionAnswer_ByLoginId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LoginId" Type="int" Mode="In" />
+  </Function>
   <Function Name="Logins_CheckLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LoginName" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
