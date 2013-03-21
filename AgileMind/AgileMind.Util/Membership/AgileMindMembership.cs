@@ -38,6 +38,9 @@ namespace AgileMind.Util.Membership
             LoginResult loginResult = client.CreateLogin(username, password, email);
             if (loginResult.Success)
             {
+
+                HttpContext.Current.Session.Add("SessionId", loginResult.SessionId);
+
                 MembershipUser user = new MembershipUser("AspNetSqlMembershipProvider", loginResult.LoginInfo.LoginName, loginResult.LoginInfo.LoginId, loginResult.LoginInfo.EmailAddress, 
                                             string.Empty, string.Empty, loginResult.LoginInfo.Active, !loginResult.LoginInfo.Active, loginResult.LoginInfo.Created, DateTime.Now, 
                                             DateTime.Now, DateTime.Now, DateTime.Now);

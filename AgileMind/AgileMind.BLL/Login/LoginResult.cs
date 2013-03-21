@@ -90,9 +90,19 @@ namespace AgileMind.BLL.Login
                 agileMindDB.Logins.AddObject(login);
                 agileMindDB.SaveChanges();
 
+                
+
                 List<vwLoginInfo> loginInfoList = agileMindDB.vw_LoginInfo_FetchByLoginId(login.LoginId).ToList();
                 if (loginInfoList.Count == 1)
                 {
+                    t_LoginSession newSession = new t_LoginSession();
+                    newSession.LoginId = login.LoginId;
+                    newSession.LoginSessionId = Guid.NewGuid();
+                    newSession.ValidTill = DateTime.Now.AddHours(3);
+                    agileMindDB.t_LoginSession.AddObject(newSession);
+                    agileMindDB.SaveChanges();
+
+                    loginInfo.SessionId = newSession.LoginSessionId;
                     loginInfo.LoginInfo = loginInfoList[0];
                     loginInfo.Success = true;
                 }

@@ -28,12 +28,14 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT [UserProfileQuestionId],[Question],[Order],[Created],[Active],
-			[UserProfileAnswerId],[LoginId],[Answer],[AnswerCreated],[NoAnswer]
-	FROM [vwQuestionAnswer]
-		WHERE 
-			(LoginId = @LoginId OR LoginId IS NULL)
-			AND Active = 1
+    -- Insert statements for procedure here
+	SELECT     dbo.t_UserProfileQuestion.UserProfileQuestionId, dbo.t_UserProfileQuestion.Question, dbo.t_UserProfileQuestion.[Order], dbo.t_UserProfileQuestion.Created, dbo.t_UserProfileQuestion.Active, 
+						  dbo.t_UserProfileAnswer.UserProfileAnswerId, dbo.t_UserProfileAnswer.LoginId, dbo.t_UserProfileAnswer.Answer, dbo.t_UserProfileAnswer.Created AS AnswerCreated, 
+						  dbo.t_UserProfileAnswer.NoAnswer
+	FROM         dbo.t_UserProfileQuestion LEFT OUTER JOIN
+						  dbo.t_UserProfileAnswer ON dbo.t_UserProfileQuestion.UserProfileQuestionId = dbo.t_UserProfileAnswer.UserProfileQuestionId
+											AND LoginId = @LoginId
+		WHERE Active = 1
 
 
 END
