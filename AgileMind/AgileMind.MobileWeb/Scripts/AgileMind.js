@@ -13,6 +13,16 @@ function HideLoading() {
     $.mobile.loading('hide', {});
 }
 
+function CreateProfileQuestion() {
+    var self = new Object();
+
+    self.Question = '';
+    self.UserProfileAnswerId = 0;
+    self.Answer = '';
+
+    return self;
+}
+
 function CreateQuestion() {
     var self = new Object();
     self.LeftWord = '';
@@ -38,7 +48,7 @@ function AgileMindViewModel() {
     self.IsLoggedIn = ko.observable(false);
     self.Error = ko.observable("");
     self.duration = ko.observable(0);
-
+    self.SessionId = ko.observable("");
     self.LoginInfo = { UserName: ko.observable(""), Password: ko.observable("") };
     self.Register = { UserName: ko.observable(""), Password: ko.observable(""), Email: ko.observable("") };
 
@@ -47,9 +57,163 @@ function AgileMindViewModel() {
     self.Questions = [];
     self.CorrectAnswers = ko.observable(0);
 
+    self.ProfileQuestions = [];
+    self.CurrentProfileQuestion = ko.observable(CreateProfileQuestion());
+    self.QuestionIndex = 0;
+    self.NextCaption = ko.observable("Next");
+
     // Computed data
 
     // Operations
+
+    self.SaveProfileAnswers = function () {
+        $.ajax({
+            type: 'POST',
+            url: URIHOME + GAMES + 'SaveUserProfileQuestions',
+            data: {
+                QuestionAnswerList: JSON.stringify(self.ProfileQuestions), SessionId: self.SessionId()
+            },
+            dataType: 'json',
+            success: function (data) {
+
+                if (!data.Success) {
+                    self.Error(data.Error);
+                }
+                else {
+
+                    self.Error('');
+                }
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                self.Error(errorThrown);
+            }
+
+        });
+    };
+
+    //Select Next Question
+    self.SelectNextProfileQuestion = function () {
+
+        self.QuestionIndex = self.QuestionIndex + 1;
+
+        if (self.QuestionIndex + 1 == self.ProfileQuestions.length) {
+            self.NextCaption("Finish");
+        }
+        else {
+            self.NextCaption("Next");
+        }
+
+
+        if (self.QuestionIndex >= self.ProfileQuestions.length) {
+            $.mobile.changePage("#profileFinish",
+                                    {
+                                        transition: "slide",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+            $('#profileFinish').trigger('create');
+            self.SaveProfileAnswers();
+            //self.SaveResults();
+        }
+        else {
+            self.CurrentProfileQuestion(self.ProfileQuestions[self.QuestionIndex]);
+            $.mobile.changePage("#profileQuestions",
+                                    {
+                                        transition: "flip",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+            $('#profileQuestions').trigger('create');
+
+        }
+
+
+    }
+
+
+    self.NextProfile = function () {
+        self.SelectNextProfileQuestion();
+    }
+
+    self.BackProfile = function () {
+        if (self.QuestionIndex > 0) {
+            self.QuestionIndex = self.QuestionIndex - 1;
+
+            if (self.QuestionIndex + 1 == self.ProfileQuestions.length) {
+                self.NextCaption("Finish");
+            }
+            else {
+                self.NextCaption("Next");
+            }
+
+            self.CurrentProfileQuestion(self.ProfileQuestions[self.QuestionIndex]);
+            $.mobile.changePage("#profileQuestions",
+                                    {
+                                        transition: "flip",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+            $('#profileQuestions').trigger('create');
+        }
+    }
+
+    self.GetProfileQuestions = function () {
+
+        try {
+
+            ShowLoading('Loading...');
+            $('#loginPage').addClass('ui-disabled');
+
+            $.ajax({
+                type: 'POST',
+                url: URIHOME + GAMES + 'FetchUserProfileQuestions',
+                data: { SessionId: self.SessionId() },
+                dataType: 'json',
+                success: function (data) {
+                    HideLoading();
+                    $('#loginPage').removeClass('ui-disabled');
+
+                    if (!data.Success) {
+                        self.Error(data.Error);
+                    }
+                    else {
+
+                        self.QuestionIndex = 0;
+                        self.ProfileQuestions = data.QuestionList
+                        self.CurrentProfileQuestion(self.ProfileQuestions[0]);
+
+                        $.mobile.changePage("#profileQuestions",
+                            {
+                                transition: "slide"
+                            }
+                        );
+
+                        $('#profileQuestions').trigger('create');
+
+                        self.Error('');
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    HideLoading();
+                    $('#loginPage').removeClass('ui-disabled');
+                    self.Error(errorThrown);
+                }
+
+            });
+
+
+        } catch (e) {
+            HideLoading();
+            $('#loginPage').removeClass('ui-disabled');
+            self.Error(e.message);
+        }
+
+    }
 
     self.SaveResults = function () {
         self.endTime = new Date();
@@ -228,6 +392,7 @@ function AgileMindViewModel() {
                     }
                     else {
                         self.IsLoggedIn(true);
+                        self.SessionId(data.SessionId);
                         self.Error('');
                     }
 
@@ -273,6 +438,7 @@ function AgileMindViewModel() {
                     }
                     else {
                         self.IsLoggedIn(true);
+                        self.SessionId(data.SessionId);
                         self.LoginInfo.UserName(self.Register.UserName());
                         self.LoginInfo.Password(self.Register.Password());
                         self.Error('');

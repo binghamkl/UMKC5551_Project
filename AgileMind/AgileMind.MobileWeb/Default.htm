@@ -13,6 +13,7 @@
 </head>
 <body>
 
+        <!-- Login Page  -->
     <div data-role="page" data-theme="c" id="loginPage" >
         <div data-role="header">
             <h2>Login</h2>
@@ -33,11 +34,13 @@
         </div>
         <div data-role="content" data-bind="visible: IsLoggedIn()">
             <ul data-role="listview">
+                <li><a data-bind="click:GetProfileQuestions">Fill In User Profile</a></li>
                 <li><a data-bind="click:CreateQuestions">Color Game</a></li>
             </ul>
         </div>
     </div>
 
+        <!-- Create User -->
     <div data-role="dialog" data-theme="a" id="CreateUser">
         <div data-role="header">
             <h2>Create User</h2>
@@ -101,6 +104,37 @@
         </div>
     </div>
 
+    <!-- Profile Questions -->
+    <div data-role="dialog" id="profileQuestions" data-theme="c">
+        <div data-role="header">
+            <h2>Profile Questions</h2>
+        </div>
+        <div data-role="content" data-bind="with:CurrentProfileQuestion">
+            <label data-bind="text:Question" for="profileAnswer"></label>
+            <input type="text" name="profileAnswer" id="profileAnswer" data-bind="value:Answer" />
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a data-bind="click: $root.BackProfile" id="ProfileBackButton" data-role="button" data-icon="arrow-d">Back</a>
+                </div>
+                <div class="ui-block-b">
+                    <a data-bind="click: $root.NextProfile, text:$root.NextCaption" id="ProfileNextButton" data-role="button" data-icon="check"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Finish -->
+    <div data-role="dialog" id="profileFinish" data-theme="c">
+        <div data-role="header">
+            <h2>Profile Entered</h2>
+        </div>
+        <div data-role="content">
+            <h2>Thank you for entering your profile information.</h2>
+            <a data-rel="back" data-role="button" data-icon="arrow-d">Menu</a>
+
+        </div>
+    </div>
 
 
     <script>
