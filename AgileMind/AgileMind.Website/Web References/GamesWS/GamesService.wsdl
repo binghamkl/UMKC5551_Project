@@ -235,6 +235,42 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="FetchRandomQuizQuestions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SessionId" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="QuestionCount" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProfileQuizQuestion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Question" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Answer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserAnswer" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProfileQuizQuestion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProfileQuizQuestion" nillable="true" type="tns:ProfileQuizQuestion" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FetchRandomQuizQuestionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchRandomQuizQuestionsResult" type="tns:ProfileQuizQuestionRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProfileQuizQuestionRequest">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Result">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="QuestionList" type="tns:ArrayOfProfileQuizQuestion" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="guid">
@@ -280,6 +316,12 @@
   <wsdl:message name="SaveUserProfileQuestionsSoapOut">
     <wsdl:part name="parameters" element="tns:SaveUserProfileQuestionsResponse" />
   </wsdl:message>
+  <wsdl:message name="FetchRandomQuizQuestionsSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchRandomQuizQuestions" />
+  </wsdl:message>
+  <wsdl:message name="FetchRandomQuizQuestionsSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchRandomQuizQuestionsResponse" />
+  </wsdl:message>
   <wsdl:portType name="GamesServiceSoap">
     <wsdl:operation name="FetchColorGame">
       <wsdl:input message="tns:FetchColorGameSoapIn" />
@@ -304,6 +346,10 @@
     <wsdl:operation name="SaveUserProfileQuestions">
       <wsdl:input message="tns:SaveUserProfileQuestionsSoapIn" />
       <wsdl:output message="tns:SaveUserProfileQuestionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchRandomQuizQuestions">
+      <wsdl:input message="tns:FetchRandomQuizQuestionsSoapIn" />
+      <wsdl:output message="tns:FetchRandomQuizQuestionsSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="GamesServiceSoap" type="tns:GamesServiceSoap">
@@ -362,6 +408,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FetchRandomQuizQuestions">
+      <soap:operation soapAction="http://tempuri.org/FetchRandomQuizQuestions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="GamesServiceSoap12" type="tns:GamesServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -412,6 +467,15 @@
     </wsdl:operation>
     <wsdl:operation name="SaveUserProfileQuestions">
       <soap12:operation soapAction="http://tempuri.org/SaveUserProfileQuestions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchRandomQuizQuestions">
+      <soap12:operation soapAction="http://tempuri.org/FetchRandomQuizQuestions" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

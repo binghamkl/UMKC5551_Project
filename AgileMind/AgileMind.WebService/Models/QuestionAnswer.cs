@@ -13,6 +13,8 @@ namespace AgileMind.WebService.Models
     {
 
         private String _question;
+        private int _userProfileQuestionId;
+        private int _userProfileAnswerId;
 
         #region -- Answer Property --
         public String Answer
@@ -21,7 +23,6 @@ namespace AgileMind.WebService.Models
             set { _question = value; }
         }
         #endregion
-        private int _userProfileQuestionId;
 
         #region -- UserProfileQuestionId Property --
         public int UserProfileQuestionId
@@ -30,7 +31,6 @@ namespace AgileMind.WebService.Models
             set { _userProfileQuestionId = value; }
         }
         #endregion
-        private int _userProfileAnswerId;
 
         #region -- UserProfileAnswerId Property --
         public int UserProfileAnswerId

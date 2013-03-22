@@ -44,6 +44,8 @@ namespace AgileMind.Website.GamesWS {
         
         private System.Threading.SendOrPostCallback SaveUserProfileQuestionsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback FetchRandomQuizQuestionsOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -99,6 +101,9 @@ namespace AgileMind.Website.GamesWS {
         
         /// <remarks/>
         public event SaveUserProfileQuestionsCompletedEventHandler SaveUserProfileQuestionsCompleted;
+        
+        /// <remarks/>
+        public event FetchRandomQuizQuestionsCompletedEventHandler FetchRandomQuizQuestionsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchColorGame", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -293,6 +298,37 @@ namespace AgileMind.Website.GamesWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchRandomQuizQuestions", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ProfileQuizQuestionRequest FetchRandomQuizQuestions(System.Guid SessionId, int QuestionCount) {
+            object[] results = this.Invoke("FetchRandomQuizQuestions", new object[] {
+                        SessionId,
+                        QuestionCount});
+            return ((ProfileQuizQuestionRequest)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FetchRandomQuizQuestionsAsync(System.Guid SessionId, int QuestionCount) {
+            this.FetchRandomQuizQuestionsAsync(SessionId, QuestionCount, null);
+        }
+        
+        /// <remarks/>
+        public void FetchRandomQuizQuestionsAsync(System.Guid SessionId, int QuestionCount, object userState) {
+            if ((this.FetchRandomQuizQuestionsOperationCompleted == null)) {
+                this.FetchRandomQuizQuestionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFetchRandomQuizQuestionsOperationCompleted);
+            }
+            this.InvokeAsync("FetchRandomQuizQuestions", new object[] {
+                        SessionId,
+                        QuestionCount}, this.FetchRandomQuizQuestionsOperationCompleted, userState);
+        }
+        
+        private void OnFetchRandomQuizQuestionsOperationCompleted(object arg) {
+            if ((this.FetchRandomQuizQuestionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FetchRandomQuizQuestionsCompleted(this, new FetchRandomQuizQuestionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -409,6 +445,51 @@ namespace AgileMind.Website.GamesWS {
             }
             set {
                 this.userCorrectField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ProfileQuizQuestion {
+        
+        private string questionField;
+        
+        private string answerField;
+        
+        private string userAnswerField;
+        
+        /// <remarks/>
+        public string Question {
+            get {
+                return this.questionField;
+            }
+            set {
+                this.questionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Answer {
+            get {
+                return this.answerField;
+            }
+            set {
+                this.answerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UserAnswer {
+            get {
+                return this.userAnswerField;
+            }
+            set {
+                this.userAnswerField = value;
             }
         }
     }
@@ -831,6 +912,7 @@ namespace AgileMind.Website.GamesWS {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ProfileQuizQuestionRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserProfileQuestionsResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(GameResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ColorGameResult))]
@@ -862,6 +944,27 @@ namespace AgileMind.Website.GamesWS {
             }
             set {
                 this.errorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ProfileQuizQuestionRequest : Result {
+        
+        private ProfileQuizQuestion[] questionListField;
+        
+        /// <remarks/>
+        public ProfileQuizQuestion[] QuestionList {
+            get {
+                return this.questionListField;
+            }
+            set {
+                this.questionListField = value;
             }
         }
     }
@@ -1073,6 +1176,32 @@ namespace AgileMind.Website.GamesWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void FetchRandomQuizQuestionsCompletedEventHandler(object sender, FetchRandomQuizQuestionsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FetchRandomQuizQuestionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FetchRandomQuizQuestionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ProfileQuizQuestionRequest Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ProfileQuizQuestionRequest)(this.results[0]));
             }
         }
     }

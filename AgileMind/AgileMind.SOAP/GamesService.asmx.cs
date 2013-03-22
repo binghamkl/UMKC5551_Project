@@ -72,5 +72,13 @@ namespace AgileMind.SOAP
 		}
 		#endregion
 		
+        [WebMethod]
+        #region -- FetchRandomQuizQuestions(Guid SessionId, int QuestionCount) Method --
+        public ProfileQuizQuestionRequest FetchRandomQuizQuestions(Guid SessionId, int QuestionCount)
+		{
+            return ProfileQuizQuestionRequest.FetchRandomQuizQuestions(SessionId, QuestionCount);
+		}
+		#endregion
+		
     }
 }

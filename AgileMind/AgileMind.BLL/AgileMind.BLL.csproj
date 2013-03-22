@@ -45,6 +45,8 @@
     <Compile Include="Games\ColorGameResult.cs" />
     <Compile Include="Games\GameListEnum.cs" />
     <Compile Include="Games\GameResults.cs" />
+    <Compile Include="Games\ProfileQuizQuestion.cs" />
+    <Compile Include="Games\ProfileQuizQuestionRequest.cs" />
     <Compile Include="Games\UserProfileQuestionsResults.cs" />
     <Compile Include="Login\LoginResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
