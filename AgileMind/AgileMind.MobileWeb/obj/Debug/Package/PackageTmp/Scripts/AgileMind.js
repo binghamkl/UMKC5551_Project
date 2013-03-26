@@ -34,6 +34,14 @@ function CreateQuestion() {
     return self;
 }
 
+function CreateProfileQuizQuestion() {
+    var self = new Object();
+    self.Question = '';
+    self.Answer = '';
+    self.UserAnswer = '';
+    return self;
+}
+
 
 // Overall viewmodel for this screen, along with initial state
 function AgileMindViewModel() {
@@ -62,9 +70,115 @@ function AgileMindViewModel() {
     self.QuestionIndex = 0;
     self.NextCaption = ko.observable("Next");
 
+    self.ProfileQuizQuestions = [];
+    self.CurrentProfileQuizQuestion = ko.observable(CreateProfileQuizQuestion());
+
+
     // Computed data
 
     // Operations
+
+    self.NextQuizQuestion = function () {
+
+        self.QuestionIndex = self.QuestionIndex + 1;
+
+        if (self.QuestionIndex + 1 == self.ProfileQuizQuestions.length) {
+            self.NextCaption("Finish");
+        }
+        else {
+            self.NextCaption("Next");
+        }
+
+
+        if (self.QuestionIndex >= self.ProfileQuizQuestions.length) {
+
+            self.CorrectAnswers(0);
+            for (var i = 0; i < self.ProfileQuizQuestions.length; i++) {
+                if (self.ProfileQuizQuestions[i].UserAnswer) {
+                    if (self.ProfileQuizQuestions[i].Answer.toLowerCase() == self.ProfileQuizQuestions[i].UserAnswer.toLowerCase()) {
+                        self.CorrectAnswers(self.CorrectAnswers() + 1);
+                    }
+                }
+            }
+
+            $.mobile.changePage("#ColorGameScores",
+                                    {
+                                        transition: "slide",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+            $('#ColorGameScores').trigger('create');
+            self.SaveResults(2, self.ProfileQuizQuestions.length);
+            //self.SaveResults();
+        }
+        else {
+            self.CurrentProfileQuizQuestion(self.ProfileQuizQuestions[self.QuestionIndex]);
+            $.mobile.changePage("#ProfileQuiz",
+                                    {
+                                        transition: "flip",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+            $('#ProfileQuiz').trigger('create');
+
+        }
+
+    }
+
+    self.GetProfileQuiz = function () {
+        try {
+
+            ShowLoading('Loading...');
+            $('#loginPage').addClass('ui-disabled');
+
+            $.ajax({
+                type: 'POST',
+                url: URIHOME + GAMES + 'FetchRandomUsreProfileQuizQuestions',
+                data: { SessionId: self.SessionId(), QuestionCount: 10 },
+                dataType: 'json',
+                success: function (data) {
+                    HideLoading();
+                    $('#loginPage').removeClass('ui-disabled');
+
+                    if (!data.Success) {
+                        self.Error(data.Error);
+                    }
+                    else {
+
+                        self.QuestionIndex = 0;
+                        self.ProfileQuizQuestions = data.QuestionList;
+                        self.CurrentProfileQuizQuestion(self.ProfileQuizQuestions[0]);
+
+                        $.mobile.changePage("#ProfileQuiz",
+                            {
+                                transition: "slide"
+                            }
+                        );
+
+                        $('#ProfileQuiz').trigger('create');
+
+                        self.startTime = new Date();
+                        self.Error('');
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    HideLoading();
+                    $('#loginPage').removeClass('ui-disabled');
+                    self.Error(errorThrown);
+                }
+
+            });
+
+
+        } catch (e) {
+            HideLoading();
+            $('#loginPage').removeClass('ui-disabled');
+            self.Error(e.message);
+        }
+    };
 
     self.SaveProfileAnswers = function () {
         $.ajax({
@@ -183,7 +297,7 @@ function AgileMindViewModel() {
                     else {
 
                         self.QuestionIndex = 0;
-                        self.ProfileQuestions = data.QuestionList
+                        self.ProfileQuestions = data.QuestionList;
                         self.CurrentProfileQuestion(self.ProfileQuestions[0]);
 
                         $.mobile.changePage("#profileQuestions",
@@ -215,7 +329,7 @@ function AgileMindViewModel() {
 
     }
 
-    self.SaveResults = function () {
+    self.SaveResults = function (GameType, TotalQuestions) {
         self.endTime = new Date();
         var elapsed = (vw.endTime - vw.startTime) / 1000
         self.duration(elapsed);
@@ -223,8 +337,8 @@ function AgileMindViewModel() {
             type: 'POST',
             url: URIHOME + GAMES + 'InsertGameResult',
             data: {
-                UserName: self.LoginInfo.UserName(), Password: self.LoginInfo.Password(), gameType: 1,
-                Score: self.CorrectAnswers(), TestDuration: elapsed, Total: self.Questions.length
+                UserName: self.LoginInfo.UserName(), Password: self.LoginInfo.Password(), gameType: GameType,
+                Score: self.CorrectAnswers(), TestDuration: elapsed, Total: TotalQuestions
             },
             dataType: 'json',
             success: function (data) {
@@ -354,7 +468,7 @@ function AgileMindViewModel() {
                             );
             $('#ColorGameScores').trigger('create');
 
-            self.SaveResults();
+            self.SaveResults(1, self.Questions.length);
         }
         else {
             $.mobile.changePage("#ColorGame",

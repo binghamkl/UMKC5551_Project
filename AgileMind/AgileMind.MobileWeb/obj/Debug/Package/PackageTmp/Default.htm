@@ -35,6 +35,7 @@
         <div data-role="content" data-bind="visible: IsLoggedIn()">
             <ul data-role="listview">
                 <li><a data-bind="click:GetProfileQuestions">Fill In User Profile</a></li>
+                <li><a data-bind="click:GetProfileQuiz">Profile Quiz Game</a></li>
                 <li><a data-bind="click:CreateQuestions">Color Game</a></li>
             </ul>
         </div>
@@ -132,6 +133,29 @@
         <div data-role="content">
             <h2>Thank you for entering your profile information.</h2>
             <a data-rel="back" data-role="button" data-icon="arrow-d">Menu</a>
+
+        </div>
+    </div>
+
+
+    <!-- Profile Quiz Questions -->
+    <div data-role="dialog" id="ProfileQuiz" data-theme="c">
+        <div data-role="header">
+            <h2>Profile Quiz</h2>
+        </div>
+        <div data-role="content" data-bind="with:CurrentProfileQuizQuestion">
+            <h2>Profile Quiz Questions</h2>
+            
+            <label for="text-1" data-bind="text:Question"></label>
+            <input type="text" name="Answer" id="text-1" data-bind="value:UserAnswer">
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                </div>
+                <div class="ui-block-b">
+                    <a data-bind="click: $root.NextQuizQuestion" data-role="button" data-icon="check">Next</a>
+                </div>
+            </div>
 
         </div>
     </div>

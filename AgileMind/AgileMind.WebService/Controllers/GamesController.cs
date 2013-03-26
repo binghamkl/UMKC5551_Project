@@ -106,9 +106,9 @@ namespace AgileMind.WebService.Controllers
             //return Json(QuestionAnswerList, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        
-		#region -- FetchRandomUsreProfileQuizQuestions() Method --
-		public JsonResult FetchRandomUsreProfileQuizQuestions(String SessionId, int QuestionCount)
+
+        #region -- FetchRandomUsreProfileQuizQuestions(String SessionId, int QuestionCount) Method --
+        public JsonResult FetchRandomUsreProfileQuizQuestions(String SessionId, int QuestionCount)
 		{
             JsonResult jsonResult = new JsonResult();
 
