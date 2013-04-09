@@ -24,6 +24,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_UserProfileAnswer_Logins", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.Login), "t_UserProfileAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_UserProfileAnswer), true)]
 [assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_UserProfileAnswer_t_UserProfileQuestion", "t_UserProfileQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_UserProfileQuestion), "t_UserProfileAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_UserProfileAnswer), true)]
 [assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_LoginSession_Logins", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.Login), "t_LoginSession", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_LoginSession), true)]
+[assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermQuestions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_ShortTermQuestions), "t_ShortTermAnswers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_ShortTermAnswers), true)]
+[assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuiz", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_ShortTermQuiz), "t_ShortTermQuestions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_ShortTermQuestions), true)]
 
 #endregion
 
@@ -202,6 +204,70 @@ namespace AgileMind.DAL.Data
             }
         }
         private ObjectSet<vwQuestionAnswer> _vwQuestionAnswers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_Settings> t_Settings
+        {
+            get
+            {
+                if ((_t_Settings == null))
+                {
+                    _t_Settings = base.CreateObjectSet<t_Settings>("t_Settings");
+                }
+                return _t_Settings;
+            }
+        }
+        private ObjectSet<t_Settings> _t_Settings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_ShortTermAnswers> t_ShortTermAnswers
+        {
+            get
+            {
+                if ((_t_ShortTermAnswers == null))
+                {
+                    _t_ShortTermAnswers = base.CreateObjectSet<t_ShortTermAnswers>("t_ShortTermAnswers");
+                }
+                return _t_ShortTermAnswers;
+            }
+        }
+        private ObjectSet<t_ShortTermAnswers> _t_ShortTermAnswers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_ShortTermQuestions> t_ShortTermQuestions
+        {
+            get
+            {
+                if ((_t_ShortTermQuestions == null))
+                {
+                    _t_ShortTermQuestions = base.CreateObjectSet<t_ShortTermQuestions>("t_ShortTermQuestions");
+                }
+                return _t_ShortTermQuestions;
+            }
+        }
+        private ObjectSet<t_ShortTermQuestions> _t_ShortTermQuestions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_ShortTermQuiz> t_ShortTermQuiz
+        {
+            get
+            {
+                if ((_t_ShortTermQuiz == null))
+                {
+                    _t_ShortTermQuiz = base.CreateObjectSet<t_ShortTermQuiz>("t_ShortTermQuiz");
+                }
+                return _t_ShortTermQuiz;
+            }
+        }
+        private ObjectSet<t_ShortTermQuiz> _t_ShortTermQuiz;
 
         #endregion
 
@@ -269,6 +335,38 @@ namespace AgileMind.DAL.Data
         public void AddTovwQuestionAnswers(vwQuestionAnswer vwQuestionAnswer)
         {
             base.AddObject("vwQuestionAnswers", vwQuestionAnswer);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_Settings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_Settings(t_Settings t_Settings)
+        {
+            base.AddObject("t_Settings", t_Settings);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_ShortTermAnswers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_ShortTermAnswers(t_ShortTermAnswers t_ShortTermAnswers)
+        {
+            base.AddObject("t_ShortTermAnswers", t_ShortTermAnswers);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_ShortTermQuestions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_ShortTermQuestions(t_ShortTermQuestions t_ShortTermQuestions)
+        {
+            base.AddObject("t_ShortTermQuestions", t_ShortTermQuestions);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_ShortTermQuiz EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_ShortTermQuiz(t_ShortTermQuiz t_ShortTermQuiz)
+        {
+            base.AddObject("t_ShortTermQuiz", t_ShortTermQuiz);
         }
 
         #endregion
@@ -1291,6 +1389,676 @@ namespace AgileMind.DAL.Data
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Login>("AgileMindModel.FK_t_LoginSession_Logins", "Login", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_Settings")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_Settings : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_Settings object.
+        /// </summary>
+        /// <param name="settingsId">Initial value of the SettingsId property.</param>
+        /// <param name="setting">Initial value of the Setting property.</param>
+        /// <param name="value">Initial value of the Value property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        public static t_Settings Createt_Settings(global::System.Int32 settingsId, global::System.String setting, global::System.String value, global::System.DateTime created)
+        {
+            t_Settings t_Settings = new t_Settings();
+            t_Settings.SettingsId = settingsId;
+            t_Settings.Setting = setting;
+            t_Settings.Value = value;
+            t_Settings.Created = created;
+            return t_Settings;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SettingsId
+        {
+            get
+            {
+                return _SettingsId;
+            }
+            set
+            {
+                if (_SettingsId != value)
+                {
+                    OnSettingsIdChanging(value);
+                    ReportPropertyChanging("SettingsId");
+                    _SettingsId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("SettingsId");
+                    OnSettingsIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SettingsId;
+        partial void OnSettingsIdChanging(global::System.Int32 value);
+        partial void OnSettingsIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Setting
+        {
+            get
+            {
+                return _Setting;
+            }
+            set
+            {
+                OnSettingChanging(value);
+                ReportPropertyChanging("Setting");
+                _Setting = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Setting");
+                OnSettingChanged();
+            }
+        }
+        private global::System.String _Setting;
+        partial void OnSettingChanging(global::System.String value);
+        partial void OnSettingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                OnValueChanging(value);
+                ReportPropertyChanging("Value");
+                _Value = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Value");
+                OnValueChanged();
+            }
+        }
+        private global::System.String _Value;
+        partial void OnValueChanging(global::System.String value);
+        partial void OnValueChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_ShortTermAnswers")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_ShortTermAnswers : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_ShortTermAnswers object.
+        /// </summary>
+        /// <param name="shortTermAnswerId">Initial value of the ShortTermAnswerId property.</param>
+        /// <param name="shortTermQuestionsId">Initial value of the ShortTermQuestionsId property.</param>
+        /// <param name="answer">Initial value of the Answer property.</param>
+        /// <param name="isCorrect">Initial value of the IsCorrect property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        public static t_ShortTermAnswers Createt_ShortTermAnswers(global::System.Int32 shortTermAnswerId, global::System.Int32 shortTermQuestionsId, global::System.String answer, global::System.Boolean isCorrect, global::System.DateTime created)
+        {
+            t_ShortTermAnswers t_ShortTermAnswers = new t_ShortTermAnswers();
+            t_ShortTermAnswers.ShortTermAnswerId = shortTermAnswerId;
+            t_ShortTermAnswers.ShortTermQuestionsId = shortTermQuestionsId;
+            t_ShortTermAnswers.Answer = answer;
+            t_ShortTermAnswers.IsCorrect = isCorrect;
+            t_ShortTermAnswers.Created = created;
+            return t_ShortTermAnswers;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ShortTermAnswerId
+        {
+            get
+            {
+                return _ShortTermAnswerId;
+            }
+            set
+            {
+                if (_ShortTermAnswerId != value)
+                {
+                    OnShortTermAnswerIdChanging(value);
+                    ReportPropertyChanging("ShortTermAnswerId");
+                    _ShortTermAnswerId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ShortTermAnswerId");
+                    OnShortTermAnswerIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ShortTermAnswerId;
+        partial void OnShortTermAnswerIdChanging(global::System.Int32 value);
+        partial void OnShortTermAnswerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ShortTermQuestionsId
+        {
+            get
+            {
+                return _ShortTermQuestionsId;
+            }
+            set
+            {
+                OnShortTermQuestionsIdChanging(value);
+                ReportPropertyChanging("ShortTermQuestionsId");
+                _ShortTermQuestionsId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ShortTermQuestionsId");
+                OnShortTermQuestionsIdChanged();
+            }
+        }
+        private global::System.Int32 _ShortTermQuestionsId;
+        partial void OnShortTermQuestionsIdChanging(global::System.Int32 value);
+        partial void OnShortTermQuestionsIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Answer
+        {
+            get
+            {
+                return _Answer;
+            }
+            set
+            {
+                OnAnswerChanging(value);
+                ReportPropertyChanging("Answer");
+                _Answer = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Answer");
+                OnAnswerChanged();
+            }
+        }
+        private global::System.String _Answer;
+        partial void OnAnswerChanging(global::System.String value);
+        partial void OnAnswerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsCorrect
+        {
+            get
+            {
+                return _IsCorrect;
+            }
+            set
+            {
+                OnIsCorrectChanging(value);
+                ReportPropertyChanging("IsCorrect");
+                _IsCorrect = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsCorrect");
+                OnIsCorrectChanged();
+            }
+        }
+        private global::System.Boolean _IsCorrect;
+        partial void OnIsCorrectChanging(global::System.Boolean value);
+        partial void OnIsCorrectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermQuestions")]
+        public t_ShortTermQuestions t_ShortTermQuestions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_ShortTermQuestions>("AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermQuestions").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_ShortTermQuestions>("AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermQuestions").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<t_ShortTermQuestions> t_ShortTermQuestionsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_ShortTermQuestions>("AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermQuestions");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<t_ShortTermQuestions>("AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermQuestions", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_ShortTermQuestions")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_ShortTermQuestions : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_ShortTermQuestions object.
+        /// </summary>
+        /// <param name="shortTermQuestionsId">Initial value of the ShortTermQuestionsId property.</param>
+        /// <param name="shortTermQuizId">Initial value of the ShortTermQuizId property.</param>
+        /// <param name="shortTermQuestion">Initial value of the ShortTermQuestion property.</param>
+        public static t_ShortTermQuestions Createt_ShortTermQuestions(global::System.Int32 shortTermQuestionsId, global::System.Int32 shortTermQuizId, global::System.String shortTermQuestion)
+        {
+            t_ShortTermQuestions t_ShortTermQuestions = new t_ShortTermQuestions();
+            t_ShortTermQuestions.ShortTermQuestionsId = shortTermQuestionsId;
+            t_ShortTermQuestions.ShortTermQuizId = shortTermQuizId;
+            t_ShortTermQuestions.ShortTermQuestion = shortTermQuestion;
+            return t_ShortTermQuestions;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ShortTermQuestionsId
+        {
+            get
+            {
+                return _ShortTermQuestionsId;
+            }
+            set
+            {
+                if (_ShortTermQuestionsId != value)
+                {
+                    OnShortTermQuestionsIdChanging(value);
+                    ReportPropertyChanging("ShortTermQuestionsId");
+                    _ShortTermQuestionsId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ShortTermQuestionsId");
+                    OnShortTermQuestionsIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ShortTermQuestionsId;
+        partial void OnShortTermQuestionsIdChanging(global::System.Int32 value);
+        partial void OnShortTermQuestionsIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ShortTermQuizId
+        {
+            get
+            {
+                return _ShortTermQuizId;
+            }
+            set
+            {
+                OnShortTermQuizIdChanging(value);
+                ReportPropertyChanging("ShortTermQuizId");
+                _ShortTermQuizId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ShortTermQuizId");
+                OnShortTermQuizIdChanged();
+            }
+        }
+        private global::System.Int32 _ShortTermQuizId;
+        partial void OnShortTermQuizIdChanging(global::System.Int32 value);
+        partial void OnShortTermQuizIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ShortTermQuestion
+        {
+            get
+            {
+                return _ShortTermQuestion;
+            }
+            set
+            {
+                OnShortTermQuestionChanging(value);
+                ReportPropertyChanging("ShortTermQuestion");
+                _ShortTermQuestion = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ShortTermQuestion");
+                OnShortTermQuestionChanged();
+            }
+        }
+        private global::System.String _ShortTermQuestion;
+        partial void OnShortTermQuestionChanging(global::System.String value);
+        partial void OnShortTermQuestionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Created;
+        partial void OnCreatedChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreatedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermAnswers")]
+        public EntityCollection<t_ShortTermAnswers> t_ShortTermAnswers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<t_ShortTermAnswers>("AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermAnswers");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_ShortTermAnswers>("AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermAnswers", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuiz")]
+        public t_ShortTermQuiz t_ShortTermQuiz
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_ShortTermQuiz>("AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuiz").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_ShortTermQuiz>("AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuiz").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<t_ShortTermQuiz> t_ShortTermQuizReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_ShortTermQuiz>("AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuiz");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<t_ShortTermQuiz>("AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuiz", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_ShortTermQuiz")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_ShortTermQuiz : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_ShortTermQuiz object.
+        /// </summary>
+        /// <param name="shortTermQuizId">Initial value of the ShortTermQuizId property.</param>
+        /// <param name="questionStatement">Initial value of the QuestionStatement property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        public static t_ShortTermQuiz Createt_ShortTermQuiz(global::System.Int32 shortTermQuizId, global::System.String questionStatement, global::System.DateTime created)
+        {
+            t_ShortTermQuiz t_ShortTermQuiz = new t_ShortTermQuiz();
+            t_ShortTermQuiz.ShortTermQuizId = shortTermQuizId;
+            t_ShortTermQuiz.QuestionStatement = questionStatement;
+            t_ShortTermQuiz.Created = created;
+            return t_ShortTermQuiz;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ShortTermQuizId
+        {
+            get
+            {
+                return _ShortTermQuizId;
+            }
+            set
+            {
+                if (_ShortTermQuizId != value)
+                {
+                    OnShortTermQuizIdChanging(value);
+                    ReportPropertyChanging("ShortTermQuizId");
+                    _ShortTermQuizId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ShortTermQuizId");
+                    OnShortTermQuizIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ShortTermQuizId;
+        partial void OnShortTermQuizIdChanging(global::System.Int32 value);
+        partial void OnShortTermQuizIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String QuestionStatement
+        {
+            get
+            {
+                return _QuestionStatement;
+            }
+            set
+            {
+                OnQuestionStatementChanging(value);
+                ReportPropertyChanging("QuestionStatement");
+                _QuestionStatement = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("QuestionStatement");
+                OnQuestionStatementChanged();
+            }
+        }
+        private global::System.String _QuestionStatement;
+        partial void OnQuestionStatementChanging(global::System.String value);
+        partial void OnQuestionStatementChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuestions")]
+        public EntityCollection<t_ShortTermQuestions> t_ShortTermQuestions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<t_ShortTermQuestions>("AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuestions");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_ShortTermQuestions>("AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuestions", value);
                 }
             }
         }

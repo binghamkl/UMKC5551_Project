@@ -47,6 +47,10 @@
     <Compile Include="Games\GameResults.cs" />
     <Compile Include="Games\ProfileQuizQuestion.cs" />
     <Compile Include="Games\ProfileQuizQuestionRequest.cs" />
+    <Compile Include="Games\ShortTermAnswer.cs" />
+    <Compile Include="Games\ShortTermQuestion.cs" />
+    <Compile Include="Games\ShortTermQuiz.cs" />
+    <Compile Include="Games\ShortTermQuizResult.cs" />
     <Compile Include="Games\UserProfileQuestionsResults.cs" />
     <Compile Include="Login\LoginResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

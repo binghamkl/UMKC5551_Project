@@ -99,5 +99,45 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="FetchQuestionAnswer_ByLoginId" FunctionName="AgileMindModel.Store.FetchQuestionAnswer_ByLoginId" />
+    <EntitySetMapping Name="t_Settings">
+      <EntityTypeMapping TypeName="AgileMindModel.t_Settings">
+        <MappingFragment StoreEntitySet="t_Settings">
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Setting" ColumnName="Setting" />
+          <ScalarProperty Name="SettingsId" ColumnName="SettingsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_ShortTermAnswers">
+      <EntityTypeMapping TypeName="AgileMindModel.t_ShortTermAnswers">
+        <MappingFragment StoreEntitySet="t_ShortTermAnswers">
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="ShortTermQuestionsId" ColumnName="ShortTermQuestionsId" />
+          <ScalarProperty Name="ShortTermAnswerId" ColumnName="ShortTermAnswerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_ShortTermQuestions">
+      <EntityTypeMapping TypeName="AgileMindModel.t_ShortTermQuestions">
+        <MappingFragment StoreEntitySet="t_ShortTermQuestions">
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="ShortTermQuestion" ColumnName="ShortTermQuestion" />
+          <ScalarProperty Name="ShortTermQuizId" ColumnName="ShortTermQuizId" />
+          <ScalarProperty Name="ShortTermQuestionsId" ColumnName="ShortTermQuestionsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_ShortTermQuiz">
+      <EntityTypeMapping TypeName="AgileMindModel.t_ShortTermQuiz">
+        <MappingFragment StoreEntitySet="t_ShortTermQuiz">
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="QuestionStatement" ColumnName="QuestionStatement" />
+          <ScalarProperty Name="ShortTermQuizId" ColumnName="ShortTermQuizId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

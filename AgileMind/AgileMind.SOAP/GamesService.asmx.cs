@@ -80,5 +80,14 @@ namespace AgileMind.SOAP
 		}
 		#endregion
 		
+        [WebMethod]
+		#region -- FetchShortTermMemoryQuiz() Method --
+		public ShortTermQuizResult FetchShortTermMemoryQuiz(Guid SessionId)
+		{
+            return ShortTermQuizResult.Fetchquiz(SessionId);
+		}
+		#endregion
+		
+
     }
 }

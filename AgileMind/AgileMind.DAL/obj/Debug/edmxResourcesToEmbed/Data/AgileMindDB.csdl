@@ -40,6 +40,18 @@
     <FunctionImport Name="FetchQuestionAnswer_ByLoginId" EntitySet="vwQuestionAnswers" ReturnType="Collection(AgileMindModel.vwQuestionAnswer)">
       <Parameter Name="LoginId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="t_Settings" EntityType="AgileMindModel.t_Settings" />
+    <EntitySet Name="t_ShortTermAnswers" EntityType="AgileMindModel.t_ShortTermAnswers" />
+    <EntitySet Name="t_ShortTermQuestions" EntityType="AgileMindModel.t_ShortTermQuestions" />
+    <EntitySet Name="t_ShortTermQuiz" EntityType="AgileMindModel.t_ShortTermQuiz" />
+    <AssociationSet Name="FK_t_ShortTermAnswers_t_ShortTermQuestions" Association="AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions">
+      <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
+      <End Role="t_ShortTermAnswers" EntitySet="t_ShortTermAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_ShortTermQuestions_t_ShortTermQuiz" Association="AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz">
+      <End Role="t_ShortTermQuiz" EntitySet="t_ShortTermQuiz" />
+      <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Login">
     <Key>
@@ -206,4 +218,68 @@
     <Property Type="DateTime" Name="AnswerCreated" />
     <Property Type="Boolean" Name="NoAnswer" />
   </EntityType>
+  <EntityType Name="t_Settings">
+    <Key>
+      <PropertyRef Name="SettingsId" />
+    </Key>
+    <Property Type="Int32" Name="SettingsId" Nullable="false" />
+    <Property Type="String" Name="Setting" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Value" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_ShortTermAnswers">
+    <Key>
+      <PropertyRef Name="ShortTermAnswerId" />
+    </Key>
+    <Property Type="Int32" Name="ShortTermAnswerId" Nullable="false" />
+    <Property Type="Int32" Name="ShortTermQuestionsId" Nullable="false" />
+    <Property Type="String" Name="Answer" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="IsCorrect" Nullable="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <NavigationProperty Name="t_ShortTermQuestions" Relationship="AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions" FromRole="t_ShortTermAnswers" ToRole="t_ShortTermQuestions" />
+  </EntityType>
+  <EntityType Name="t_ShortTermQuestions">
+    <Key>
+      <PropertyRef Name="ShortTermQuestionsId" />
+    </Key>
+    <Property Type="Int32" Name="ShortTermQuestionsId" Nullable="false" />
+    <Property Type="Int32" Name="ShortTermQuizId" Nullable="false" />
+    <Property Type="String" Name="ShortTermQuestion" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Created" />
+    <NavigationProperty Name="t_ShortTermAnswers" Relationship="AgileMindModel.FK_t_ShortTermAnswers_t_ShortTermQuestions" FromRole="t_ShortTermQuestions" ToRole="t_ShortTermAnswers" />
+    <NavigationProperty Name="t_ShortTermQuiz" Relationship="AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz" FromRole="t_ShortTermQuestions" ToRole="t_ShortTermQuiz" />
+  </EntityType>
+  <EntityType Name="t_ShortTermQuiz">
+    <Key>
+      <PropertyRef Name="ShortTermQuizId" />
+    </Key>
+    <Property Type="Int32" Name="ShortTermQuizId" Nullable="false" />
+    <Property Type="String" Name="QuestionStatement" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <NavigationProperty Name="t_ShortTermQuestions" Relationship="AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz" FromRole="t_ShortTermQuiz" ToRole="t_ShortTermQuestions" />
+  </EntityType>
+  <Association Name="FK_t_ShortTermAnswers_t_ShortTermQuestions">
+    <End Type="AgileMindModel.t_ShortTermQuestions" Role="t_ShortTermQuestions" Multiplicity="1" />
+    <End Type="AgileMindModel.t_ShortTermAnswers" Role="t_ShortTermAnswers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_ShortTermQuestions">
+        <PropertyRef Name="ShortTermQuestionsId" />
+      </Principal>
+      <Dependent Role="t_ShortTermAnswers">
+        <PropertyRef Name="ShortTermQuestionsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_ShortTermQuestions_t_ShortTermQuiz">
+    <End Type="AgileMindModel.t_ShortTermQuiz" Role="t_ShortTermQuiz" Multiplicity="1" />
+    <End Type="AgileMindModel.t_ShortTermQuestions" Role="t_ShortTermQuestions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_ShortTermQuiz">
+        <PropertyRef Name="ShortTermQuizId" />
+      </Principal>
+      <Dependent Role="t_ShortTermQuestions">
+        <PropertyRef Name="ShortTermQuizId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

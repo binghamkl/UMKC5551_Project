@@ -120,6 +120,20 @@ namespace AgileMind.WebService.Controllers
             return jsonResult;
         }
 		#endregion
-		
+
+        #region -- FetchShortTermMemoryQuestions(String SessionId) Method --
+        public JsonResult FetchShortTermMemoryQuestions(String SessionId)
+        {
+            JsonResult jsonResult = new JsonResult();
+
+            Guid sessionGuid = new Guid(SessionId);
+
+            ShortTermQuizResult result = ShortTermQuizResult.Fetchquiz(sessionGuid);
+
+            jsonResult = Json(result, JsonRequestBehavior.AllowGet);
+            return jsonResult;
+        }
+        #endregion
+
     }
 }

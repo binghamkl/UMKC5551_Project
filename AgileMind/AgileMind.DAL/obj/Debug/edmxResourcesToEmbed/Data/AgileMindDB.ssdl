@@ -5,6 +5,10 @@
     <EntitySet Name="t_Game" EntityType="AgileMindModel.Store.t_Game" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_GameResults" EntityType="AgileMindModel.Store.t_GameResults" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_LoginSession" EntityType="AgileMindModel.Store.t_LoginSession" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_Settings" EntityType="AgileMindModel.Store.t_Settings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_ShortTermAnswers" EntityType="AgileMindModel.Store.t_ShortTermAnswers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_ShortTermQuestions" EntityType="AgileMindModel.Store.t_ShortTermQuestions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_ShortTermQuiz" EntityType="AgileMindModel.Store.t_ShortTermQuiz" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_UserProfileAnswer" EntityType="AgileMindModel.Store.t_UserProfileAnswer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_UserProfileQuestion" EntityType="AgileMindModel.Store.t_UserProfileQuestion" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="vwLoginInfo" EntityType="AgileMindModel.Store.vwLoginInfo" store:Type="Views" store:Schema="dbo" store:Name="vwLoginInfo">
@@ -42,6 +46,14 @@
     <AssociationSet Name="FK_t_LoginSession_Logins" Association="AgileMindModel.Store.FK_t_LoginSession_Logins">
       <End Role="Logins" EntitySet="Logins" />
       <End Role="t_LoginSession" EntitySet="t_LoginSession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_ShortTermAnswers_t_ShortTermQuestions" Association="AgileMindModel.Store.FK_t_ShortTermAnswers_t_ShortTermQuestions">
+      <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
+      <End Role="t_ShortTermAnswers" EntitySet="t_ShortTermAnswers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_ShortTermQuestions_t_ShortTermQuiz" Association="AgileMindModel.Store.FK_t_ShortTermQuestions_t_ShortTermQuiz">
+      <End Role="t_ShortTermQuiz" EntitySet="t_ShortTermQuiz" />
+      <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
     </AssociationSet>
     <AssociationSet Name="FK_t_UserProfileAnswer_Logins" Association="AgileMindModel.Store.FK_t_UserProfileAnswer_Logins">
       <End Role="Logins" EntitySet="Logins" />
@@ -91,6 +103,42 @@
     <Property Name="LoginSessionId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="LoginId" Type="int" Nullable="false" />
     <Property Name="ValidTill" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_Settings">
+    <Key>
+      <PropertyRef Name="SettingsId" />
+    </Key>
+    <Property Name="SettingsId" Type="int" Nullable="false" />
+    <Property Name="Setting" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Value" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_ShortTermAnswers">
+    <Key>
+      <PropertyRef Name="ShortTermAnswerId" />
+    </Key>
+    <Property Name="ShortTermAnswerId" Type="int" Nullable="false" />
+    <Property Name="ShortTermQuestionsId" Type="int" Nullable="false" />
+    <Property Name="Answer" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="IsCorrect" Type="bit" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_ShortTermQuestions">
+    <Key>
+      <PropertyRef Name="ShortTermQuestionsId" />
+    </Key>
+    <Property Name="ShortTermQuestionsId" Type="int" Nullable="false" />
+    <Property Name="ShortTermQuizId" Type="int" Nullable="false" />
+    <Property Name="ShortTermQuestion" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Created" Type="datetime" />
+  </EntityType>
+  <EntityType Name="t_ShortTermQuiz">
+    <Key>
+      <PropertyRef Name="ShortTermQuizId" />
+    </Key>
+    <Property Name="ShortTermQuizId" Type="int" Nullable="false" />
+    <Property Name="QuestionStatement" Type="varchar" Nullable="false" MaxLength="2000" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="t_UserProfileAnswer">
     <Key>
@@ -188,6 +236,30 @@
       </Principal>
       <Dependent Role="t_LoginSession">
         <PropertyRef Name="LoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_ShortTermAnswers_t_ShortTermQuestions">
+    <End Role="t_ShortTermQuestions" Type="AgileMindModel.Store.t_ShortTermQuestions" Multiplicity="1" />
+    <End Role="t_ShortTermAnswers" Type="AgileMindModel.Store.t_ShortTermAnswers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_ShortTermQuestions">
+        <PropertyRef Name="ShortTermQuestionsId" />
+      </Principal>
+      <Dependent Role="t_ShortTermAnswers">
+        <PropertyRef Name="ShortTermQuestionsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_ShortTermQuestions_t_ShortTermQuiz">
+    <End Role="t_ShortTermQuiz" Type="AgileMindModel.Store.t_ShortTermQuiz" Multiplicity="1" />
+    <End Role="t_ShortTermQuestions" Type="AgileMindModel.Store.t_ShortTermQuestions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_ShortTermQuiz">
+        <PropertyRef Name="ShortTermQuizId" />
+      </Principal>
+      <Dependent Role="t_ShortTermQuestions">
+        <PropertyRef Name="ShortTermQuizId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
