@@ -52,6 +52,7 @@ namespace AgileMind.BLL.Games
             {
                 AgileMindEntities agileDB = new AgileMindEntities();
 
+
                 t_LoginSession session = (from loginSession in agileDB.t_LoginSession where loginSession.LoginSessionId == SessionId && loginSession.ValidTill > DateTime.Now select loginSession).First();
                 if (session != null)
                 {
@@ -94,6 +95,12 @@ namespace AgileMind.BLL.Games
                     qList.Shuffle();
 
                     request.Quiz.QuestionList = qList;
+
+                    t_Settings setting = (from settingData in agileDB.t_Settings where settingData.Setting == "QuestionDelay" select settingData).First();
+                    if (setting != null)
+                        request.Quiz.QuestionDelay = int.Parse(setting.Value);
+                    else
+                        request.Quiz.QuestionDelay = 10;
 
                     request.Success = true;
                 }

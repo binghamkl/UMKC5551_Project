@@ -74,6 +74,8 @@
     <Content Include="Games\ColorGameResults.aspx" />
     <Content Include="Games\ColorQuiz.aspx" />
     <Content Include="Games\GameResults.aspx" />
+    <Content Include="Games\ShortTerm.aspx" />
+    <Content Include="Games\ShortTermQuestionsForm.aspx" />
     <Content Include="Games\UserProfileComplete.aspx" />
     <Content Include="Games\UserProfileQuestions.aspx" />
     <Content Include="Games\UserProfileQuiz.aspx" />
@@ -125,6 +127,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\GamesWS\Result.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\GamesWS\ShortTermQuizResult.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\GamesWS\UserProfileQuestionsResults.datasource">
@@ -197,6 +202,20 @@
       <DependentUpon>GameResults.aspx</DependentUpon>
     </Compile>
     <Compile Include="Games\ProfileQuizInformation.cs" />
+    <Compile Include="Games\ShortTerm.aspx.cs">
+      <DependentUpon>ShortTerm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Games\ShortTerm.aspx.designer.cs">
+      <DependentUpon>ShortTerm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Games\ShortTermQuestionsForm.aspx.cs">
+      <DependentUpon>ShortTermQuestionsForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Games\ShortTermQuestionsForm.aspx.designer.cs">
+      <DependentUpon>ShortTermQuestionsForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Games\UserProfileComplete.aspx.cs">
       <DependentUpon>UserProfileComplete.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

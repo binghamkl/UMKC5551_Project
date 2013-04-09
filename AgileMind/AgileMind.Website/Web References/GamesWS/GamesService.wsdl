@@ -271,6 +271,60 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="FetchShortTermMemoryQuiz">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SessionId" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ShortTermQuiz">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Statement" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuestionList" type="tns:ArrayOfShortTermQuestion" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShortTermQuizId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="QuestionDelay" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfShortTermQuestion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShortTermQuestion" nillable="true" type="tns:ShortTermQuestion" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShortTermQuestion">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Question" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserCorrect" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AnswerList" type="tns:ArrayOfShortTermAnswer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfShortTermAnswer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShortTermAnswer" nillable="true" type="tns:ShortTermAnswer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShortTermAnswer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Answer" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsCorrect" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FetchShortTermMemoryQuizResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchShortTermMemoryQuizResult" type="tns:ShortTermQuizResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ShortTermQuizResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Result">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Quiz" type="tns:ShortTermQuiz" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="guid">
@@ -322,6 +376,12 @@
   <wsdl:message name="FetchRandomQuizQuestionsSoapOut">
     <wsdl:part name="parameters" element="tns:FetchRandomQuizQuestionsResponse" />
   </wsdl:message>
+  <wsdl:message name="FetchShortTermMemoryQuizSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchShortTermMemoryQuiz" />
+  </wsdl:message>
+  <wsdl:message name="FetchShortTermMemoryQuizSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchShortTermMemoryQuizResponse" />
+  </wsdl:message>
   <wsdl:portType name="GamesServiceSoap">
     <wsdl:operation name="FetchColorGame">
       <wsdl:input message="tns:FetchColorGameSoapIn" />
@@ -350,6 +410,10 @@
     <wsdl:operation name="FetchRandomQuizQuestions">
       <wsdl:input message="tns:FetchRandomQuizQuestionsSoapIn" />
       <wsdl:output message="tns:FetchRandomQuizQuestionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchShortTermMemoryQuiz">
+      <wsdl:input message="tns:FetchShortTermMemoryQuizSoapIn" />
+      <wsdl:output message="tns:FetchShortTermMemoryQuizSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="GamesServiceSoap" type="tns:GamesServiceSoap">
@@ -417,6 +481,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="FetchShortTermMemoryQuiz">
+      <soap:operation soapAction="http://tempuri.org/FetchShortTermMemoryQuiz" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="GamesServiceSoap12" type="tns:GamesServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -476,6 +549,15 @@
     </wsdl:operation>
     <wsdl:operation name="FetchRandomQuizQuestions">
       <soap12:operation soapAction="http://tempuri.org/FetchRandomQuizQuestions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchShortTermMemoryQuiz">
+      <soap12:operation soapAction="http://tempuri.org/FetchShortTermMemoryQuiz" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -15,6 +15,7 @@ namespace AgileMind.BLL.Games
         private String _statement;
         private List<ShortTermQuestion> _questionList = new List<ShortTermQuestion>();
         private int _shortTermQuizId;
+        private int _questionDelay;
 
         /*-- Constructors --*/
 
@@ -50,6 +51,14 @@ namespace AgileMind.BLL.Games
         {
             get { return _shortTermQuizId; }
             set { _shortTermQuizId = value; }
+        }
+        #endregion
+
+        #region -- QuestionDelay Property --
+        public int QuestionDelay
+        {
+            get { return _questionDelay; }
+            set { _questionDelay = value; }
         }
         #endregion
 

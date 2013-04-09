@@ -46,6 +46,8 @@ namespace AgileMind.Website.GamesWS {
         
         private System.Threading.SendOrPostCallback FetchRandomQuizQuestionsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback FetchShortTermMemoryQuizOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -104,6 +106,9 @@ namespace AgileMind.Website.GamesWS {
         
         /// <remarks/>
         public event FetchRandomQuizQuestionsCompletedEventHandler FetchRandomQuizQuestionsCompleted;
+        
+        /// <remarks/>
+        public event FetchShortTermMemoryQuizCompletedEventHandler FetchShortTermMemoryQuizCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchColorGame", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -329,6 +334,35 @@ namespace AgileMind.Website.GamesWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchShortTermMemoryQuiz", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ShortTermQuizResult FetchShortTermMemoryQuiz(System.Guid SessionId) {
+            object[] results = this.Invoke("FetchShortTermMemoryQuiz", new object[] {
+                        SessionId});
+            return ((ShortTermQuizResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FetchShortTermMemoryQuizAsync(System.Guid SessionId) {
+            this.FetchShortTermMemoryQuizAsync(SessionId, null);
+        }
+        
+        /// <remarks/>
+        public void FetchShortTermMemoryQuizAsync(System.Guid SessionId, object userState) {
+            if ((this.FetchShortTermMemoryQuizOperationCompleted == null)) {
+                this.FetchShortTermMemoryQuizOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFetchShortTermMemoryQuizOperationCompleted);
+            }
+            this.InvokeAsync("FetchShortTermMemoryQuiz", new object[] {
+                        SessionId}, this.FetchShortTermMemoryQuizOperationCompleted, userState);
+        }
+        
+        private void OnFetchShortTermMemoryQuizOperationCompleted(object arg) {
+            if ((this.FetchShortTermMemoryQuizCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FetchShortTermMemoryQuizCompleted(this, new FetchShortTermMemoryQuizCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -445,6 +479,141 @@ namespace AgileMind.Website.GamesWS {
             }
             set {
                 this.userCorrectField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ShortTermAnswer {
+        
+        private string answerField;
+        
+        private bool isCorrectField;
+        
+        /// <remarks/>
+        public string Answer {
+            get {
+                return this.answerField;
+            }
+            set {
+                this.answerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsCorrect {
+            get {
+                return this.isCorrectField;
+            }
+            set {
+                this.isCorrectField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ShortTermQuestion {
+        
+        private string questionField;
+        
+        private bool userCorrectField;
+        
+        private ShortTermAnswer[] answerListField;
+        
+        /// <remarks/>
+        public string Question {
+            get {
+                return this.questionField;
+            }
+            set {
+                this.questionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool UserCorrect {
+            get {
+                return this.userCorrectField;
+            }
+            set {
+                this.userCorrectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ShortTermAnswer[] AnswerList {
+            get {
+                return this.answerListField;
+            }
+            set {
+                this.answerListField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ShortTermQuiz {
+        
+        private string statementField;
+        
+        private ShortTermQuestion[] questionListField;
+        
+        private int shortTermQuizIdField;
+        
+        private int questionDelayField;
+        
+        /// <remarks/>
+        public string Statement {
+            get {
+                return this.statementField;
+            }
+            set {
+                this.statementField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public ShortTermQuestion[] QuestionList {
+            get {
+                return this.questionListField;
+            }
+            set {
+                this.questionListField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ShortTermQuizId {
+            get {
+                return this.shortTermQuizIdField;
+            }
+            set {
+                this.shortTermQuizIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int QuestionDelay {
+            get {
+                return this.questionDelayField;
+            }
+            set {
+                this.questionDelayField = value;
             }
         }
     }
@@ -912,6 +1081,7 @@ namespace AgileMind.Website.GamesWS {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ShortTermQuizResult))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ProfileQuizQuestionRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserProfileQuestionsResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(GameResults))]
@@ -944,6 +1114,27 @@ namespace AgileMind.Website.GamesWS {
             }
             set {
                 this.errorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class ShortTermQuizResult : Result {
+        
+        private ShortTermQuiz quizField;
+        
+        /// <remarks/>
+        public ShortTermQuiz Quiz {
+            get {
+                return this.quizField;
+            }
+            set {
+                this.quizField = value;
             }
         }
     }
@@ -1202,6 +1393,32 @@ namespace AgileMind.Website.GamesWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ProfileQuizQuestionRequest)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void FetchShortTermMemoryQuizCompletedEventHandler(object sender, FetchShortTermMemoryQuizCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FetchShortTermMemoryQuizCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FetchShortTermMemoryQuizCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ShortTermQuizResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ShortTermQuizResult)(this.results[0]));
             }
         }
     }
