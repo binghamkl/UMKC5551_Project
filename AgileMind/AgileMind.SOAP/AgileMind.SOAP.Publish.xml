@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
   <publishProfile publishUrl="C:\umkc\AgileMind\AgileMindSoap" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
-    <file relUrl="bin/AgileMind.DAL.dll" publishTime="03/21/2013 22:35:41" />
-    <file relUrl="bin/AgileMind.BLL.dll" publishTime="03/21/2013 23:26:06" />
-    <file relUrl="bin/AgileMind.BLL.pdb" publishTime="03/21/2013 23:26:06" />
-    <file relUrl="bin/AgileMind.DAL.pdb" publishTime="03/21/2013 22:35:41" />
-    <file relUrl="bin/AgileMind.SOAP.pdb" publishTime="03/21/2013 23:26:06" />
+    <file relUrl="bin/AgileMind.DAL.dll" publishTime="04/08/2013 13:56:24" />
+    <file relUrl="bin/AgileMind.BLL.dll" publishTime="04/08/2013 21:01:19" />
+    <file relUrl="bin/AgileMind.BLL.pdb" publishTime="04/08/2013 21:01:19" />
+    <file relUrl="bin/AgileMind.DAL.pdb" publishTime="04/08/2013 13:56:24" />
+    <file relUrl="bin/AgileMind.SOAP.pdb" publishTime="04/08/2013 21:01:20" />
     <file relUrl="Web.config" publishTime="03/10/2013 14:50:59" />
     <file relUrl="Login.asmx" publishTime="03/10/2013 14:50:05" />
     <file relUrl="GamesService.asmx" publishTime="03/10/2013 14:50:15" />
     <file relUrl="Global.asax" publishTime="03/03/2013 20:27:17" />
-    <file relUrl="bin/AgileMind.SOAP.dll" publishTime="03/21/2013 23:26:06" />
+    <file relUrl="bin/AgileMind.SOAP.dll" publishTime="04/08/2013 21:01:20" />
   </publishProfile>
 </publishData>

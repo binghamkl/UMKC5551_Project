@@ -67,13 +67,13 @@ namespace AgileMind.Website.Games {
         protected global::System.Web.UI.WebControls.Label uxQuestion;
         
         /// <summary>
-        /// uxRadioButtonList control.
+        /// uxAnswers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList uxRadioButtonList;
+        protected global::System.Web.UI.WebControls.RadioButtonList uxAnswers;
         
         /// <summary>
         /// uxNextQuestion control.

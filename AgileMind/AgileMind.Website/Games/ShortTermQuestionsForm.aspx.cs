@@ -73,6 +73,18 @@ namespace AgileMind.Website.Games
 
         /*-- Methods --*/
 
+        #region -- SetupUI() Method --
+        private void SetupUI()
+        {
+            if (QuestionNumber.HasValue)
+            {
+                uxQuestion.Text = Quiz.QuestionList[QuestionNumber.Value].Question;
+                uxAnswers.DataSource = Quiz.QuestionList[QuestionNumber.Value].AnswerList;
+                uxAnswers.DataBind();
+            }
+        }
+        #endregion
+
         /*-- Event Handlers --*/
 
         #region -- Page_Load(object sender, EventArgs e) Event Handler --
@@ -89,10 +101,10 @@ namespace AgileMind.Website.Games
                     if (Session["SessionId"] != null)
                     {
 
-                        Guid sessionId = (Guid)Session["SessionId"];
-                            DateTime now = DateTime.Now;
-                            DateTime future = now.AddSeconds(Quiz.QuestionDelay);
-                            Session.Add("QuizTime", future);
+                        DateTime now = DateTime.Now;
+                        DateTime future = now.AddSeconds(Quiz.QuestionDelay);
+                        Session.Add("QuizTime", future);
+                        uxTimeLeft.Text = Quiz.QuestionDelay.ToString();
                 
                     }
                     else
@@ -124,7 +136,56 @@ namespace AgileMind.Website.Games
                     uxQuestionsPanel.Visible = true;
                     uxCountDownPanel.Visible = false;
                     uxTimeLeft.Enabled = false;
+                    QuestionNumber = 0;
+                    SetupUI();
+
+                    Session.Add("BeginTime", DateTime.Now);
+
                 }
+            }
+        }
+        #endregion
+
+        #region -- uxNextQuestion_Click(object sender, EventArgs e) Event Handler --
+        protected void uxNextQuestion_Click(object sender, EventArgs e)
+        {
+
+            if (uxAnswers.SelectedIndex > -1)
+            {
+                String answer = uxAnswers.SelectedItem.Text;
+                ShortTermAnswer foundAnswer = Quiz.QuestionList[QuestionNumber.Value].AnswerList.ToList().Find(delegate(ShortTermAnswer findAnswer) 
+                {
+                    return findAnswer.Answer == answer;
+                });
+                if (foundAnswer.IsCorrect)
+                    Quiz.QuestionList[QuestionNumber.Value].UserCorrect = true;
+            }
+
+            QuestionNumber = QuestionNumber + 1;
+
+            if (QuestionNumber.Value >= Quiz.QuestionList.Count())
+            {
+                DateTime finishTime = DateTime.Now;
+                int correctScore = 0;
+                foreach (ShortTermQuestion question in Quiz.QuestionList)
+                {
+                    if (question.UserCorrect)
+                        correctScore++;
+                }
+                DateTime startTime = (DateTime)Session["BeginTime"];
+                TimeSpan elapsedTime = finishTime - startTime;
+                decimal seconds = ((decimal)elapsedTime.TotalMilliseconds / 1000);
+
+                GamesWS.GamesService gamesService = new GamesService();
+                gamesService.InsertGameResultWeb(User.Identity.Name, GameListEnum.UserProfileQuestions, correctScore, seconds, Quiz.QuestionList.Count());
+
+                String queryString = string.Format("Correct={0}&Total={1}&Seconds={2}", Server.HtmlEncode(correctScore.ToString()), Server.HtmlEncode(Quiz.QuestionList.Count().ToString()),
+                                            Server.HtmlEncode(seconds.ToString()));
+                Response.Redirect("GameResults.aspx?" + queryString);
+            }
+            else
+            {
+                SetupUI();
             }
         }
         #endregion
