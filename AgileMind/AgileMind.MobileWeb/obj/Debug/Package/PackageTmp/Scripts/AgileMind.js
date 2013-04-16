@@ -73,10 +73,67 @@ function AgileMindViewModel() {
     self.ProfileQuizQuestions = [];
     self.CurrentProfileQuizQuestion = ko.observable(CreateProfileQuizQuestion());
 
+    self.Quiz = ko.observable({ Statement: '' });
 
     // Computed data
 
     // Operations
+
+    //CreateQuestions
+    self.ShortTermMemoryQuiz = function () {
+
+        try {
+
+            ShowLoading('Loading...');
+            $('#loginPage').addClass('ui-disabled');
+
+            $.ajax({
+                type: 'POST',
+                url: URIHOME + GAMES + 'FetchShortTermMemoryQuestions',
+                data: { SessionId: self.SessionId() },
+                dataType: 'json',
+                success: function (data) {
+                    HideLoading();
+                    $('#loginPage').removeClass('ui-disabled');
+
+                    if (!data.Success) {
+                        self.Error(data.Error);
+                    }
+                    else {
+
+                        self.Quiz = data.Quiz
+                        //self.CurrentQuestion(self.Questions[0]);
+                        //self.CorrectAnswers(0);
+
+                        $.mobile.changePage("#ColorGame",
+                            {
+                                transition: "slide"
+                            }
+                        );
+                        self.startTime = new Date();
+
+                        $('#ColorGame').trigger('create');
+
+                        self.Error('');
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    HideLoading();
+                    $('#loginPage').removeClass('ui-disabled');
+                    self.Error(errorThrown);
+                }
+
+            });
+
+
+        } catch (e) {
+            HideLoading();
+            $('#loginPage').removeClass('ui-disabled');
+            self.Error(e.message);
+        }
+    }
+
 
     self.NextQuizQuestion = function () {
 

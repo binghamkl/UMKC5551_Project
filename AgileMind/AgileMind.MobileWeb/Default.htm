@@ -37,6 +37,7 @@
                 <li><a data-bind="click:GetProfileQuestions">Fill In User Profile</a></li>
                 <li><a data-bind="click:GetProfileQuiz">Profile Quiz Game</a></li>
                 <li><a data-bind="click:CreateQuestions">Color Game</a></li>
+                <li><a data-bind="click:ShortTermMemoryQuiz">Short Term Memory</a></li>
             </ul>
         </div>
     </div>
@@ -137,7 +138,6 @@
         </div>
     </div>
 
-
     <!-- Profile Quiz Questions -->
     <div data-role="dialog" id="ProfileQuiz" data-theme="c">
         <div data-role="header">
@@ -156,6 +156,20 @@
                     <a data-bind="click: $root.NextQuizQuestion" data-role="button" data-icon="check">Next</a>
                 </div>
             </div>
+
+        </div>
+    </div>
+
+    <!-- Short Term Quiz Questions -->
+    <div data-role="dialog" id="ShortTermQuiz" data-theme="c">
+        <div data-role="header">
+            <h2>ShortTerm Quiz</h2>
+        </div>
+        <div data-role="content" data-bind="with:Quiz">
+            <h2>Short Term Quiz Statement</h2>
+            
+            <p data-bind="text:Statement"></p>
+
 
         </div>
     </div>
