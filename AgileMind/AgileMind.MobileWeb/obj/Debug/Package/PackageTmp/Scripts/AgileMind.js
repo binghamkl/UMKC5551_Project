@@ -73,13 +73,83 @@ function AgileMindViewModel() {
     self.ProfileQuizQuestions = [];
     self.CurrentProfileQuizQuestion = ko.observable(CreateProfileQuizQuestion());
 
-    self.Quiz = ko.observable({ Statement: '' });
+    self.Quiz = ko.observable({ Statement: '', QuestionDelay: 0 });
+    self.Delay = 0;
+    self.CurrentQuestionNumber = ko.observable(1);
+    self.TotalQuestion = ko.observable(1);
+    self.ShortTermQuestion = ko.observable();
 
     // Computed data
 
     // Operations
 
     //CreateQuestions
+    self.SelectedAnswer = function (AnswerEntity) {
+        if (AnswerEntity.IsCorrect) {
+            self.CorrectAnswers(self.CorrectAnswers() + 1);
+        }
+        self.CurrentQuestionNumber(self.CurrentQuestionNumber() + 1);
+        if (self.CurrentQuestionNumber() > self.TotalQuestion()) {
+
+            $.mobile.changePage("#ShortTermScore",
+                                    {
+                                        transition: "slide",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+                                    $('#ShortTermScore').trigger('create');
+
+            self.SaveResults(3, self.TotalQuestion());
+            
+        }
+        else {
+            self.NextShortTermQuestion();
+        }
+    }
+
+    self.NextShortTermQuestion = function () {
+        self.ShortTermQuestion(self.Quiz().QuestionList[self.CurrentQuestionNumber() - 1]);
+        $.mobile.changePage("#ShortTermQuestion",
+                                    {
+                                        transition: "flip",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+                                    $('#ShortTermQuestion').trigger('create');
+
+    }
+
+    self.TimeOut = function () {
+        self.Delay--;
+        if (self.Delay > 0) {
+            ShowLoading("Please wait " + self.Delay + " seconds");
+            setTimeout(self.TimeOut, 1000);
+        }
+        else {
+            self.CurrentQuestionNumber(1);
+            self.TotalQuestion(self.Quiz().QuestionList.length);
+            self.startTime = new Date();
+            self.CorrectAnswers(0);
+
+            self.NextShortTermQuestion();
+
+        }
+    }
+
+    self.BeginShortTermQuiz = function () {
+
+        if (self.Quiz().QuestionDelay > 0) {
+            ShowLoading("Please wait " + self.Quiz().QuestionDelay + " seconds");
+            self.Delay = self.Quiz().QuestionDelay;
+            setTimeout(self.TimeOut, 1000);
+
+        }
+
+    }
+
+
     self.ShortTermMemoryQuiz = function () {
 
         try {
@@ -101,18 +171,18 @@ function AgileMindViewModel() {
                     }
                     else {
 
-                        self.Quiz = data.Quiz
+                        self.Quiz(data.Quiz);
                         //self.CurrentQuestion(self.Questions[0]);
                         //self.CorrectAnswers(0);
 
-                        $.mobile.changePage("#ColorGame",
+                        $.mobile.changePage("#ShortTermQuiz",
                             {
                                 transition: "slide"
                             }
                         );
                         self.startTime = new Date();
 
-                        $('#ColorGame').trigger('create');
+                        $('#ShortTermQuiz').trigger('create');
 
                         self.Error('');
                     }

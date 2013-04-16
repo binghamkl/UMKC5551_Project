@@ -169,7 +169,42 @@
             <h2>Short Term Quiz Statement</h2>
             
             <p data-bind="text:Statement"></p>
+            <div>
+                <button datarole="button" data-icon="check" data-bind="click: $root.BeginShortTermQuiz">Begin</button>
+            </div>
 
+        </div>
+    </div>
+
+    <!-- Short Term Quiz Questions -->
+    <div data-role="dialog" id="ShortTermQuestion" data-theme="c">
+        <div data-role="header">
+            <h2>Short Term Memory Questions</h2>
+        </div>
+        <div data-role="content" >
+            <h2>Question <label data-bind="text: $root.CurrentQuestionNumber"></label> of <label data-bind="text: $root.TotalQuestion"></label></h2>
+            <div data-bind="with:ShortTermQuestion">
+                <p data-bind="text:Question"></p>
+            
+            <ul data-role="listview" data-inset="true" data-bind="foreach:AnswerList">
+                <li><a data-bind="text:Answer, click:$root.SelectedAnswer"></a></li>
+            </ul>
+            
+            </div>
+            
+
+        </div>
+    </div>
+
+        <!-- ShortTerm Score Game Questions -->
+    <div data-role="dialog" id="ShortTermScore" data-theme="c">
+        <div data-role="header">
+            <h2>Your Score</h2>
+        </div>
+        <div data-role="content">
+            <h2>You got <label data-bind="text:CorrectAnswers"></label> out of <label data-bind="text:TotalQuestion"></label> correct</h2>
+            <h2>It took you <label data-bind="text:duration"></label> seconds</h2>
+            <a data-rel="back" data-role="button" data-icon="arrow-d">Menu</a>
 
         </div>
     </div>

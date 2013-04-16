@@ -2,3 +2,4 @@ C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.MobileWeb\bin\AgileMind.MobileWeb.pdb
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.MobileWeb\obj\Debug\AgileMind.MobileWeb.dll
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.MobileWeb\obj\Debug\AgileMind.MobileWeb.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.MobileWeb\obj\Debug\AgileMind.MobileWeb.csprojResolveAssemblyReference.cache
