@@ -54,6 +54,8 @@
     <Compile Include="Games\UserProfileQuestionsResults.cs" />
     <Compile Include="Login\LoginResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\UserGameResults.cs" />
+    <Compile Include="Results\UserMeanGameScore.cs" />
     <Compile Include="Util\Result.cs" />
   </ItemGroup>
   <ItemGroup>

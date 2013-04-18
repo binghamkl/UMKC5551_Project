@@ -836,12 +836,16 @@ namespace AgileMind.DAL.Data
         /// <param name="gameId">Initial value of the GameId property.</param>
         /// <param name="game">Initial value of the Game property.</param>
         /// <param name="description">Initial value of the Description property.</param>
-        public static t_Game Createt_Game(global::System.Int32 gameId, global::System.String game, global::System.String description)
+        /// <param name="mean">Initial value of the Mean property.</param>
+        /// <param name="stdev">Initial value of the stdev property.</param>
+        public static t_Game Createt_Game(global::System.Int32 gameId, global::System.String game, global::System.String description, global::System.Double mean, global::System.Double stdev)
         {
             t_Game t_Game = new t_Game();
             t_Game.GameId = gameId;
             t_Game.Game = game;
             t_Game.Description = description;
+            t_Game.Mean = mean;
+            t_Game.stdev = stdev;
             return t_Game;
         }
 
@@ -923,6 +927,54 @@ namespace AgileMind.DAL.Data
         private global::System.String _Description;
         partial void OnDescriptionChanging(global::System.String value);
         partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Mean
+        {
+            get
+            {
+                return _Mean;
+            }
+            set
+            {
+                OnMeanChanging(value);
+                ReportPropertyChanging("Mean");
+                _Mean = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Mean");
+                OnMeanChanged();
+            }
+        }
+        private global::System.Double _Mean;
+        partial void OnMeanChanging(global::System.Double value);
+        partial void OnMeanChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double stdev
+        {
+            get
+            {
+                return _stdev;
+            }
+            set
+            {
+                OnstdevChanging(value);
+                ReportPropertyChanging("stdev");
+                _stdev = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("stdev");
+                OnstdevChanged();
+            }
+        }
+        private global::System.Double _stdev;
+        partial void OnstdevChanging(global::System.Double value);
+        partial void OnstdevChanged();
 
         #endregion
 

@@ -37,7 +37,7 @@ namespace AgileMind.BLL.Games
 
         /*-- Factory Methods --*/
 
-        #region -- InsertGameResult(String UserName, String Password, GameListEnum gameType, int Score, decimal TestDuration, int Total) Method --
+        #region -- InsertGameResult(String UserName, String Password, GameListEnum gameType, int UserMeanGameScore, decimal TestDuration, int Total) Method --
         public static GameResults InsertGameResult(String UserName, String Password, GameListEnum gameType, int Score, decimal TestDuration, int Total)
 		{
             GameResults results = new GameResults();
@@ -75,7 +75,7 @@ namespace AgileMind.BLL.Games
 		}
 		#endregion
 
-        #region -- InsertGameResultLoginId(String UserName, GameListEnum gameType, int Score, decimal TestDuration, int Total) Method --
+        #region -- InsertGameResultLoginId(String UserName, GameListEnum gameType, int UserMeanGameScore, decimal TestDuration, int Total) Method --
         public static GameResults InsertGameResultLoginId(String UserName, GameListEnum gameType, int Score, decimal TestDuration, int Total)
         {
             GameResults results = new GameResults();

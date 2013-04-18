@@ -33,7 +33,7 @@ namespace AgileMind.SOAP
         #endregion
 
         [WebMethod]
-        #region -- InsertGameResult(String UserName, String Password, GameListEnum gameType, int Score, decimal TestDuration, int Total) Method --
+        #region -- InsertGameResult(String UserName, String Password, GameListEnum gameType, int UserMeanGameScore, decimal TestDuration, int Total) Method --
         public GameResults InsertGameResult(String UserName, String Password, GameListEnum gameType, int Score, decimal TestDuration, int Total)
 		{
             return GameResults.InsertGameResult(UserName, Password, gameType, Score, TestDuration, Total);
@@ -41,7 +41,7 @@ namespace AgileMind.SOAP
 		#endregion
 
         [WebMethod]
-        #region -- InsertGameResultWeb(String UserName, GameListEnum gameType, int Score, decimal TestDuration, int Total) Method --
+        #region -- InsertGameResultWeb(String UserName, GameListEnum gameType, int UserMeanGameScore, decimal TestDuration, int Total) Method --
         public GameResults InsertGameResultWeb(String UserName, GameListEnum gameType, int Score, decimal TestDuration, int Total)
         {
             return GameResults.InsertGameResultLoginId(UserName, gameType, Score, TestDuration, Total);
