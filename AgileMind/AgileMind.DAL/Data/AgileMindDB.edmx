@@ -371,6 +371,9 @@
             <End Role="t_ShortTermQuiz" EntitySet="t_ShortTermQuiz" />
             <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
           </AssociationSet>
+          <FunctionImport Name="UserDevAveragePerGame">
+            <Parameter Name="LoginId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Login">
           <Key>
@@ -749,6 +752,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UserDevAveragePerGame" FunctionName="AgileMindModel.Store.UserDevAveragePerGame" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

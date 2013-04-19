@@ -4,15 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AgileMind.BLL.Util;
+using AgileMind.DAL.Data;
 
 #endregion
 
 namespace AgileMind.BLL.Results
 {
-    public class UserGameResults : Results
+    public class UserGameResults : Result
     {
 
-        private List<UserMeanGameScore> _meanGameScores;
+        private List<UserMeanGameScore> _meanGameScores = new List<UserMeanGameScore>();
         private decimal _userScore;
 
         /*-- Constructors --*/
@@ -49,10 +51,9 @@ namespace AgileMind.BLL.Results
         /*-- Event Handlers --*/
 	    
         /*-- Load User Scores --*/
-
         
 		#region -- FetchUserGameResults() Method --
-		public UserGameResults FetchUserGameResults(Guid sessionId)
+		public static UserGameResults FetchUserGameResults(Guid SessionId)
 		{
             UserGameResults request = new UserGameResults();
 
@@ -60,55 +61,44 @@ namespace AgileMind.BLL.Results
             {
                 AgileMindEntities agileDB = new AgileMindEntities();
 
-
                 t_LoginSession session = (from loginSession in agileDB.t_LoginSession where loginSession.LoginSessionId == SessionId && loginSession.ValidTill > DateTime.Now select loginSession).First();
                 if (session != null)
                 {
-                    List<t_ShortTermQuiz> quizList = (from data in agileDB.t_ShortTermQuiz select data).ToList();
-                    Random rand = new Random();
-                    int questionIndex = rand.Next(quizList.Count);
-                    request.Quiz = new ShortTermQuiz();
-                    request.Quiz.Statement = quizList[questionIndex].QuestionStatement;
-                    request.Quiz.ShortTermQuizId = quizList[questionIndex].ShortTermQuizId;
 
-                    //Load Questions and then answers.
-                    List<t_ShortTermQuestions> questionList = (from questions in agileDB.t_ShortTermQuestions where questions.ShortTermQuizId == request.Quiz.ShortTermQuizId select questions).ToList();
-                    foreach (t_ShortTermQuestions question in questionList)
+                    List<t_GameResults> userResults = (from gameResultsData in agileDB.t_GameResults where gameResultsData.LoginId == session.LoginId && gameResultsData.Total > 0 && gameResultsData.TestDuration > 0 orderby gameResultsData.GameId select gameResultsData).ToList();
+                    List<t_Game> gameList = (from gameData in agileDB.t_Game select gameData).ToList();
+                    foreach (t_Game game in gameList)
                     {
-                        question.t_ShortTermAnswers.Load();
-                    }
-
-
-                    //Take the loaded information and put it into something that we'll send back.
-                    ShortTermQuiz quiz = request.Quiz;
-                    List<ShortTermQuestion> qList = new List<ShortTermQuestion>();
-                    foreach (t_ShortTermQuestions question in questionList)
-                    {
-                        ShortTermQuestion newQuestion = new ShortTermQuestion();
-                        newQuestion.Question = question.ShortTermQuestion;
-                        foreach (t_ShortTermAnswers shortTermAnswer in question.t_ShortTermAnswers)
+                        List<t_GameResults> gameResultsList = userResults.FindAll(delegate(t_GameResults findResults) { return findResults.GameId == game.GameId; });
+                        if (gameResultsList.Count > 0)
                         {
-                            ShortTermAnswer newAnswer = new ShortTermAnswer();
-                            newAnswer.Answer = shortTermAnswer.Answer;
-                            newAnswer.IsCorrect = shortTermAnswer.IsCorrect;
-                            newQuestion.AnswerList.Add(newAnswer);
+                            decimal gameScoreTotal = 0;
+                            foreach (t_GameResults gameResult in gameResultsList)
+                            {
+                                gameScoreTotal += ((decimal)gameResult.Score / (decimal)gameResult.Total) * 100 / gameResult.TestDuration.Value;
+
+                            }
+                            UserMeanGameScore newGameScore = new UserMeanGameScore();
+                            newGameScore.Game = game.Game;
+                            newGameScore.GameDeviation = (decimal)game.stdev;
+                            newGameScore.GameId = game.GameId;
+                            newGameScore.GameMean = (decimal)game.Mean;
+                            newGameScore.UserMean = gameScoreTotal / gameResultsList.Count;
+                            newGameScore.MeanDiff = newGameScore.UserMean - newGameScore.GameMean;
+                            newGameScore.UserDeflection = newGameScore.MeanDiff / newGameScore.GameDeviation;
+
+                            request.MeanGameScores.Add(newGameScore);
+                            
                         }
 
-                        newQuestion.AnswerList.Shuffle();
-
-                        qList.Add(newQuestion);
-
                     }
 
-                    qList.Shuffle();
-
-                    request.Quiz.QuestionList = qList;
-
-                    t_Settings setting = (from settingData in agileDB.t_Settings where settingData.Setting == "QuestionDelay" select settingData).First();
-                    if (setting != null)
-                        request.Quiz.QuestionDelay = int.Parse(setting.Value);
-                    else
-                        request.Quiz.QuestionDelay = 10;
+                    decimal userDeflectionTotal = 0;
+                    foreach (UserMeanGameScore mgs in request.MeanGameScores)
+                    {
+                        userDeflectionTotal += mgs.UserDeflection;
+                    }
+                    request.UserScore = userDeflectionTotal / request.MeanGameScores.Count;
 
                     request.Success = true;
                 }

@@ -31,6 +31,8 @@
     <EntitySetMapping Name="t_Game">
       <EntityTypeMapping TypeName="AgileMindModel.t_Game">
         <MappingFragment StoreEntitySet="t_Game">
+          <ScalarProperty Name="stdev" ColumnName="stdev" />
+          <ScalarProperty Name="Mean" ColumnName="Mean" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Game" ColumnName="Game" />
           <ScalarProperty Name="GameId" ColumnName="GameId" />
@@ -139,5 +141,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="UserDevAveragePerGame" FunctionName="AgileMindModel.Store.UserDevAveragePerGame" />
   </EntityContainerMapping>
 </Mapping>

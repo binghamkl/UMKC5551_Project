@@ -83,6 +83,8 @@
     <Property Name="GameId" Type="int" Nullable="false" />
     <Property Name="Game" Type="varchar" Nullable="false" MaxLength="30" />
     <Property Name="Description" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Mean" Type="float" Nullable="false" />
+    <Property Name="stdev" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="t_GameResults">
     <Key>
@@ -301,6 +303,9 @@
     <Parameter Name="LoginName" Type="varchar" Mode="In" />
     <Parameter Name="Password" Type="varchar" Mode="In" />
     <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UserDevAveragePerGame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LoginId" Type="int" Mode="In" />
   </Function>
   <Function Name="vw_LoginInfo_FetchByLoginId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LoginId" Type="int" Mode="In" />

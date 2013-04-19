@@ -52,6 +52,9 @@
       <End Role="t_ShortTermQuiz" EntitySet="t_ShortTermQuiz" />
       <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
     </AssociationSet>
+    <FunctionImport Name="UserDevAveragePerGame">
+      <Parameter Name="LoginId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Login">
     <Key>
@@ -91,6 +94,8 @@
     <Property Type="String" Name="Game" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Description" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="t_GameResults" Relationship="AgileMindModel.FK_t_GameResults_t_Game" FromRole="t_Game" ToRole="t_GameResults" />
+    <Property Type="Double" Name="Mean" Nullable="false" />
+    <Property Type="Double" Name="stdev" Nullable="false" />
   </EntityType>
   <EntityType Name="t_GameResults">
     <Key>

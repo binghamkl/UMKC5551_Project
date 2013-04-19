@@ -530,6 +530,25 @@ namespace AgileMind.DAL.Data
     
             return base.ExecuteFunction<vwQuestionAnswer>("FetchQuestionAnswer_ByLoginId", mergeOption, loginIdParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="loginId">No Metadata Documentation available.</param>
+        public int UserDevAveragePerGame(Nullable<global::System.Int32> loginId)
+        {
+            ObjectParameter loginIdParameter;
+            if (loginId.HasValue)
+            {
+                loginIdParameter = new ObjectParameter("LoginId", loginId);
+            }
+            else
+            {
+                loginIdParameter = new ObjectParameter("LoginId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("UserDevAveragePerGame", loginIdParameter);
+        }
 
         #endregion
 

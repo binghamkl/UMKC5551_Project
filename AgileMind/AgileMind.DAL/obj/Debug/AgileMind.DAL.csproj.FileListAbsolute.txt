@@ -3,4 +3,3 @@ C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.DAL\obj\Debug\AgileMind.DAL.dll
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.DAL\obj\Debug\AgileMind.DAL.pdb
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.DAL\bin\Debug\AgileMind.DAL.dll.config
-C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.DAL\obj\Debug\AgileMind.DAL.csprojResolveAssemblyReference.cache

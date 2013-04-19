@@ -32,7 +32,6 @@ BEGIN
 		FROM t_GameResults
 			WHERE Total > 0 
 				AND TestDuration > 0
-				AND Score > 0
 		GROUP BY GameId
 	UPDATE t_Game set [Mean] = ta.Mean
 		FROM t_Game
@@ -44,7 +43,6 @@ BEGIN
 		FROM t_GameResults
 			WHERE Total > 0 
 				AND TestDuration > 0
-				AND Score > 0
 		GROUP BY GameId
 	UPDATE t_Game set [stdev] = ts.StdDev
 		FROM t_Game

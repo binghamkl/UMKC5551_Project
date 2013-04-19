@@ -52,6 +52,7 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GameScoreService.asmx" />
     <Content Include="GamesService.asmx" />
     <Content Include="Global.asax" />
     <Content Include="Login.asmx" />
@@ -64,6 +65,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameScoreService.asmx.cs">
+      <DependentUpon>GameScoreService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GamesService.asmx.cs">
       <DependentUpon>GamesService.asmx</DependentUpon>
       <SubType>Component</SubType>
