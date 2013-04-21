@@ -47,5 +47,18 @@ namespace AgileMind.Website
         }
         #endregion
 
+        #region -- HeadLoginView_ViewChanged(object sender, EventArgs e) Event Handler --
+        protected void HeadLoginView_ViewChanged(object sender, EventArgs e)
+        {
+            
+        }
+        #endregion
+
+        protected void HeadLoginStatus_LoggedOut(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+        }
+
     }
 }
