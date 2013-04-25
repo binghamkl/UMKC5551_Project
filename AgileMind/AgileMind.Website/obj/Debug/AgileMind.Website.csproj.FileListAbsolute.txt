@@ -5,3 +5,4 @@ C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Website\obj\Debug\AgileMind.Website.csprojResolveAssemblyReference.cache
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Website\bin\AgileMind.Util.dll
 C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Website\bin\AgileMind.Util.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.Website\bin\System.Web.DataVisualization.dll

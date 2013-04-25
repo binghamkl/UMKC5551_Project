@@ -1,4 +1,84 @@
 ﻿var GAMES = "Games/";
+var GAMESCORE = "GameScore/";
+
+
+        google.load('visualization', '1', { packages: ['gauge', 'corechart'] });
+        google.setOnLoadCallback(drawChartInit);
+
+
+        function drawBarChart(name, gameresultlist) {
+            //var arrayTable = [
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Date');
+            data.addColumn('number', 'Score');
+            for (var itemCount = 0; itemCount < gameresultlist.length; itemCount++) {
+                data.addRow([gameresultlist[itemCount].CreatedString, 0 ]);
+    
+            }
+
+
+            var options = {
+              title: name + ' Results',
+              animation:{
+                duration: 1000,
+                easing: 'out',
+              },
+                    hAxis: {title: 'Date', titleTextStyle: {color: 'red'}}
+                              
+
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('graphareadiv'));
+            chart.draw(data, options);
+            for (var itemCount = 0; itemCount < gameresultlist.length; itemCount++) {
+                //data.addRow([gameresultlist[itemCount].CreatedString, gameresultlist[itemCount].Score/gameresultlist[itemCount].Total * 100 ]);
+                data.setValue(itemCount, 1, gameresultlist[itemCount].Score/gameresultlist[itemCount].Total * 100);
+            }
+                chart.draw(data, options);
+
+    // This is new.
+
+
+        }
+
+        function drawChartInit() {
+            drawChart(0);
+        }
+        function drawChart(scoreValue) {
+            var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['MemoryScore', 0]
+        ]);
+
+            var options = {
+                width: 400, height: 120,
+                redFrom: -3, redTo: -1,
+                greenFrom: 1, greenTo: 3,
+                minorTicks: .1,
+                min: -3,
+                max: 3,
+                animation:{
+                    duration: 1000,
+                    easing: 'in',
+                    }
+            };
+            scoreValue = Math.round(scoreValue * 1000) / 1000; 
+            var chart = new google.visualization.Gauge(document.getElementById('gaugediv'));
+            chart.draw(data, options);
+
+            //clearChart();
+
+    // This is new.
+    setTimeout(function(){
+            var data = google.visualization.arrayToDataTable([
+                        ['Label', 'Value'],
+                        ['MemoryScore',scoreValue],
+                ]);
+            chart.draw(data, options);
+            }, 200);
+
+        }
 
 function ShowLoading(message) {
     $.mobile.loading('show', {
@@ -79,9 +159,79 @@ function AgileMindViewModel() {
     self.TotalQuestion = ko.observable(1);
     self.ShortTermQuestion = ko.observable();
 
+
+    self.ScoreHistory = ko.observableArray([ { Game: ko.observable(''), GameId: ko.observable(0)}]);
     // Computed data
 
     // Operations
+
+    // memory quiz scores
+    self.FetchGameScores = function (UserMeanGame) {
+
+        try {
+
+            $.ajax({
+                type: 'POST',
+                url: URIHOME + GAMESCORE + 'FetchIndividualGameResults',
+                data: { SessionId: self.SessionId(), GameId: parseInt(UserMeanGame.GameId) },
+                dataType: 'json',
+                success: function (data) {
+                    $.mobile.changePage("#gamescoregraph",
+                                                {
+                                                    transition: "flip",
+                                                    allowSamePageTransition: true,
+                                                    changeHash: false
+                                                }
+                                        );
+                                                $('#gamescoregraph').trigger('create');
+                                                drawBarChart(UserMeanGame.Game, data);
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    self.Error(errorThrown);
+                }
+
+            });
+
+
+        } catch (e) {
+            self.Error(e.message);
+        }
+    }
+
+
+    self.FetchUserScores = function () {
+
+        try {
+
+            $.ajax({
+                type: 'POST',
+                url: URIHOME + GAMESCORE + 'FetchUserGameResults',
+                data: { SessionId: self.SessionId() },
+                dataType: 'json',
+                success: function (data) {
+
+                    if (!data.Success) {
+                        self.Error(data.Error);
+                    }
+                    else {
+                        drawChart(data.UserScore);
+                        self.ScoreHistory(data.MeanGameScores);
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    self.Error(errorThrown);
+                }
+
+            });
+
+
+        } catch (e) {
+            self.Error(e.message);
+        }
+    }
+
 
     //CreateQuestions
     self.SelectedAnswer = function (AnswerEntity) {
@@ -457,6 +607,8 @@ function AgileMindViewModel() {
     }
 
     self.SaveResults = function (GameType, TotalQuestions) {
+        try {
+
         self.endTime = new Date();
         var elapsed = (vw.endTime - vw.startTime) / 1000
         self.duration(elapsed);
@@ -471,19 +623,25 @@ function AgileMindViewModel() {
             success: function (data) {
 
                 if (!data.Success) {
+                    self.FetchUserScores();
                     self.Error(data.Error);
                 }
                 else {
+                    self.FetchUserScores();
 
                     self.Error('');
                 }
 
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                self.Error(errorThrown);
+                self.FetchUserScores();
             }
 
         });
+        }
+        catch (e ) {
+            self.FetchUserScores();
+        }
     };
 
         //CreateQuestions
@@ -635,6 +793,7 @@ function AgileMindViewModel() {
                         self.IsLoggedIn(true);
                         self.SessionId(data.SessionId);
                         self.Error('');
+                        self.FetchUserScores();
                     }
 
                 },

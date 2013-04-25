@@ -2,13 +2,12 @@
 <publishData>
   <publishProfile publishUrl="C:\umkc\AgileMind\AgileMindWebservice" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="True" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
     <file relUrl="Scripts/jquery.validate.unobtrusive.js" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="bin/AgileMind.WebService.pdb" publishTime="04/08/2013 21:01:20" />
-    <file relUrl="Scripts/jquery-1.7.1.min.js" publishTime="02/28/2013 20:24:14" />
+    <file relUrl="bin/AgileMind.WebService.pdb" publishTime="04/24/2013 22:24:06" />
+    <file relUrl="Scripts/jquery-1.7.1-vsdoc.js" publishTime="02/28/2013 20:24:14" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Images/orderedList6.png" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/themes/base/minified/images/ui-icons_cd0a0a_256x240.png" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="bin/AgileMind.DAL.dll" publishTime="04/08/2013 13:56:24" />
+    <file relUrl="bin/AgileMind.DAL.dll" publishTime="04/18/2013 21:27:11" />
     <file relUrl="Scripts/modernizr-2.5.3.js" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/jquery.ui.accordion.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/EntityFramework.xml" publishTime="02/23/2013 18:22:36" />
@@ -16,11 +15,9 @@
     <file relUrl="Content/themes/base/jquery.ui.button.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.Mvc.dll" publishTime="02/23/2013 18:22:39" />
     <file relUrl="bin/System.Net.Http.WebRequest.dll" publishTime="02/23/2013 18:22:40" />
-    <file relUrl="Web.config" publishTime="03/21/2013 22:35:48" />
+    <file relUrl="Web.config" publishTime="04/21/2013 15:33:09" />
     <file relUrl="bin/System.Web.WebPages.Deployment.xml" publishTime="02/23/2013 18:22:39" />
-    <file relUrl="Content/themes/base/minified/images/ui-bg_glass_75_dadada_1x400.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/images/ui-icons_cd0a0a_256x240.png" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/jquery.ui.datepicker.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/jquery-ui.min.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Images/accent.png" publishTime="02/28/2013 20:24:12" />
@@ -36,14 +33,17 @@
     <file relUrl="Content/themes/base/minified/jquery.ui.autocomplete.min.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/images/ui-bg_flat_75_ffffff_40x100.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.WebPages.dll" publishTime="02/23/2013 18:22:39" />
+    <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Scripts/jquery.unobtrusive-ajax.min.js" publishTime="02/28/2013 20:24:15" />
+    <file relUrl="Content/themes/base/minified/jquery.ui.datepicker.min.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.Mvc.xml" publishTime="02/23/2013 18:22:39" />
     <file relUrl="bin/System.Web.Helpers.xml" publishTime="02/23/2013 18:22:39" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="bin/System.Net.Http.dll" publishTime="02/23/2013 18:22:40" />
+    <file relUrl="Scripts/jquery-1.7.1.min.js" publishTime="02/28/2013 20:24:14" />
     <file relUrl="Images/orderedList0.png" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/themes/base/jquery.ui.core.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Net.Http.xml" publishTime="02/23/2013 18:22:40" />
+    <file relUrl="Content/themes/base/minified/jquery.ui.button.min.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Images/orderedList1.png" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/themes/base/images/ui-bg_glass_75_dadada_1x400.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.Optimization.dll" publishTime="02/23/2013 18:22:41" />
@@ -51,24 +51,25 @@
     <file relUrl="bin/Newtonsoft.Json.xml" publishTime="02/23/2013 18:22:39" />
     <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="02/23/2013 18:22:39" />
     <file relUrl="Content/themes/base/minified/jquery.ui.theme.min.css" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="bin/AgileMind.BLL.dll" publishTime="04/08/2013 21:01:19" />
+    <file relUrl="bin/AgileMind.BLL.dll" publishTime="04/18/2013 21:27:12" />
     <file relUrl="bin/System.Web.WebPages.Deployment.dll" publishTime="02/23/2013 18:22:39" />
     <file relUrl="Content/themes/base/minified/jquery.ui.tabs.min.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Views/Home/Index.cshtml" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/themes/base/jquery.ui.selectable.css" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="bin/AgileMind.BLL.pdb" publishTime="04/08/2013 21:01:19" />
+    <file relUrl="Content/themes/base/minified/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="02/28/2013 20:24:15" />
+    <file relUrl="bin/AgileMind.BLL.pdb" publishTime="04/18/2013 21:27:12" />
     <file relUrl="Content/themes/base/images/ui-icons_222222_256x240.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Images/bullet.png" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/themes/base/jquery.ui.progressbar.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.Razor.xml" publishTime="02/23/2013 18:22:39" />
     <file relUrl="packages.config" publishTime="02/28/2013 20:24:17" />
     <file relUrl="Content/themes/base/minified/images/ui-icons_2e83ff_256x240.png" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="bin/AgileMind.DAL.pdb" publishTime="04/08/2013 13:56:24" />
+    <file relUrl="bin/AgileMind.DAL.pdb" publishTime="04/18/2013 21:27:11" />
     <file relUrl="bin/System.Web.WebPages.Razor.dll" publishTime="02/23/2013 18:22:39" />
-    <file relUrl="bin/System.Net.Http.WebRequest.xml" publishTime="02/23/2013 18:22:40" />
-    <file relUrl="Content/themes/base/minified/jquery.ui.button.min.css" publishTime="02/28/2013 20:24:15" />
+    <file relUrl="Content/themes/base/minified/jquery.ui.progressbar.min.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Images/orderedList2.png" publishTime="02/28/2013 20:24:12" />
-    <file relUrl="Content/themes/base/minified/jquery.ui.datepicker.min.css" publishTime="02/28/2013 20:24:15" />
+    <file relUrl="bin/System.Net.Http.dll" publishTime="02/23/2013 18:22:40" />
+    <file relUrl="Views/Shared/Error.cshtml" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/themes/base/images/ui-icons_454545_256x240.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/jquery.ui.accordion.min.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/EntityFramework.dll" publishTime="02/23/2013 18:22:36" />
@@ -78,7 +79,7 @@
     <file relUrl="Content/themes/base/minified/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.Http.WebHost.dll" publishTime="02/23/2013 18:22:40" />
     <file relUrl="Content/themes/base/jquery.ui.resizable.css" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="Content/themes/base/jquery.ui.dialog.css" publishTime="02/28/2013 20:24:15" />
+    <file relUrl="bin/System.Net.Http.WebRequest.xml" publishTime="02/23/2013 18:22:40" />
     <file relUrl="Scripts/knockout-2.1.0.debug.js" publishTime="02/28/2013 20:24:17" />
     <file relUrl="Scripts/jquery.validate-vsdoc.js" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/jquery.ui.resizable.min.css" publishTime="02/28/2013 20:24:15" />
@@ -90,14 +91,14 @@
     <file relUrl="bin/System.Web.Providers.dll" publishTime="02/23/2013 18:22:40" />
     <file relUrl="favicon.ico" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Views/Web.config" publishTime="02/28/2013 20:24:12" />
-    <file relUrl="Scripts/knockout-2.1.0.js" publishTime="02/28/2013 20:24:17" />
+    <file relUrl="Content/themes/base/minified/images/ui-bg_glass_75_dadada_1x400.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Images/orderedList7.png" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/Site.css" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/themes/base/minified/jquery.ui.dialog.min.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/images/ui-bg_glass_95_fef1ec_1x400.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.Http.WebHost.xml" publishTime="02/23/2013 18:22:40" />
     <file relUrl="Images/orderedList5.png" publishTime="02/28/2013 20:24:12" />
-    <file relUrl="Scripts/jquery-1.7.1-vsdoc.js" publishTime="02/28/2013 20:24:14" />
+    <file relUrl="Content/themes/base/images/ui-icons_888888_256x240.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.Http.dll" publishTime="02/23/2013 18:22:40" />
     <file relUrl="Content/themes/base/jquery-ui.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/WebGrease.dll" publishTime="02/23/2013 18:22:41" />
@@ -106,13 +107,13 @@
     <file relUrl="Images/orderedList4.png" publishTime="02/28/2013 20:24:12" />
     <file relUrl="Content/themes/base/minified/images/ui-bg_glass_55_fbf9ee_1x400.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/jquery.ui.tabs.css" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="Content/themes/base/minified/jquery.ui.progressbar.min.css" publishTime="02/28/2013 20:24:15" />
+    <file relUrl="Content/themes/base/jquery.ui.theme.css" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Scripts/_references.js" publishTime="02/28/2013 20:24:12" />
     <file relUrl="bin/System.Net.Http.Formatting.dll" publishTime="02/23/2013 18:22:40" />
     <file relUrl="Scripts/jquery-ui-1.8.20.min.js" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/images/ui-icons_454545_256x240.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/jquery.ui.slider.min.css" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="Content/themes/base/minified/images/ui-bg_glass_75_e6e6e6_1x400.png" publishTime="02/28/2013 20:24:15" />
+    <file relUrl="Scripts/knockout-2.1.0.js" publishTime="02/28/2013 20:24:17" />
     <file relUrl="Scripts/jquery-ui-1.8.20.js" publishTime="02/28/2013 20:24:15" />
     <file relUrl="bin/System.Web.WebPages.xml" publishTime="02/23/2013 18:22:39" />
     <file relUrl="Scripts/jquery.unobtrusive-ajax.js" publishTime="02/28/2013 20:24:15" />
@@ -125,10 +126,9 @@
     <file relUrl="bin/System.Net.Http.Formatting.xml" publishTime="02/23/2013 18:22:40" />
     <file relUrl="Content/themes/base/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/images/ui-bg_flat_0_aaaaaa_40x100.png" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="bin/AgileMind.WebService.dll" publishTime="04/08/2013 21:01:20" />
     <file relUrl="Scripts/jquery.validate.unobtrusive.min.js" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/minified/images/ui-bg_glass_65_ffffff_1x400.png" publishTime="02/28/2013 20:24:15" />
-    <file relUrl="Views/Shared/Error.cshtml" publishTime="02/28/2013 20:24:12" />
+    <file relUrl="bin/AgileMind.WebService.dll" publishTime="04/24/2013 22:24:07" />
     <file relUrl="Content/themes/base/images/ui-bg_highlight-soft_75_cccccc_1x100.png" publishTime="02/28/2013 20:24:15" />
     <file relUrl="Content/themes/base/jquery.ui.autocomplete.css" publishTime="02/28/2013 20:24:15" />
   </publishProfile>
