@@ -48,7 +48,7 @@ var GAMESCORE = "GameScore/";
         function drawChart(scoreValue) {
             var data = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['MemoryScore', 0]
+          ['MemoryScore', -3]
         ]);
 
             var options = {
@@ -159,11 +159,107 @@ function AgileMindViewModel() {
     self.TotalQuestion = ko.observable(1);
     self.ShortTermQuestion = ko.observable();
 
+    self.IdentifyObjectQuiz = ko.observableArray();
+    self.IdentityQuizQuestion = ko.observable( { Object: ko.observable(''),  ObjectURL: ko.observable(''), UserAnswer : ko.observable(''), AnswerList : ko.observableArray() });
 
     self.ScoreHistory = ko.observableArray([ { Game: ko.observable(''), GameId: ko.observable(0)}]);
     // Computed data
 
     // Operations
+
+    self.NextIdentityQuestion = function () {
+        self.IdentityQuizQuestion(self.IdentifyObjectQuiz()[self.CurrentQuestionNumber() - 1]);
+        $.mobile.changePage("#identifyQuizPage",
+                                    {
+                                        transition: "flip",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+                                    $('#identifyQuizPage').trigger('create');
+
+    }
+
+    // Selected Answer
+    self.SelectedIdentityAnswer = function (AnswerEntity) {
+        if (AnswerEntity.IsCorrect) {
+            self.CorrectAnswers(self.CorrectAnswers() + 1);
+        }
+        self.CurrentQuestionNumber(self.CurrentQuestionNumber() + 1);
+        if (self.CurrentQuestionNumber() > self.TotalQuestion()) {
+
+            $.mobile.changePage("#ShortTermScore",
+                                    {
+                                        transition: "slide",
+                                        allowSamePageTransition: true,
+                                        changeHash: false
+                                    }
+                            );
+                                    $('#ShortTermScore').trigger('create');
+
+            self.SaveResults(4, self.TotalQuestion());
+            
+        }
+        else {
+            self.NextIdentityQuestion();
+        }
+    }
+
+
+    self.IdentifyQuiz = function () {
+
+        try {
+
+            ShowLoading('Loading...');
+            $('#loginPage').addClass('ui-disabled');
+
+            $.ajax({
+                type: 'POST',
+                url: URIHOME + GAMES + 'FetchIdentifyQuestions',
+                data: { SessionId: self.SessionId() },
+                dataType: 'json',
+                success: function (data) {
+                    HideLoading();
+                    $('#loginPage').removeClass('ui-disabled');
+
+                    if (!data.Success) {
+                        self.Error(data.Error);
+                    }
+                    else {
+
+                        self.IdentifyObjectQuiz(data.QuestionList);
+                        //self.CurrentQuestion(self.Questions[0]);
+                        self.CorrectAnswers(0);
+                        self.TotalQuestion(data.QuestionList.length);
+                        self.IdentityQuizQuestion(self.IdentifyObjectQuiz()[0]);
+                        $.mobile.changePage("#identifyQuizPage",
+                            {
+                                transition: "slide"
+                            }
+                        );
+                        self.startTime = new Date();
+
+                        $('#identifyQuizPage').trigger('create');
+
+                        self.Error('');
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    HideLoading();
+                    $('#loginPage').removeClass('ui-disabled');
+                    self.Error(errorThrown);
+                }
+
+            });
+
+
+        } catch (e) {
+            HideLoading();
+            $('#loginPage').removeClass('ui-disabled');
+            self.Error(e.message);
+        }
+    }
 
     // memory quiz scores
     self.FetchGameScores = function (UserMeanGame) {

@@ -42,6 +42,7 @@
                 <li><a data-bind="click:GetProfileQuiz">Profile Quiz Game</a></li>
                 <li><a data-bind="click:CreateQuestions">Color Game</a></li>
                 <li><a data-bind="click:ShortTermMemoryQuiz">Short Term Memory</a></li>
+                <li><a data-bind="click:IdentifyQuiz">Identify Objects</a></li>
             </ul>
         </div>
     </div>
@@ -235,6 +236,33 @@
             </div>
         </div>
     </div>
+
+        <!-- Identify Objects Questions -->
+    <div data-role="dialog" id="identifyQuizPage" data-theme="c">
+        <div data-role="header">
+            <h2>Identify The Object</h2>
+        </div>
+        <div data-role="content" >
+            <h2>Identify the object <label data-bind="text: $root.CurrentQuestionNumber"></label> of <label data-bind="text: $root.TotalQuestion"></label></h2>
+            <div data-bind="with:IdentityQuizQuestion">
+                <div >
+                    <div >
+
+                        <img data-bind="attr : {src:ObjectURL}" />
+
+                    </div>
+                </div>  
+                   
+                <ul data-role="listview" data-inset="true" data-bind="foreach:AnswerList">
+                    <li><a data-bind="text:Answer, click:$root.SelectedIdentityAnswer"></a></li>
+                </ul>
+            
+            </div>
+            
+
+        </div>
+    </div>
+
 
     <script>
         var vw = new AgileMindViewModel();
