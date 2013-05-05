@@ -45,6 +45,9 @@
     <Compile Include="Games\ColorGameResult.cs" />
     <Compile Include="Games\GameListEnum.cs" />
     <Compile Include="Games\GameResults.cs" />
+    <Compile Include="Games\IdentifyAnswers.cs" />
+    <Compile Include="Games\IdentifyQuestion.cs" />
+    <Compile Include="Games\IdentifyResults.cs" />
     <Compile Include="Games\ProfileQuizQuestion.cs" />
     <Compile Include="Games\ProfileQuizQuestionRequest.cs" />
     <Compile Include="Games\ShortTermAnswer.cs" />

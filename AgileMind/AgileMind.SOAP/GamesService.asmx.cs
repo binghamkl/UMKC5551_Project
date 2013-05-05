@@ -87,6 +87,14 @@ namespace AgileMind.SOAP
             return ShortTermQuizResult.Fetchquiz(SessionId);
 		}
 		#endregion
+        
+        [WebMethod]
+        #region -- FetchIdentifyQuestions(Guid SessionId) Method --
+        public IdentifyResults FetchIdentifyQuestions(Guid SessionId)
+		{
+            return IdentifyResults.FetchQuestionList(SessionId);
+		}
+		#endregion
 		
 
     }

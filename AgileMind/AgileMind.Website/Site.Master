@@ -43,6 +43,7 @@
                         <asp:MenuItem NavigateUrl="~/Games/UserProfileQuestions.aspx" Text="Profile Questions"/>
                         <asp:MenuItem NavigateUrl="~/Games/UserProfileQuiz.aspx" Text="Profile Quiz"/>
                         <asp:MenuItem NavigateUrl="~/Games/ShortTerm.aspx" Text="Short Term Quiz"/>
+                        <asp:MenuItem NavigateUrl="~/Games/Identify.aspx" Text="Identify Objects"/>
                     </Items>
                 </asp:Menu>
             </div>

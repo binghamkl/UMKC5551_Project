@@ -1,0 +1,8 @@
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.TestWindows\bin\Debug\AgileMind.TestWindows.exe.config
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.TestWindows\bin\Debug\AgileMind.TestWindows.exe
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.TestWindows\bin\Debug\AgileMind.TestWindows.pdb
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.TestWindows\obj\x86\Debug\AgileMind.TestWindows.Form1.resources
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.TestWindows\obj\x86\Debug\AgileMind.TestWindows.Properties.Resources.resources
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.TestWindows\obj\x86\Debug\AgileMind.TestWindows.csproj.GenerateResource.Cache
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.TestWindows\obj\x86\Debug\AgileMind.TestWindows.exe
+C:\Users\kbingham\Documents\Visual Studio 2010\Projects\UMKCAgileMind\AgileMind\AgileMind.TestWindows\obj\x86\Debug\AgileMind.TestWindows.pdb

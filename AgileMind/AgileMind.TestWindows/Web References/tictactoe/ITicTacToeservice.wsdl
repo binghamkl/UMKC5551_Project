@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://eBob42.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="ITicTacToeservice" targetNamespace="http://eBob42.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types />
+  <message name="NewGame0Request" />
+  <message name="NewGame0Response">
+    <part name="return" type="xs:int" />
+  </message>
+  <message name="MakeMove1Request">
+    <part name="Game" type="xs:int" />
+    <part name="ID" type="xs:int" />
+    <part name="Place" type="xs:int" />
+  </message>
+  <message name="MakeMove1Response" />
+  <message name="NextMove2Request">
+    <part name="Game" type="xs:int" />
+    <part name="ID" type="xs:int" />
+  </message>
+  <message name="NextMove2Response">
+    <part name="return" type="xs:int" />
+  </message>
+  <message name="IsWinner3Request">
+    <part name="Game" type="xs:int" />
+  </message>
+  <message name="IsWinner3Response">
+    <part name="return" type="xs:int" />
+  </message>
+  <message name="GetValue4Request">
+    <part name="Game" type="xs:int" />
+    <part name="Place" type="xs:int" />
+  </message>
+  <message name="GetValue4Response">
+    <part name="return" type="xs:int" />
+  </message>
+  <portType name="ITicTacToe">
+    <operation name="NewGame">
+      <input message="tns:NewGame0Request" />
+      <output message="tns:NewGame0Response" />
+    </operation>
+    <operation name="MakeMove">
+      <input message="tns:MakeMove1Request" />
+      <output message="tns:MakeMove1Response" />
+    </operation>
+    <operation name="NextMove">
+      <input message="tns:NextMove2Request" />
+      <output message="tns:NextMove2Response" />
+    </operation>
+    <operation name="IsWinner">
+      <input message="tns:IsWinner3Request" />
+      <output message="tns:IsWinner3Response" />
+    </operation>
+    <operation name="GetValue">
+      <input message="tns:GetValue4Request" />
+      <output message="tns:GetValue4Response" />
+    </operation>
+  </portType>
+  <binding name="ITicTacToebinding" type="tns:ITicTacToe">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="NewGame">
+      <soap:operation soapAction="urn:Magic-ITicTacToe#NewGame" style="rpc" />
+      <input message="tns:NewGame0Request">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output message="tns:NewGame0Response">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="MakeMove">
+      <soap:operation soapAction="urn:Magic-ITicTacToe#MakeMove" style="rpc" />
+      <input message="tns:MakeMove1Request">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output message="tns:MakeMove1Response">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="NextMove">
+      <soap:operation soapAction="urn:Magic-ITicTacToe#NextMove" style="rpc" />
+      <input message="tns:NextMove2Request">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output message="tns:NextMove2Response">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="IsWinner">
+      <soap:operation soapAction="urn:Magic-ITicTacToe#IsWinner" style="rpc" />
+      <input message="tns:IsWinner3Request">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output message="tns:IsWinner3Response">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="GetValue">
+      <soap:operation soapAction="urn:Magic-ITicTacToe#GetValue" style="rpc" />
+      <input message="tns:GetValue4Request">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output message="tns:GetValue4Response">
+        <soap:body use="encoded" namespace="urn:Magic-ITicTacToe" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ITicTacToeservice">
+    <port name="ITicTacToePort" binding="tns:ITicTacToebinding">
+      <soap:address location="http://www.ebob42.com/cgi-bin/TicTacToe.exe/soap/ITicTacToe" />
+    </port>
+  </service>
+</definitions>

@@ -142,5 +142,24 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="UserDevAveragePerGame" FunctionName="AgileMindModel.Store.UserDevAveragePerGame" />
+    <EntitySetMapping Name="t_Object">
+      <EntityTypeMapping TypeName="AgileMindModel.t_Object">
+        <MappingFragment StoreEntitySet="t_Object">
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Object" ColumnName="Object" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="t_ObjectImage">
+      <EntityTypeMapping TypeName="AgileMindModel.t_ObjectImage">
+        <MappingFragment StoreEntitySet="t_ObjectImage">
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+          <ScalarProperty Name="ObjectImageId" ColumnName="ObjectImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

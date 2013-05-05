@@ -26,6 +26,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_LoginSession_Logins", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.Login), "t_LoginSession", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_LoginSession), true)]
 [assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_ShortTermAnswers_t_ShortTermQuestions", "t_ShortTermQuestions", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_ShortTermQuestions), "t_ShortTermAnswers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_ShortTermAnswers), true)]
 [assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_ShortTermQuestions_t_ShortTermQuiz", "t_ShortTermQuiz", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_ShortTermQuiz), "t_ShortTermQuestions", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_ShortTermQuestions), true)]
+[assembly: EdmRelationshipAttribute("AgileMindModel", "FK_t_ObjectImage_t_Object", "t_Object", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AgileMind.DAL.Data.t_Object), "t_ObjectImage", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AgileMind.DAL.Data.t_ObjectImage), true)]
 
 #endregion
 
@@ -268,6 +269,38 @@ namespace AgileMind.DAL.Data
             }
         }
         private ObjectSet<t_ShortTermQuiz> _t_ShortTermQuiz;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_Object> t_Object
+        {
+            get
+            {
+                if ((_t_Object == null))
+                {
+                    _t_Object = base.CreateObjectSet<t_Object>("t_Object");
+                }
+                return _t_Object;
+            }
+        }
+        private ObjectSet<t_Object> _t_Object;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<t_ObjectImage> t_ObjectImage
+        {
+            get
+            {
+                if ((_t_ObjectImage == null))
+                {
+                    _t_ObjectImage = base.CreateObjectSet<t_ObjectImage>("t_ObjectImage");
+                }
+                return _t_ObjectImage;
+            }
+        }
+        private ObjectSet<t_ObjectImage> _t_ObjectImage;
 
         #endregion
 
@@ -367,6 +400,22 @@ namespace AgileMind.DAL.Data
         public void AddTot_ShortTermQuiz(t_ShortTermQuiz t_ShortTermQuiz)
         {
             base.AddObject("t_ShortTermQuiz", t_ShortTermQuiz);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_Object EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_Object(t_Object t_Object)
+        {
+            base.AddObject("t_Object", t_Object);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the t_ObjectImage EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTot_ObjectImage(t_ObjectImage t_ObjectImage)
+        {
+            base.AddObject("t_ObjectImage", t_ObjectImage);
         }
 
         #endregion
@@ -1460,6 +1509,318 @@ namespace AgileMind.DAL.Data
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Login>("AgileMindModel.FK_t_LoginSession_Logins", "Login", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_Object")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_Object : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_Object object.
+        /// </summary>
+        /// <param name="objectId">Initial value of the ObjectId property.</param>
+        /// <param name="object">Initial value of the Object property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        public static t_Object Createt_Object(global::System.Int32 objectId, global::System.String @object, global::System.DateTime created)
+        {
+            t_Object t_Object = new t_Object();
+            t_Object.ObjectId = objectId;
+            t_Object.Object = @object;
+            t_Object.Created = created;
+            return t_Object;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ObjectId
+        {
+            get
+            {
+                return _ObjectId;
+            }
+            set
+            {
+                if (_ObjectId != value)
+                {
+                    OnObjectIdChanging(value);
+                    ReportPropertyChanging("ObjectId");
+                    _ObjectId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ObjectId");
+                    OnObjectIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ObjectId;
+        partial void OnObjectIdChanging(global::System.Int32 value);
+        partial void OnObjectIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Object
+        {
+            get
+            {
+                return _Object;
+            }
+            set
+            {
+                OnObjectChanging(value);
+                ReportPropertyChanging("Object");
+                _Object = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Object");
+                OnObjectChanged();
+            }
+        }
+        private global::System.String _Object;
+        partial void OnObjectChanging(global::System.String value);
+        partial void OnObjectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_ObjectImage_t_Object", "t_ObjectImage")]
+        public EntityCollection<t_ObjectImage> t_ObjectImage
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<t_ObjectImage>("AgileMindModel.FK_t_ObjectImage_t_Object", "t_ObjectImage");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<t_ObjectImage>("AgileMindModel.FK_t_ObjectImage_t_Object", "t_ObjectImage", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AgileMindModel", Name="t_ObjectImage")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class t_ObjectImage : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new t_ObjectImage object.
+        /// </summary>
+        /// <param name="objectImageId">Initial value of the ObjectImageId property.</param>
+        /// <param name="objectId">Initial value of the ObjectId property.</param>
+        /// <param name="imageURL">Initial value of the ImageURL property.</param>
+        /// <param name="created">Initial value of the Created property.</param>
+        public static t_ObjectImage Createt_ObjectImage(global::System.Int32 objectImageId, global::System.Int32 objectId, global::System.String imageURL, global::System.DateTime created)
+        {
+            t_ObjectImage t_ObjectImage = new t_ObjectImage();
+            t_ObjectImage.ObjectImageId = objectImageId;
+            t_ObjectImage.ObjectId = objectId;
+            t_ObjectImage.ImageURL = imageURL;
+            t_ObjectImage.Created = created;
+            return t_ObjectImage;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ObjectImageId
+        {
+            get
+            {
+                return _ObjectImageId;
+            }
+            set
+            {
+                if (_ObjectImageId != value)
+                {
+                    OnObjectImageIdChanging(value);
+                    ReportPropertyChanging("ObjectImageId");
+                    _ObjectImageId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ObjectImageId");
+                    OnObjectImageIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ObjectImageId;
+        partial void OnObjectImageIdChanging(global::System.Int32 value);
+        partial void OnObjectImageIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ObjectId
+        {
+            get
+            {
+                return _ObjectId;
+            }
+            set
+            {
+                OnObjectIdChanging(value);
+                ReportPropertyChanging("ObjectId");
+                _ObjectId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ObjectId");
+                OnObjectIdChanged();
+            }
+        }
+        private global::System.Int32 _ObjectId;
+        partial void OnObjectIdChanging(global::System.Int32 value);
+        partial void OnObjectIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ImageURL
+        {
+            get
+            {
+                return _ImageURL;
+            }
+            set
+            {
+                OnImageURLChanging(value);
+                ReportPropertyChanging("ImageURL");
+                _ImageURL = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ImageURL");
+                OnImageURLChanged();
+            }
+        }
+        private global::System.String _ImageURL;
+        partial void OnImageURLChanging(global::System.String value);
+        partial void OnImageURLChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Created
+        {
+            get
+            {
+                return _Created;
+            }
+            set
+            {
+                OnCreatedChanging(value);
+                ReportPropertyChanging("Created");
+                _Created = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Created");
+                OnCreatedChanged();
+            }
+        }
+        private global::System.DateTime _Created;
+        partial void OnCreatedChanging(global::System.DateTime value);
+        partial void OnCreatedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("AgileMindModel", "FK_t_ObjectImage_t_Object", "t_Object")]
+        public t_Object t_Object
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_Object>("AgileMindModel.FK_t_ObjectImage_t_Object", "t_Object").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_Object>("AgileMindModel.FK_t_ObjectImage_t_Object", "t_Object").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<t_Object> t_ObjectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<t_Object>("AgileMindModel.FK_t_ObjectImage_t_Object", "t_Object");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<t_Object>("AgileMindModel.FK_t_ObjectImage_t_Object", "t_Object", value);
                 }
             }
         }

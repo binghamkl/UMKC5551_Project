@@ -54,11 +54,13 @@ namespace AgileMind.Website
         }
         #endregion
 
+        #region -- HeadLoginStatus_LoggedOut(object sender, EventArgs e) event Handler --
         protected void HeadLoginStatus_LoggedOut(object sender, EventArgs e)
         {
             Session.Clear();
             Session.Abandon();
         }
+        #endregion
 
     }
 }

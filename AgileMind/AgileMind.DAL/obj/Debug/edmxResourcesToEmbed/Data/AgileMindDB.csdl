@@ -55,6 +55,12 @@
     <FunctionImport Name="UserDevAveragePerGame">
       <Parameter Name="LoginId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="t_Object" EntityType="AgileMindModel.t_Object" />
+    <EntitySet Name="t_ObjectImage" EntityType="AgileMindModel.t_ObjectImage" />
+    <AssociationSet Name="FK_t_ObjectImage_t_Object" Association="AgileMindModel.FK_t_ObjectImage_t_Object">
+      <End Role="t_Object" EntitySet="t_Object" />
+      <End Role="t_ObjectImage" EntitySet="t_ObjectImage" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Login">
     <Key>
@@ -284,6 +290,37 @@
       </Principal>
       <Dependent Role="t_ShortTermQuestions">
         <PropertyRef Name="ShortTermQuizId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="t_Object">
+    <Key>
+      <PropertyRef Name="ObjectId" />
+    </Key>
+    <Property Type="Int32" Name="ObjectId" Nullable="false" />
+    <Property Type="String" Name="Object" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <NavigationProperty Name="t_ObjectImage" Relationship="AgileMindModel.FK_t_ObjectImage_t_Object" FromRole="t_Object" ToRole="t_ObjectImage" />
+  </EntityType>
+  <EntityType Name="t_ObjectImage">
+    <Key>
+      <PropertyRef Name="ObjectImageId" />
+    </Key>
+    <Property Type="Int32" Name="ObjectImageId" Nullable="false" />
+    <Property Type="Int32" Name="ObjectId" Nullable="false" />
+    <Property Type="String" Name="ImageURL" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="Created" Nullable="false" />
+    <NavigationProperty Name="t_Object" Relationship="AgileMindModel.FK_t_ObjectImage_t_Object" FromRole="t_ObjectImage" ToRole="t_Object" />
+  </EntityType>
+  <Association Name="FK_t_ObjectImage_t_Object">
+    <End Type="AgileMindModel.t_Object" Role="t_Object" Multiplicity="1" />
+    <End Type="AgileMindModel.t_ObjectImage" Role="t_ObjectImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Object">
+        <PropertyRef Name="ObjectId" />
+      </Principal>
+      <Dependent Role="t_ObjectImage">
+        <PropertyRef Name="ObjectId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

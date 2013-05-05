@@ -5,6 +5,8 @@
     <EntitySet Name="t_Game" EntityType="AgileMindModel.Store.t_Game" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_GameResults" EntityType="AgileMindModel.Store.t_GameResults" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_LoginSession" EntityType="AgileMindModel.Store.t_LoginSession" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_Object" EntityType="AgileMindModel.Store.t_Object" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="t_ObjectImage" EntityType="AgileMindModel.Store.t_ObjectImage" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_Settings" EntityType="AgileMindModel.Store.t_Settings" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_ShortTermAnswers" EntityType="AgileMindModel.Store.t_ShortTermAnswers" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="t_ShortTermQuestions" EntityType="AgileMindModel.Store.t_ShortTermQuestions" store:Type="Tables" Schema="dbo" />
@@ -46,6 +48,10 @@
     <AssociationSet Name="FK_t_LoginSession_Logins" Association="AgileMindModel.Store.FK_t_LoginSession_Logins">
       <End Role="Logins" EntitySet="Logins" />
       <End Role="t_LoginSession" EntitySet="t_LoginSession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_t_ObjectImage_t_Object" Association="AgileMindModel.Store.FK_t_ObjectImage_t_Object">
+      <End Role="t_Object" EntitySet="t_Object" />
+      <End Role="t_ObjectImage" EntitySet="t_ObjectImage" />
     </AssociationSet>
     <AssociationSet Name="FK_t_ShortTermAnswers_t_ShortTermQuestions" Association="AgileMindModel.Store.FK_t_ShortTermAnswers_t_ShortTermQuestions">
       <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
@@ -105,6 +111,23 @@
     <Property Name="LoginSessionId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="LoginId" Type="int" Nullable="false" />
     <Property Name="ValidTill" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_Object">
+    <Key>
+      <PropertyRef Name="ObjectId" />
+    </Key>
+    <Property Name="ObjectId" Type="int" Nullable="false" />
+    <Property Name="Object" Type="varchar" Nullable="false" MaxLength="40" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="t_ObjectImage">
+    <Key>
+      <PropertyRef Name="ObjectImageId" />
+    </Key>
+    <Property Name="ObjectImageId" Type="int" Nullable="false" />
+    <Property Name="ObjectId" Type="int" Nullable="false" />
+    <Property Name="ImageURL" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="t_Settings">
     <Key>
@@ -238,6 +261,18 @@
       </Principal>
       <Dependent Role="t_LoginSession">
         <PropertyRef Name="LoginId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_t_ObjectImage_t_Object">
+    <End Role="t_Object" Type="AgileMindModel.Store.t_Object" Multiplicity="1" />
+    <End Role="t_ObjectImage" Type="AgileMindModel.Store.t_ObjectImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="t_Object">
+        <PropertyRef Name="ObjectId" />
+      </Principal>
+      <Dependent Role="t_ObjectImage">
+        <PropertyRef Name="ObjectId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

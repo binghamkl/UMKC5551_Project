@@ -48,6 +48,8 @@ namespace AgileMind.Website.GamesWS {
         
         private System.Threading.SendOrPostCallback FetchShortTermMemoryQuizOperationCompleted;
         
+        private System.Threading.SendOrPostCallback FetchIdentifyQuestionsOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -109,6 +111,9 @@ namespace AgileMind.Website.GamesWS {
         
         /// <remarks/>
         public event FetchShortTermMemoryQuizCompletedEventHandler FetchShortTermMemoryQuizCompleted;
+        
+        /// <remarks/>
+        public event FetchIdentifyQuestionsCompletedEventHandler FetchIdentifyQuestionsCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchColorGame", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -363,6 +368,35 @@ namespace AgileMind.Website.GamesWS {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/FetchIdentifyQuestions", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public IdentifyResults FetchIdentifyQuestions(System.Guid SessionId) {
+            object[] results = this.Invoke("FetchIdentifyQuestions", new object[] {
+                        SessionId});
+            return ((IdentifyResults)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FetchIdentifyQuestionsAsync(System.Guid SessionId) {
+            this.FetchIdentifyQuestionsAsync(SessionId, null);
+        }
+        
+        /// <remarks/>
+        public void FetchIdentifyQuestionsAsync(System.Guid SessionId, object userState) {
+            if ((this.FetchIdentifyQuestionsOperationCompleted == null)) {
+                this.FetchIdentifyQuestionsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFetchIdentifyQuestionsOperationCompleted);
+            }
+            this.InvokeAsync("FetchIdentifyQuestions", new object[] {
+                        SessionId}, this.FetchIdentifyQuestionsOperationCompleted, userState);
+        }
+        
+        private void OnFetchIdentifyQuestionsOperationCompleted(object arg) {
+            if ((this.FetchIdentifyQuestionsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FetchIdentifyQuestionsCompleted(this, new FetchIdentifyQuestionsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -479,6 +513,96 @@ namespace AgileMind.Website.GamesWS {
             }
             set {
                 this.userCorrectField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class IdentifyAnswer {
+        
+        private string answerField;
+        
+        private bool isCorrectField;
+        
+        /// <remarks/>
+        public string Answer {
+            get {
+                return this.answerField;
+            }
+            set {
+                this.answerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsCorrect {
+            get {
+                return this.isCorrectField;
+            }
+            set {
+                this.isCorrectField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class IdentifyQuestion {
+        
+        private string objectField;
+        
+        private string objectURLField;
+        
+        private string userAnswerField;
+        
+        private IdentifyAnswer[] answerListField;
+        
+        /// <remarks/>
+        public string Object {
+            get {
+                return this.objectField;
+            }
+            set {
+                this.objectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ObjectURL {
+            get {
+                return this.objectURLField;
+            }
+            set {
+                this.objectURLField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UserAnswer {
+            get {
+                return this.userAnswerField;
+            }
+            set {
+                this.userAnswerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public IdentifyAnswer[] AnswerList {
+            get {
+                return this.answerListField;
+            }
+            set {
+                this.answerListField = value;
             }
         }
     }
@@ -1081,6 +1205,7 @@ namespace AgileMind.Website.GamesWS {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(IdentifyResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ShortTermQuizResult))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ProfileQuizQuestionRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserProfileQuestionsResults))]
@@ -1114,6 +1239,27 @@ namespace AgileMind.Website.GamesWS {
             }
             set {
                 this.errorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18033")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
+    public partial class IdentifyResults : Result {
+        
+        private IdentifyQuestion[] questionListField;
+        
+        /// <remarks/>
+        public IdentifyQuestion[] QuestionList {
+            get {
+                return this.questionListField;
+            }
+            set {
+                this.questionListField = value;
             }
         }
     }
@@ -1213,6 +1359,12 @@ namespace AgileMind.Website.GamesWS {
         
         /// <remarks/>
         UserProfileQuestions,
+        
+        /// <remarks/>
+        ShortTermMemory,
+        
+        /// <remarks/>
+        Identify,
     }
     
     /// <remarks/>
@@ -1419,6 +1571,32 @@ namespace AgileMind.Website.GamesWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ShortTermQuizResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    public delegate void FetchIdentifyQuestionsCompletedEventHandler(object sender, FetchIdentifyQuestionsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FetchIdentifyQuestionsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FetchIdentifyQuestionsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public IdentifyResults Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((IdentifyResults)(this.results[0]));
             }
         }
     }

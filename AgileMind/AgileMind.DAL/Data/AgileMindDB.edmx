@@ -10,6 +10,8 @@
           <EntitySet Name="t_Game" EntityType="AgileMindModel.Store.t_Game" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="t_GameResults" EntityType="AgileMindModel.Store.t_GameResults" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="t_LoginSession" EntityType="AgileMindModel.Store.t_LoginSession" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="t_Object" EntityType="AgileMindModel.Store.t_Object" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="t_ObjectImage" EntityType="AgileMindModel.Store.t_ObjectImage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="t_Settings" EntityType="AgileMindModel.Store.t_Settings" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="t_ShortTermAnswers" EntityType="AgileMindModel.Store.t_ShortTermAnswers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="t_ShortTermQuestions" EntityType="AgileMindModel.Store.t_ShortTermQuestions" store:Type="Tables" Schema="dbo" />
@@ -51,6 +53,10 @@
           <AssociationSet Name="FK_t_LoginSession_Logins" Association="AgileMindModel.Store.FK_t_LoginSession_Logins">
             <End Role="Logins" EntitySet="Logins" />
             <End Role="t_LoginSession" EntitySet="t_LoginSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_ObjectImage_t_Object" Association="AgileMindModel.Store.FK_t_ObjectImage_t_Object">
+            <End Role="t_Object" EntitySet="t_Object" />
+            <End Role="t_ObjectImage" EntitySet="t_ObjectImage" />
           </AssociationSet>
           <AssociationSet Name="FK_t_ShortTermAnswers_t_ShortTermQuestions" Association="AgileMindModel.Store.FK_t_ShortTermAnswers_t_ShortTermQuestions">
             <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
@@ -110,6 +116,23 @@
           <Property Name="LoginSessionId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="LoginId" Type="int" Nullable="false" />
           <Property Name="ValidTill" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_Object">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+          </Key>
+          <Property Name="ObjectId" Type="int" Nullable="false" />
+          <Property Name="Object" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t_ObjectImage">
+          <Key>
+            <PropertyRef Name="ObjectImageId" />
+          </Key>
+          <Property Name="ObjectImageId" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
+          <Property Name="ImageURL" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="t_Settings">
           <Key>
@@ -246,6 +269,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_t_ObjectImage_t_Object">
+          <End Role="t_Object" Type="AgileMindModel.Store.t_Object" Multiplicity="1" />
+          <End Role="t_ObjectImage" Type="AgileMindModel.Store.t_ObjectImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Object">
+              <PropertyRef Name="ObjectId" />
+            </Principal>
+            <Dependent Role="t_ObjectImage">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_t_ShortTermAnswers_t_ShortTermQuestions">
           <End Role="t_ShortTermQuestions" Type="AgileMindModel.Store.t_ShortTermQuestions" Multiplicity="1" />
           <End Role="t_ShortTermAnswers" Type="AgileMindModel.Store.t_ShortTermAnswers" Multiplicity="*" />
@@ -372,8 +407,14 @@
             <End Role="t_ShortTermQuestions" EntitySet="t_ShortTermQuestions" />
           </AssociationSet>
           <FunctionImport Name="UserDevAveragePerGame">
-            <Parameter Name="LoginId" Mode="In" Type="Int32" />
+          <Parameter Name="LoginId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="t_Object" EntityType="AgileMindModel.t_Object" />
+          <EntitySet Name="t_ObjectImage" EntityType="AgileMindModel.t_ObjectImage" />
+          <AssociationSet Name="FK_t_ObjectImage_t_Object" Association="AgileMindModel.FK_t_ObjectImage_t_Object">
+            <End Role="t_Object" EntitySet="t_Object" />
+            <End Role="t_ObjectImage" EntitySet="t_ObjectImage" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Login">
           <Key>
@@ -606,6 +647,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="t_Object">
+          <Key>
+            <PropertyRef Name="ObjectId" />
+          </Key>
+          <Property Type="Int32" Name="ObjectId" Nullable="false" />
+          <Property Type="String" Name="Object" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Created" Nullable="false" />
+          <NavigationProperty Name="t_ObjectImage" Relationship="AgileMindModel.FK_t_ObjectImage_t_Object" FromRole="t_Object" ToRole="t_ObjectImage" />
+        </EntityType>
+        <EntityType Name="t_ObjectImage">
+          <Key>
+            <PropertyRef Name="ObjectImageId" />
+          </Key>
+          <Property Type="Int32" Name="ObjectImageId" Nullable="false" />
+          <Property Type="Int32" Name="ObjectId" Nullable="false" />
+          <Property Type="String" Name="ImageURL" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Created" Nullable="false" />
+          <NavigationProperty Name="t_Object" Relationship="AgileMindModel.FK_t_ObjectImage_t_Object" FromRole="t_ObjectImage" ToRole="t_Object" />
+        </EntityType>
+        <Association Name="FK_t_ObjectImage_t_Object">
+          <End Type="AgileMindModel.t_Object" Role="t_Object" Multiplicity="1" />
+          <End Type="AgileMindModel.t_ObjectImage" Role="t_ObjectImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Object">
+              <PropertyRef Name="ObjectId" />
+            </Principal>
+            <Dependent Role="t_ObjectImage">
+              <PropertyRef Name="ObjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -753,6 +825,25 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UserDevAveragePerGame" FunctionName="AgileMindModel.Store.UserDevAveragePerGame" />
+          <EntitySetMapping Name="t_Object">
+            <EntityTypeMapping TypeName="AgileMindModel.t_Object">
+              <MappingFragment StoreEntitySet="t_Object">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Object" ColumnName="Object" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t_ObjectImage">
+            <EntityTypeMapping TypeName="AgileMindModel.t_ObjectImage">
+              <MappingFragment StoreEntitySet="t_ObjectImage">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="ObjectImageId" ColumnName="ObjectImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -819,6 +910,12 @@
         <AssociationConnector Association="AgileMindModel.FK_t_ShortTermQuestions_t_ShortTermQuiz" >
           <ConnectorPoint PointX="10.25" PointY="2.0189925130208373" />
           <ConnectorPoint PointX="11" PointY="2.0189925130208373" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="AgileMindModel.t_Object" Width="1.5" PointX="8.375" PointY="5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="AgileMindModel.t_ObjectImage" Width="1.5" PointX="10.625" PointY="4.875" Height="1.9802864583333388" />
+        <AssociationConnector Association="AgileMindModel.FK_t_ObjectImage_t_Object" >
+          <ConnectorPoint PointX="9.875" PointY="5.8939925130208337" />
+          <ConnectorPoint PointX="10.625" PointY="5.8939925130208337" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
