@@ -83,8 +83,11 @@
     <Content Include="Games\UserProfileComplete.aspx" />
     <Content Include="Games\UserProfileQuestions.aspx" />
     <Content Include="Games\UserProfileQuiz.aspx" />
+    <Content Include="img\AMLogo.jpg" />
+    <Content Include="img\AMLogo.png" />
     <Content Include="img\glyphicons-halflings-white.png" />
     <Content Include="img\glyphicons-halflings.png" />
+    <Content Include="img\kbingham.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery-1.9.1.js" />
@@ -92,6 +95,7 @@
     <Content Include="js\jquery.mobile-1.3.0.js" />
     <Content Include="js\jquery.mobile-1.3.0.min.js" />
     <Content Include="js\knockout-2.2.1.js" />
+    <Content Include="Links.aspx" />
     <Content Include="mobile\TestGame.htm" />
     <Content Include="QuizImage\Banana.jpg" />
     <Content Include="QuizImage\Car.jpg" />
@@ -279,6 +283,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Links.aspx.cs">
+      <DependentUpon>Links.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Links.aspx.designer.cs">
+      <DependentUpon>Links.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

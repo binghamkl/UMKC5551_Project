@@ -31,6 +31,15 @@ namespace AgileMind.Website {
         protected global::System.Web.UI.ScriptManager uxAgileMindScriptManager;
         
         /// <summary>
+        /// uxLogo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image uxLogo;
+        
+        /// <summary>
         /// HeadLoginView control.
         /// </summary>
         /// <remarks>
