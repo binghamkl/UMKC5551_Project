@@ -15,7 +15,6 @@
             <li><a href="http://www.webmd.com/alzheimers/guide/preventing-dementia-brain-exercises">WebMD Prevent Dementia</a></li>
             <li><a href="http://www.everydayhealth.com/longevity/mental-fitness/brain-exercises-for-memory.aspx">Memory Exercises</a></li>
             <li><a href="http://www.popsci.com/science/article/2013-04/do-brain-games-work?src=SOC&dom=tw">Brain Games</a></li>
-            <li><a href="http://office.microsoft.com/en-us/images">Free Clipart provided by Microsoft Office</a></li>
         </ul>
     </div>
     <div>

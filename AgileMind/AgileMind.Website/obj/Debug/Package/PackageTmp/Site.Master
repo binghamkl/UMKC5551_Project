@@ -14,11 +14,10 @@
     <form runat="server">
     <asp:ScriptManager ID="uxAgileMindScriptManager" runat="server"></asp:ScriptManager>
     <div class="page">
-        <div class="header">
+        <div class="header sitediv">
             <div class="title">
-                <h1>
-                    AgileMind - Increase your mental elasticity today!
-                </h1>
+                <asp:Image ID="uxLogo" runat="server" AlternateText="Agile Mind - Increase your mental elasticity" ImageUrl="~/img/AMLogo.png" />
+                
             </div>
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false" 
@@ -38,12 +37,13 @@
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                         <asp:MenuItem NavigateUrl="~/Games/ColorQuiz.aspx" Text="Color Quiz"/>
                         <asp:MenuItem NavigateUrl="~/Games/UserProfileQuestions.aspx" Text="Profile Questions"/>
                         <asp:MenuItem NavigateUrl="~/Games/UserProfileQuiz.aspx" Text="Profile Quiz"/>
                         <asp:MenuItem NavigateUrl="~/Games/ShortTerm.aspx" Text="Short Term Quiz"/>
                         <asp:MenuItem NavigateUrl="~/Games/Identify.aspx" Text="Identify Objects"/>
+                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About" />
+                        <asp:MenuItem NavigateUrl="~/Links.aspx" Text="Links" />
                     </Items>
                 </asp:Menu>
             </div>
@@ -55,7 +55,9 @@
         </div>
     </div>
     <div class="footer">
-        
+        <div>
+            <p>Copyright - Sridhar/Bingham Enterprises</p>
+        </div>
     </div>
     </form>
 </body>

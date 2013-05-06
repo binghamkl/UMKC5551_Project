@@ -19,7 +19,10 @@
             <h3>Vidya Sridhar</h3>
             <div class="controls controls-row">
                 <span class="span1"></span>
-                <span class="span4"></span>
+                <span class="span10">
+			        <p>I am currently in my final semester at UMKC, doing my masters in computer science. I completed several courses of my undergrad back in India, and decided to study in the University of Missouri, Kansas City to pursue my further studies. 
+			        </p>
+        		</span>
             </div>
         </div>
         <div>
