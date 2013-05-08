@@ -304,3 +304,16 @@ div.accountInfo
     -moz-border-radius: 15px;
     border-radius: 15px;
 }
+
+.ratingimage {
+    -webkit-border-radius: 30px;
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+     opacity: 0.0;
+}
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(1.0, 1.0) rotate(0deg); opacity: 1.0;}
+    50% {-webkit-transform: scale(2.0, 2.0) rotate(30deg); opacity: 1.0;}
+    100% {-webkit-transform: scale(1.0, 1.0) rotate(0deg); opacity: 1.0;}
+    
+}

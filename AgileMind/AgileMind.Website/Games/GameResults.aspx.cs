@@ -36,6 +36,19 @@ namespace AgileMind.Website.Games
             uxCorrect.Text = correct;
             uxTimeSpan.Text = seconds;
             uxTotal.Text = total;
+
+            decimal decCorrect = 0;
+            decimal decTotal = 0;
+            if (decimal.TryParse(correct, out decCorrect) && decimal.TryParse(total, out decTotal))
+            {
+                if (decTotal > 0 && decCorrect > 0)
+                {
+                    if (decCorrect / decTotal * 100 < 60)
+                    {
+                        uxResultImage.ImageUrl = "~/img/Fail-small.png";
+                    }
+                }
+            }
         }
         #endregion
 
